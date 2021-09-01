@@ -32,8 +32,22 @@ module.exports = {
             ],
             '/Interview/': [
                 {
+                    title: '浏览网络',
+                    collapsable: true,
+                    children: [
+                        'network-summary',
+                        'network-cache',
+                        'network-storage',
+                        'network-operation',
+                        'network-optimizing',// 优化
+                        'network-basics',// 基础
+                        'network-safety',// 安全
+                        'network-others',// 其他
+                    ]
+                },
+                {
                     title: '算法思想',
-                    collapsable: false,
+                    collapsable: true,
                     children: [
                         'algorithm-sort',
                         'algorithm-print',
@@ -47,6 +61,27 @@ module.exports = {
                         'algorithm-others',
                         'algorithm-summary',
                     ],
+                },
+                {
+                    title: '编译打包',
+                    collapsable: true,
+                    children: [
+                        'package-webpack',
+                        'package-vite',
+                    ]
+                },
+                {
+                    title: '基础知识（CSS&JS）',
+                    collapsable: true,
+                    children: [
+                        'basics-list',// 基础知识-罗列
+                        'basics-chain',// 原型链
+                        'basics-inherit',// 继承
+                        'basics-api',// 常用API
+                        'basics-request',// 请求
+                        'basics-css',// 布局
+                        'basics-eventloop',// 事件循环
+                    ]
                 }
             ]
         }
