@@ -82,6 +82,21 @@ module.exports = {
                         'basics-css',// 布局
                         'basics-eventloop',// 事件循环
                     ]
+                },
+                {
+                    title: '项目介绍（软实力）',
+                    collapsable: true,
+                    children: [
+                        'project-zyb',// 按面试节点划分
+                    ]
+                },
+                {
+                    title: '框架原理（Vue&React）',
+                    collapsable: true,
+                    children: [
+                        'frame-Vue',
+                        'frame-React',
+                    ]
                 }
             ]
         }
