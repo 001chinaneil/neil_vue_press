@@ -28,6 +28,13 @@ module.exports = {
                         'Vue',
                         'React',
                     ]
+                },
+                {
+                    title: '工具集合(Tools)',
+                    collapsable: false,
+                    children: [
+                        "Git",
+                    ],
                 }
             ],
             '/Interview/': [
