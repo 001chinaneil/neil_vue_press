@@ -251,5 +251,183 @@ function MyComponent() {
 5. 基于路由的代码分割：基于React.lazy和React Router第三方类库
 6. 命名导出：React.lazy只支持默认导出，针对命名导出，可以设置一个中间模块，实现按需导入的效果。[链接](https://react.docschina.org/docs/code-splitting.html#named-exports)  
 
+20211205：try agagin todo
+* [参链：Context](https://react.docschina.org/docs/context.html)
+
+1. 在组件之间共享数据的方式
+2. 不理解下面的含义
+```js
+class ThemedButton extends React.Component {
+  // 指定 contextType 读取当前的 theme context。
+  // React 会往上找到最近的 theme Provider，然后使用它的值。
+  // 在这个例子中，当前的 theme 值为 “dark”。
+  static contextType = ThemeContext;
+  render() {
+    return <Button theme={this.context} />;
+  }
+}
+```
+3. 应用场景是：很多不同层级的组件使用同一组数据。副作用是：会造成组件的复用性变差。
+4. **React关键部分**：Class语法、JSX套标签、属性和事件都可以向下传递  
+
+20211207：
+* [参链：错误边界](https://react.docschina.org/docs/error-boundaries.html)
+
+1. 错误边界是一种React组件，可以捕获并打印其子组件中所发生的所有JavaScript错误，并渲染出备用组件。在渲染期间、整个生命周期、整个组件树的构造函数中捕获错误。
+2. 无法捕获异常的场景：事件处理；异步代码（setTimeout、requestAnimationFrame）；服务端渲染；它自身的错误；
+3. 如果一个 class 组件中定义了 **static getDerivedStateFromError()** 或 **componentDidCatch()** 这两个生命周期方法中的任意一个（或两个）时，那么它就变成一个错误边界。当抛出错误后，请使用 **static getDerivedStateFromError()** 渲染备用 UI ，使用 **componentDidCatch()** 打印错误信息。
+4. 事件处理器不会在渲染期间触发，所以用try...catch...来捕获异常。
+
+20211208：
+* [参链：Refs转发](https://react.docschina.org/docs/forwarding-refs.html) todo
+* [参链：Fragments](https://react.docschina.org/docs/fragments.html)
+
+1. Refs转发是一项把ref自动通过组件传递给子组件的技巧。
+2. Fragments允许将子列表分组，而不须添加额外的节点。可以当空标签使用，挺好的。
+```js
+render() {
+  return (
+    <React.Fragment>
+      <ChildA />
+      <ChildB />
+      <ChildC />
+    </React.Fragment>
+  );
+}
+```
+```js
+// 更短的语法
+render() {
+  return (
+    <>
+      <ChildA />
+      <ChildB />
+      <ChildC />
+    </>
+  )
+}
+```
+
+20211209：
+* [参链：高阶组件](https://react.docschina.org/docs/higher-order-components.html) todo 似懂非懂
+
+1. 高阶组件是依据React特性组合而成的设计模式，参数是组件，返回值是新组件。
+
+20211210：
+* [参链：深入 JSX](https://react.docschina.org/docs/jsx-in-depth.html) 这里有好多技巧使用，建议关注 todo
+
+1. JSX其实是React.creatElement(component,prop,...children)的**语法糖**。项目中的JSX语法都会被编译成React.createElement()的形式。
+2. React必须在作用域内
+3. 在JSX类型中使用点语法
+4. 用户自定义的组件必须以大写字母开头，小写字母开头默认是HTML标签
+5. 在运行时选择类型，JSX标签不能是表达式，但是可以先把表达式赋值给一个大写开头的变量，然后使用。
+```js
+import React from 'react';
+import { PhotoStory, VideoStory } from './stories';
+
+const components = {
+  photo: PhotoStory,
+  video: VideoStory
+};
+
+function Story(props) {
+  // 正确！JSX 类型可以是大写字母开头的变量。
+  const SpecificStory = components[props.storyType];
+  return <SpecificStory story={props.story} />;
+}
+```
+6. JavaScript表达式作为props。
+7. Props默认值为True，但是不建议不传递value值给prop。
+```js
+// 等价的
+<MyTextBox autocomplete />
+
+<MyTextBox autocomplete={true} />
+```
+8. 可以使用...来展开props。
+```js
+// 等价的
+function App1() {
+  return <Greeting firstName="Ben" lastName="Hector" />;
+}
+
+function App2() {
+  const props = {firstName: 'Ben', lastName: 'Hector'};
+  return <Greeting {...props} />;
+}
+```
+
+20211210晚：
+* [参链：性能优化](https://react.docschina.org/docs/optimizing-performance.html) todo，这里好多优化的方法，等遇到好的case可以再来看看
+
+20211212晚：
+* [参链：Portals](https://react.docschina.org/docs/portals.html)
+
+1. 将子节点渲染到父节点之外的优秀方案。
+```js
+ReactDOM.createPortal(child, container)
+```
+
+20211213：
+* [参链：不使用 ES6](https://react.docschina.org/docs/react-without-es6.html) 官方文档仅对此参考使用
+
+1. 不适用ES6的替代方案：create-react-class模块
+
+* [参链：协调](https://react.docschina.org/docs/reconciliation.html) 原理剖析，赞
+
+1. 比对不同类型的元素，比对同一类型元素。。。
+2. Key属性要确保在列表中是唯一稳定的。
+
+20211214：
+* [参链：Refs and the DOM](https://react.docschina.org/docs/refs-and-the-dom.html)
+
+1. 通过refs可以访问Dom节点和在render方法中构建React元素。
+2. 创建：使用React.createRefs()创建。
+3. 感觉React不如Vue简单易写呢，这么多Hack的用法。
+
+20211215：
+* [参链：Render Props](https://react.docschina.org/docs/render-props.html)
+
+1. Render Props指一种在React组件之间使用一个值为函数的prop**共享代码**的简单技术。
+2. 使用Render Props来解决横切关注点（Cross-Cutting Concerns），用于告诉组件需要渲染什么内容的函数prop。
+3. 感悟：任何一项技术都是为了解决某个问题而出现的，它的主要功能点，它的局限性。
+
+* [参链：静态类型检查](https://react.docschina.org/docs/static-type-checking.html) TS来喽！！
+
+1. Flow和TypeScript是静态类型检查器，可以在运行前识别某些问题，辅之自动补全工具可以优化开发流程。
+2. Flow是针对JavaScript的静态类型检查器，由Facebook开发，[官方详细介绍](https://flow.org/en/docs/getting-started/)  
+    2.1 将Flow添加到项目中  
+    2.2 确保编译后的代码中没有flow语法，因为浏览器并不能识别这些。  
+    2.3 添加类型注释并且运行flow来检查它们。
+3. TypeScript是微软开发的语言，是JavaScript的类型超集，包含独立的编译器。[详细介绍](https://github.com/Microsoft/TypeScript-React-Starter#typescript-react-starter) todo
+4. 好多类型检查语言啊，Reason、Kotlin、F#/Fable，不过掌握TS就可以了。
+5. Create-React-app内置了TS语言，可以直接设置使用，
+6. 扩展阅读：
+    6.1 [TypeScript 文档：基本类型](https://www.typescriptlang.org/docs/handbook/basic-types.html)  
+    6.2 [TypeScript 文档：JavaScript 迁移](https://www.typescriptlang.org/docs/handbook/migrating-from-javascript.html)  
+    6.3 [TypeScript 文档：React 与 Webpack](https://www.typescriptlang.org/docs/handbook/react-&-webpack.html) 
+
+20211216晚：
+* [参链：严格模式](https://zh-hans.reactjs.org/docs/strict-mode.html)
+
+1. React.strictMode模式仅在开发模式生效，生产环境不生效，可以用在任何位置。
+
+### API Reference
+20211218晚：
+* [参链：React 顶层 API](https://react.docschina.org/docs/react-api.html) todo
+* [参链：React.Component](https://react.docschina.org/docs/react-component.html) todo 生命周期 比较枯燥
+* [参链：ReactDOM](https://react.docschina.org/docs/react-dom.html)
+
+1. React 的 DOM 差分算法（DOM diffing algorithm）进行高效的更新。
+2. renderToString，将 React 元素渲染为初始 HTML，达到SEO的目的。
+```js
+ReactDOMServer.renderToString(element);
+```
+
+20211220：
+* [参链：DOM 元素](https://react.docschina.org/docs/dom-elements.html) todo
+  
+
+
 
 

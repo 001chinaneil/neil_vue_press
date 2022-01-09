@@ -1,14 +1,16 @@
 # CSS布局
 
 ## 1px问题的解决和原理
-* 原理：物理像素(window.devicePixeRatio)和逻辑像素(css里面的像素=>设备独立像素=>iphone的2倍像素)
-* 解决：媒体查询，缺点：IOS8+才支持小数；transform：2倍屏0.5、3倍屏0.33
+* 原理：物理像素(window.devicePixeRatio，简称DPR)和逻辑像素(css里面的像素=>设备独立像素=>iphone的2倍像素)
+* 解决：媒体查询 + transform，缺点：IOS8+才支持小数；transform：2倍屏0.5、3倍屏0.33
 * 参链：[移动端 1px 像素问题及解决办法](https://www.jianshu.com/p/31f8907637a6)
 
 ## rem的弊端
 * 弊端一：和根元素的font-size强耦合，如果系统字体变大缩小，布局有可能会乱
 * 弊端二：需要在html里面插入一段JS代码
-* 区别：vw：viewport 可视区域的大小；vh：viewport可视区域的高度；vw的兼容性稍差：IOS8+、安卓4.4+才完全支持；
+* 计算公式：fontSize = windowWidth * 100 / 750; // 1rem的宽度
+* 区别：vw：viewport 可视区域的大小；vh：viewport可视区域的高度；vw的兼容性稍差：IOS8+、安卓4.4+才完全支持；现在低版本手机比较少了，可以使用vw了。
+* 默认vw的宽度是包含页面滚动条的宽度的，但是如果设置body或html为100%，则不会包含了。移动端滚动条不占位。
 * 参链：[vw对比rem优劣](https://blog.csdn.net/weixin_42554191/article/details/106288738)
 
 ## 对viewport的理解
@@ -22,5 +24,9 @@ display: inline-display;text-align: left; // 子级
 ```
 参链：[css实现一行文字居中，多行文字左对齐](https://www.cnblogs.com/flxy-1028/p/6079681.html)
 
+2. flex: 1含义  
+是`flex-grow、flex-shrink、flex-basis`三个属性（放大比例、缩写比例、固定空间）的缩写，默认是 0 1 auto（不放大会缩小）
+
 参链：
 * [网站全尺寸适应指南](https://juejin.cn/post/6975845418265477150)
+* [50道CSS基础面试题（附答案）](https://segmentfault.com/a/1190000013325778)

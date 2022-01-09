@@ -1,6 +1,6 @@
 module.exports = {
-    title: 'Hello Vuepress',
-    description: '学习笔记 & 工作总结',
+    title: '持续变强',
+    description: '学习笔记 & 工作总结 & 面试准备',
     base: '/neil_vue_press/',
     themeConfig: {
         nav: [
@@ -39,6 +39,35 @@ module.exports = {
             ],
             '/Interview/': [
                 {
+                    title: '基础知识（CSS&JS）',
+                    collapsable: true,
+                    children: [
+                        'basics-list',// 基础知识-罗列
+                        'basics-chain',// 原型链
+                        'basics-inherit',// 继承
+                        'basics-api',// 常用API
+                        'basics-request',// 请求
+                        'basics-css',// 布局
+                        'basics-eventloop',// 事件循环
+                    ]
+                },
+                {
+                    title: '框架原理（Vue&React）',
+                    collapsable: true,
+                    children: [
+                        'frame-Vue',
+                        'frame-React',
+                    ]
+                },
+                {
+                    title: '编译打包',
+                    collapsable: true,
+                    children: [
+                        'package-webpack',
+                        'package-vite',
+                    ]
+                },
+                {
                     title: '浏览网络',
                     collapsable: true,
                     children: [
@@ -70,41 +99,12 @@ module.exports = {
                     ],
                 },
                 {
-                    title: '编译打包',
-                    collapsable: true,
-                    children: [
-                        'package-webpack',
-                        'package-vite',
-                    ]
-                },
-                {
-                    title: '基础知识（CSS&JS）',
-                    collapsable: true,
-                    children: [
-                        'basics-list',// 基础知识-罗列
-                        'basics-chain',// 原型链
-                        'basics-inherit',// 继承
-                        'basics-api',// 常用API
-                        'basics-request',// 请求
-                        'basics-css',// 布局
-                        'basics-eventloop',// 事件循环
-                    ]
-                },
-                {
                     title: '项目介绍（软实力）',
                     collapsable: true,
                     children: [
                         'project-zyb',// 按面试节点划分
                     ]
                 },
-                {
-                    title: '框架原理（Vue&React）',
-                    collapsable: true,
-                    children: [
-                        'frame-Vue',
-                        'frame-React',
-                    ]
-                }
             ]
         }
     }

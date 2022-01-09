@@ -1,28 +1,23 @@
-# 请求
+# 请求方式 
 * 异步请求的进化史：XmlHttpRequest => Ajax => Promise => Generator => async...await（20210618午）
 
 ## Promise
-### 概念
-状态机，pending => 通过函数resolve转变为resolved；pending => 通过函数reject转变为rejected；  
+1. 概念：状态机，pending => 通过函数resolve转变为resolved；pending => 通过函数reject转变为rejected；  
 
-### 用法
-* 1. `p = new Promise((resolve,reject)=>{}); p.then((data)=>{},(error)=>{});` // **then第二个参数是捕获异常的** 等价于.catch((error)=>{}) (如果同时存在，then里面的catch优先捕获到错误，实践结论)
-* 2. 是**实例用.then()**的
-* 3. Promise.all([p1,p2,p3]).then() // **全部返回成功才行；而且无论实例p1、p2、p3谁执行的快慢，最后的返回都是固定顺序p1、p2、p3的结果，数组形式** [202106美团一面，耻辱啊]
-* 4. Promise.race([]).then()// **只要一个返回成功就行；返回最先执行成功的那个**
+2. 用法：  
+* 1. `p = new Promise((resolve,reject)=>{}); p.then((data)=>{},(error)=>{});`  **then第二个参数是捕获异常的** 等价于.catch((error)=>{}) (如果同时存在，then里面的catch优先捕获到错误，实践结论)
+* 2. 是 **实例用.then()** 的
+* 3. `Promise.race([]).then()` **只要一个返回成功就行；返回最先执行成功的那个**，特别像数组的some()
+* 4. `Promise.all([p1,p2,p3]).then()` **全部返回成功才行；而且无论实例p1、p2、p3谁执行的快慢，最后的返回都是固定顺序p1、p2、p3的结果，数组形式** [202106美团一面，耻辱啊]，特别像数组的every()
 
-### 总结
-Promise只是包装控制了异步程序流程，http请求还是xmlhttprequest 
+3. 总结：Promise只是包装控制了异步程序流程，http请求还是xmlhttprequest 
 
 ### 示例
 * 1. 手写Promise实现原理 TODO
 
-## async_await
-### 概念
-async 函数就是将 Generator 函数的星号（*）替换成 async，将 yield 替换成 await，仅此而已。  
-
-### 优点
-内置执行器；更好的语义；更广的适用性； 
+## async...await
+* 1. 概念：async 函数就是将 Generator 函数的星号（*）替换成 async，将 yield 替换成 await，仅此而已。 
+* 2. 优点：内置执行器；更好的语义；更广的适用性； 
 
 ### 考点
 * 1. `await func().catch((error)=>{})` // 因为await返回的是一个Promise对象
@@ -59,6 +54,7 @@ mySort(newarr);
 题解：
 ```js
 // 能让异步代码保持顺序的，只有Promise的resolve函数，别的根本控制不住
+// 感觉题干已经给出了解题思路了，done()
 async function mySort(arr = []){
     if(Object.prototype.toString.call(arr) !== '[object Array]'){
         return new Error('非数组类型，请检查输入~');
@@ -76,7 +72,7 @@ async function mySort(arr = []){
 
     // console.log(arrList);
 
-    // // 方法一：
+    // 方法一：
     // let run = function(){
     //     if(!arrList.length) return;
     //     let fun = arrList.shift();// 每次返回的都是一个新的Promise对象
@@ -84,16 +80,17 @@ async function mySort(arr = []){
     //         run();
     //     });
     // }
-    // // 方法二：
-    // // let run = function(i){
-    // //     if(i>=arrList.length) return;
-    // //     let fun = arrList[i];
-    // //     fun().then(()=>{
-    // //         i++;
-    // //         console.log('i',i);
-    // //         run(i);
-    // //     });
-    // // }
+
+    // 方法二：
+    // let run = function(i){
+    //     if(i>=arrList.length) return;
+    //     let fun = arrList[i];
+    //     fun().then(()=>{
+    //         i++;
+    //         console.log('i',i);
+    //         run(i);
+    //     });
+    // }
 
     // run(0);
 
@@ -111,70 +108,79 @@ async function mySort(arr = []){
 }
 ```
 
-2. 限制数量请求值函数实现
-参链：[限制数量请求池函数实现](https://www.shangmayuan.com/a/1427746af2b84c6bb44fe6fe.html)
+2. 限制数量请求池函数实现
+参链：[限制数量请求池函数实现](https://segmentfault.com/a/1190000040197250)  
+20220109 百度大厦F3 四和春 第一次自主写出来了 赞！
 ```js
 const request = createRequestPool(3);
 for (let i = 0; i < 5; i++) {
-  request('https://e.juejin.cn/extension/banner').then((res)=>{
-      console.log(res);
-  }).catch((error)=>{
-      console.log(error);
-  })
+    request('https://e.juejin.cn/extension/banner').then((res)=>{
+        console.log(res);
+    }).catch((error)=>{
+        console.log(error);
+    })
 }
 
 /**
- * 记笔记，待验证
+ * 记笔记，待验证，伪代码
  */
 function createRequestPool(poolSize) {
+    // 1. 排队池：待发送请求的列表
     const reqs = [];
+    // 2. 请求池：排队发送请求中的列表
     const temps = [];
   
+    // 最终返回的是一个发送请求的封装函数
     return function (url) {
-  
-      function runTask() {
-  
-        // 循环添加到临时数组中
-        while (reqs.length && temps.length < poolSize) {
-          temps.push(reqs.shift());
+        // 4. 执行队列
+        function runTask() {
+            // 请求池的添加条件：添加到排队发送请求列表中，等请求池满了为止
+            while (reqs.length && temps.length < poolSize) {
+                temps.push(reqs.shift());
+            }
+    
+            // 遍历排队发送请求的队列，发起请求
+            for (let i = 0; i < temps.length; i++) {
+                fetch(temps[i].url)
+                    .then((data) => {
+                        console.log('索引 then：',i);
+                        // 移除当前请求，并返回结果
+                        temps[i].resolve(data);
+                        temps.splice(temps.indexOf(temps[i]), 1);
+                        
+                        // 开启队列：每完成一个，就需要执行队列中的任务
+                        runTask();
+                    })
+                    .catch((err) => {
+                        console.log('索引 catch：',i);
+                        // 移除当前请求，并返回结果
+                        temps[i].reject(err);
+                        temps.splice(temps.indexOf(temps[i]), 1);
+                        
+                        // 开启队列
+                        runTask();
+                    });
+            }
         }
-  
-        // 遍历临时数组，发起请求
-        for (let i = 0; i < temps.length; i++) {
-          fetch(temps[i].url)
-            .then((data) => {
-              console.log('索引 then：',i);
-              // 移除当前请求，并返回结果
-              temps[i].resolve(data);
-              temps.splice(temps.indexOf(temps[i]), 1);
-  
-              // 每完成一个，就需要执行队列中的任务
-              runTask();
-            })
-            .catch((err) => {
-              console.log('索引 catch：',i);
-              // 移除当前请求，并返回结果
-              temps[i].reject(err);
-              temps.splice(temps.indexOf(temps[i]), 1);
+    
+        // 3. 最终实质返回的是个Promise对象
+        return new Promise((resolve, reject) => {
+            // 把新的请求添加进待请求列表中
+            reqs.push({
+                url,
+                resolve,
+                reject
             });
-        }
-      }
-  
-      return new Promise((resolve, reject) => {
-        reqs.push({
-          url,
-          resolve,
-          reject
+            // 开启队列
+            runTask();
         });
-  
-        runTask();
-      });
     }
 }
 ```
 
 3. 剥洋葱模型
-参链：[洋葱模型JS实现](http://js.jsrun.net/7fwKp/edit)
+参链：[洋葱模型JS实现](http://js.jsrun.net/7fwKp/edit)  
+特别像JS的调用栈
 
 题目：
 ```js
@@ -202,7 +208,7 @@ function compose() {
 }
 ```
 
-题解一：利用函数的嵌套
+题解一：利用函数的嵌套，JS的调用栈
 ```js
 function compose(middleware) {
     return function (){
@@ -254,6 +260,8 @@ function compose(middleware){
     }
 }
 ```
+
+TODO：还有其他类型的Promise面试题吗？
 
 参链：
 * [Promise入门详解和基本用法](https://www.cnblogs.com/qianguyihao/p/12660393.html)

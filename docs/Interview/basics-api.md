@@ -2,22 +2,34 @@
 
 ## 字符串
 * 常用字符串 slice()，split()
-* 1. slice(start,end)： 支持1-2个参数，第一个参数是开始位置，第二个参数是结束位置，左闭右开。
+* 1. slice(start,end)： 支持1-2个参数，第一个参数是开始位置，第二个参数是结束位置，**左闭右开**。
 * 2. split(xx)：把字符串以xx分割形成数组，与数组操作函数join(xx)互逆的效果。
 
 * 3. charAt(i)输出指定下标的字母，长度为1，适用于把字符串切割成单个字符串。
-* 4. slice() 和 substring() 都支持1-2个参数，第一个参数是开始位置，第二个参数是结束位置，左闭右开。
-    区别:   slice() 如果第二个参数是负数，则实际的数是负数+字符串长度得到的结果，如果得到的结果小于第一个参数，则返回空字符串。
-            substring() 不接受负值参数，且substring()总是从2个参数中小的参数开始，但是还是 左闭右开。
-            eg: temp.substring(7,3); 从3的位置开始截取到7的位置，结果是索引3的字母有，7的位置没有。
+* 4. slice()和substring()都支持1-2个参数，第一个参数是开始位置，第二个参数是结束位置，**左闭右开**。  
+    区别:  
+        slice() 如果第二个参数是负数，则实际的数是负数+字符串长度得到的结果，如果得到的结果小于第一个参数，则返回空字符串。  
+        substring() 不接受负值参数，且substring()总是从2个参数中小的参数开始，但是还是 左闭右开。  
+        ```js
+        <!-- 例如： -->
+        temp.substring(7,3); 从3的位置开始截取到7的位置，结果是索引3的字母有，7的位置没有。
+        ```
 * 5. toUpperCase()// 转换大写；toLowerCase()// 转换小写
+```js
+let a = 'abc123';
+let b = a.toUpperCase();
+console.log(a,b);
+// 输出结果：abc123 ABC123
+```
+API函数有2种使用方式：1. 点，比如a.toUpperCase() 2. 传，通过参数传递进去，比如Math.floor(1.23);
+API函数看结果的方式：1. 返回新的返回值 2.自身被改变
 * 6. replace()：替换字符，// 第一个参数支持正则，默认对大小写敏感，默认替换匹配的第一个，不改变原字符串，返回新字符串。
 * 7. trim()：去除字符串两端的空白
 
 截取函数辨析：
 |  | 相同点 | 不同点 | 示例 |
 | --- | --- | --- | --- |
-| slice |  |  | str.slice(start,end) |
+| slice |  | 支持参数是负数 | str.slice(start,end) |
 | substring | 截取字符串 | 参数不支持负值，若前大后小，会调换位置 | str.substring(start,end) |
 | substr |  |  | str.substr(start,length) |
 
@@ -32,8 +44,8 @@ JS字符技巧（20210626午）
 * 1. URL取参或判断是否有参 
 ```js
 let params = new URLSearchParams(location.search.replace(/^\?/g,''));
-params.get('b');// 返回布尔值
-params.has('a');// 返回参数值
+params.get('b');// 返回参数值
+params.has('a');// 返回布尔值
 ```
 正则末尾g代表全局、i(case-insensitive)代表不区分大小写、m(multiline)代表多行匹配。
 
@@ -49,7 +61,7 @@ params.has('a');// 返回参数值
 * 要想翻转用reverse;(会改变原数组)
 * 聚会join组字符(串);
 * 截取孪生slice、splice;
-* 最终合并是concat();
+* 最终合并是concat();（合并后返回新数组，原数组不变）
 * 随意点名用indexOf，返回-1是没找到。
 * 切记：核心函数会改数组，字符检索保(持)原样(不改变原数组)
 
@@ -142,7 +154,7 @@ params.has('a');// 返回参数值
         <td>合并</td>
         <td>arr1.concat(arr2)</td>
         <td></td>
-        <td>原数组没有变化，返回一个新数组</td>
+        <td><strong>原数组没有变化，返回一个新数组</strong></td>
     </tr>
     <tr> 
         <td>查元素索引</td>
@@ -171,7 +183,7 @@ params.has('a');// 返回参数值
 | **Object.prototype.toString** | Object.prototype.toString.call(a) === '[object Array]' | 最常见 |
 
 ### 寻找最大值
-* `Math.max.apply(arr);`
+* `Math.max.apply(null,arr);` 或者 `Math.max(...arr)`
 
 ### 实用技巧
 （ 20210626午 )
@@ -194,12 +206,13 @@ params.has('a');// 返回参数值
 * 8. Object.getOwnProperty(obj); // 获取自有属性 
 * 9. Object.preventExtensions(obj); // 禁止扩展对象--不可添加，可删除
 * 10. **Object.defineProperty(obj);** // 拦截对象属性，
-      ```js
-        Object.defineProperty(obj,'a',{// [set,get] 和 [value,writable]互斥，两组里任意一个属性和另一组内任意属性同时出现会报错。
-            get(){},
-            set(value),
-    　  });
-      ```
+```js
+Object.defineProperty(obj,'a',{
+    // [set,get] 和 [value,writable]互斥，两组里任意一个属性和另一组内任意属性同时出现会报错。
+    get(){},
+    set(value),
+});
+```
 * 11. **obj.hasOwnProperty('xx');** // 判断是否是自有属性
 * 12. **'xx' in obj;** // 返回布尔值，用于判断属性(自有属性、原型属性都包含)是否在对象中
 
@@ -207,66 +220,11 @@ params.has('a');// 返回参数值
 * 1. [JS操作对象的14中方法](https://blog.csdn.net/qq_36936887/article/details/114373995)
 
 ## 循环迭代
+* 总结：1 + 4 + 5（20211231午 百度鹏寰大厦F8-B）
+* 1代表简单纯粹的for循环（数组、对象都能搞，性能还高）
+* 4代表some、every、find、filter
+* 5代表for...in、for...of、forEach、map、reduce
 * 会返回新数组：map、filter、reduce，都不会改变原数组。(口诀：**map、filter、reduce返新不改旧** 20210627午)
-
-|  | forEach | map | for...in | for...of | reduce |
-| --- | --- | --- | --- | --- | --- |
-| 数组 | YES | YES | YES | YES | YES |
-| 对象 | NO | NO | YES | NO | NO |
-
-<table>
-    <tr>
-        <th></th>
-        <th>相同点</th>
-        <th>异同点</th>
-        <th>用法</th>
-    </tr>
-    <tr>
-        <td>forEach</td>
-        <td rowspan='2'>
-            1.只能遍历数组 <br>
-            2.匿名函数中的this都指向window <br>
-            3.不能使用continue、break，<strong>使用return和return false也只能跳过当次循环</strong> <br>
-            4.都不会改变原数组 
-        </td>
-        <td>不会返回新数组</td>
-        <td>arr.forEach(function(item,index,arr){...})</td>
-    </tr>
-    <tr>
-        <td>map</td>
-        <!-- <td></td> -->
-        <td>会返回新数组</td>
-        <td>arr.map(function(item,index,arr){...})</td>
-    </tr>
-</table>
-
-<table>
-    <tr>
-        <th></th>
-        <th>相同点</th>
-        <th>异同点</th>
-        <th>用法</th>
-    </tr>
-    <tr>
-        <td>for...in</td>
-        <td rowspan='2'>
-            1.匿名函数中的this都指向window <br>
-            2.使用break中断循环，并退出所有 <br>
-            3.使用continue跳过当次循环，并继续执行下次循环
-        </td>
-        <td>
-            1.遍历对象可枚举的属性，类似Object.keys(); <br>
-            2.遍历数组返回元素下标，返回的是string类型 
-        </td>
-        <td>for(let key in arr){...}</td>
-    </tr>
-    <tr>
-        <td>map</td>
-        <!-- <td></td> -->
-        <td>只可循环iterable类型，Array、Set、Map</td>
-        <td>for(let value of arr){...}</td>
-    </tr>
-</table>
 
 <table>
     <tr>
@@ -290,14 +248,77 @@ params.has('a');// 返回参数值
         <td>返回布尔值，必须全部满足才行</td>
     </tr>
     <tr>
+        <td>find</td>
+        <!-- <td></td> -->
+        <td>返回满足条件的第一个元素</td>
+    </tr>
+    <tr>
         <td>filter</td>
         <!-- <td></td> -->
         <td>返回<strong>一个新数组</strong>，把满足条件的过滤出来</td>
     </tr>
+</table>
+
+|     | for...in | for...of    | forEach  | map    | reduce   |
+| ----| :-------:| :---------: | :------: | :----: | :------: |
+| 数组 | YES      | YES         | YES     | YES     | YES      |
+| 对象 | **YES**  | NO          | NO      | NO      | NO       |
+
+
+<table>
     <tr>
-        <td>find</td>
+        <th></th>
+        <th>相同点</th>
+        <th>异同点</th>
+        <th>用法</th>
+    </tr>
+    <tr>
+        <td>for...in</td>
+        <td rowspan='2'>
+            1.匿名函数中的this都指向window <br>
+            2.使用<strong>break中断循环，并退出所有</strong><br>
+            3.使用<strong>continue跳过当次循环</strong>，并继续执行下次循环<br>
+            4.单纯的中断流程都不能用return，因为return只能在函数中返回
+        </td>
+        <td>
+            1.遍历对象可枚举的属性，类似Object.keys();不包括原型链上的属性 <br>
+            2.遍历数组返回元素下标，返回的是string类型 
+        </td>
+        <td>
+            for(let key in arr){...}
+        </td>
+    </tr>
+    <tr>
+        <td>for...of</td>
         <!-- <td></td> -->
-        <td>返回满足条件的第一个元素</td>
+        <td>只可循环iterable类型，Array、Set、Map</td>
+        <td>for(let value of arr){...}</td>
+    </tr>
+</table>
+
+<table>
+    <tr>
+        <th></th>
+        <th>相同点</th>
+        <th>异同点</th>
+        <th>用法</th>
+    </tr>
+    <tr>
+        <td>forEach</td>
+        <td rowspan='2'>
+            1.只能遍历数组 <br>
+            2.匿名函数中的this都指向window <br>
+            3.不能使用continue、break，<strong>使用return和return false也只能跳过当次循环</strong> <br>
+            4.都不会改变原数组
+        </td>
+        <td>不会返回新数组</td>
+        <td>arr.forEach(function(item,index,arr){...})</td>
+    </tr>
+    <tr>
+        <td>map</td>
+        <!-- <td></td> -->
+        <td>会返回新数组</td>
+        <td>arr.map(function(item,index,arr){...})</td>
     </tr>
 </table>
 
@@ -327,7 +348,7 @@ number.toLocalsString();// 就把整数转换为千分位了，缺点是小数�
 function test(num = 0){
     let a = String(parseInt(num)).split('');// 1. 转换成数组
     let result = '';
-    while(a.length>3){
+    while(a.length > 3){
         result = ',' + a.splice(-3,3).join('') + result;// 2. 利用splice会改变原数组的特性
     }
     result = a.join('') + result;// 3. 把剩余的部分连接
@@ -350,7 +371,7 @@ let result = await deps([1,2]);
 console.log(result);
 ```
 
-* 4. 斐波那契数列[Get!]
+* 4. 斐波那契数列[Get!]：前两位之和等于下一位，初始化为[0,1]
 ```js
 function febo(length){
     if(length == 0) return [];
@@ -358,7 +379,10 @@ function febo(length){
     if(length == 2) return [0,1];
     let arr = [ ...new Array(length).keys() ];
     
-    return arr.reduce((prev,curr,i)=>(i > 1 && prev.push( prev[i-1] + prev[i-2] ),prev),[0,1]);
+    return arr.reduce(
+        (prev,curr,i) => (i > 1 && prev.push( prev[i-1] + prev[i-2] ),prev),
+        [0,1]
+    );
 }
 
 febo(0);

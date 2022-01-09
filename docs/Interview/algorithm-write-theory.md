@@ -399,6 +399,9 @@ Promise.myPromiseAll = function (arr = []){
 }
 ```
 
+## 总结&参链：
+* [剖析并手写十五个重要 API 的实现：神三元](https://mp.weixin.qq.com/s/BTzLPZpU6VeDEmeocgQSGA)
+
 
 
 
