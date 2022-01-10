@@ -12,7 +12,7 @@ tips: **Dep 对象用于依赖收集**，它实现了一个发布订阅模式，
 [深入响应式原理](https://cn.vuejs.org/v2/guide/reactivity.html)
 
 ## 二、异步更新
-* 1. Data 对象：Vue 中的 data 方法中返回的对象。
+* 1. Data 对象：Vue模板的 data 方法中返回的对象。
 * 2. Dep 对象：每一个 Data 属性都会创建一个 Dep，用来搜集所有使用到这个 Data 的 Watcher 对象。
 * 3. Watcher 对象：主要用于渲染 DOM。
 
@@ -33,7 +33,7 @@ tips: **Dep 对象用于依赖收集**，它实现了一个发布订阅模式，
 ## 三、diff算法
 * 源码位置：node_modules/vue/src/core/vdom/patch.js
 1. 概念：虚拟DOM是为了解决浏览器性能问题而出现的，比如JS计算比DOM渲染要快、重排重绘、移动端参数不同
-2. 流程：(模拟Dom、对比新旧、差异渲染)
+2. 流程：(模拟Dom、对比新旧、差异渲染)  
     2.1 用JavaScript模拟Dom树，并渲染Dom树；  
     2.2 比较新旧Dom对象，得到差异对象；  
     2.3 把差异对象引用到渲染Dom树；
@@ -65,10 +65,10 @@ vm.render() //更新视图
 ```
 3. **利用location.hash属性读取**，每次变化，都会在浏览器历史栈里面新增记录，却并不会给后端发请求。
 
-4. 利用Vue.mixin()方法来实现混入，影响注册的所有组件，**beforeCreate钩子**之后通过**Vue.utils.defineReactive()**定义响应式的_router属性
+4. 利用Vue.mixin()方法来实现混入，影响注册的所有组件，**beforeCreate钩子**之后通过 **Vue.utils.defineReactive()** 定义响应式的_router属性
 
 参链：  
-[弄懂vue-router的实现原理](https://blog.csdn.net/qq_27674439/article/details/99821474)
+[弄懂vue-router的实现原理](https://blog.csdn.net/qq_27674439/article/details/99821474)  
 [【源码拾遗】从vue-router看前端路由的两种实现](https://zhuanlan.zhihu.com/p/27588422)
 
 ## 六、Vuex原理
@@ -80,11 +80,33 @@ vm.render() //更新视图
 
 ## 七、Vue2和Vue3的差异
 1. 速度更快：
-    1.1 重写了虚拟Dom实现
+    ```js
+    1.1、重写了虚拟Dom实现
+    1.2、编译模板的优化
+    1.3、更高效的组件初始化
+    1.4、undate性能提高1.3~2倍
+    1.5、SSR速度提高了2~3倍
+    ```
 2. 体积减小
+    ```js
+    通过webpack的tree-shaking功能，可以将无用模块“剪辑”，仅打包需要的
+    ```
 3. 更易维护
-4. 更接近原生
-5. 更易使用 
+    ```js
+    compositon Api
+    
+    ```
+4. 更好的Typescript支持
+5. 编译器重写
+6. 更接近原生
+    ```js
+    可以自定义渲染 API，createRanderer
+    ```
+7. 更易使用 
+    ```js
+    响应式 Api 暴露出来，observable
+    轻松识别组件重新渲染原因
+    ```
 
 参链：
 [面试官：Vue3有了解过吗？能说说跟Vue2的区别吗？](https://blog.csdn.net/weixin_44475093/article/details/112386778)

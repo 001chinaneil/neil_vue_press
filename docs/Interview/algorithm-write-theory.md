@@ -1,89 +1,83 @@
 # 实现原理编码
 
 ## 一、深拷贝  
-1. 正解：**(4步走，1.定义判断数组和对象，2.简单类型直接返，3.数组对象用扩展，4.利用递归搞循环(嵌套))**  
-2. 浅拷贝方法：`Object.assign()、{...obj}` 、`Array.prototype.slice()` 、`Array.prototype.concat()`  
+20220110 铭科苑 F6 二刷
+1. 口诀：**(4步走，1.定义判断数组和对象的工具函数，2.简单类型直接返，3.数组对象用扩展，4.利用递归搞循环(嵌套))**  
+2. 浅拷贝方法：`Object.assign()`、`{...obj}` 、`Array.prototype.slice()` 、`Array.prototype.concat()`  
 3. WeakMap(ES6新增)：提供了一种主动解决内存回收的方式，TODO，先不展开  
    属性：WeakMap.prototype.constructor  
    方法：set、delete、has、get  
 4. 循环引用问题：TODO  
 5. 递归爆栈问题：TODO  
-    ```js
-    function deepClone(obj,) {  
-        // 1. 定义判断对象&数组的函数
-        function isObject(obj) {
-            return Object.prototype.toString.call(obj) === '[object Object]';
-        }
-            
-        function isArray(obj) {
-            return Array.isArray(obj);
-        }
-
-        let result;
-        // 2. 拷贝简单类型，直接返回
-        if (!isObject(obj) && !isArray(obj)) {
-            return obj;
-        }
-
-        // 3. 对象&数组情况，(利用扩展运算符是浅拷贝，只拷贝第一层)
-        if (isObject(obj)) {
-            result = { ...obj };
-        }
+```js
+function deepClone(obj) {  
+    // 1. 定义判断对象&数组的工具函数
+    function isObject(obj) {
+        return Object.prototype.toString.call(obj) === '[object Object]';
+    }
         
-        if (isArray(obj)) {
-            result = [...obj];
-        }
+    function isArray(obj) {
+        return Array.isArray(obj);
+    }
 
-        // 4. 递归处理[重点][非常好，就是用for...in进行循环遍历]
-        for (var key in obj) {
+    let result;
+    // 2. 拷贝简单类型，直接返回
+    if (!isObject(obj) && !isArray(obj)) {
+        return obj;
+    }
+
+    // 3. 对象&数组情况，(利用扩展运算符是浅拷贝，只拷贝第一层)
+    if (isObject(obj)) {
+        result = {...obj};
+    }
+    
+    if (isArray(obj)) {
+        result = [...obj];
+    }
+
+    // 4. 递归处理[重点][非常好，就是用for...in进行循环遍历]，因为for...in会循环原型链上的属性，所以用hasOwnproperty过滤一下
+    for (var key in obj) {
+        if(obj.hasOwnProperty(key)){
             if ( isObject(obj[key]) || isArray(obj[key]) ) {
                 result[key] = deepClone(obj[key]);
-            } else {
-                result[key] = obj[key];
             }
         }
-
-        return result;
     }
-    ```  
+
+    return result;
+}
+```  
 参链：[面试题之如何实现一个深拷贝](https://www.muyiy.cn/blog/4/4.3.html#%E5%BC%95%E8%A8%80)  [经典！]
 
 ## 二、防抖：  
-* **防抖函数：防止多次调用，在时间间隔内只调用一次。(口诀：每次执行前都要清空定时器，return一个闭包)**  
-* **节流函数：防止多次调用，每隔一段时间进行一次调用。(口诀：每次执行前都要检查定时器，非空则返回，return一个闭包)**
-
+* **防抖函数：防止多次调用，在时间间隔内只最后调用一次。(口诀：每次执行前都要清空定时器，return一个闭包)**  
+如果对逻辑执行有要求，那用节流就好了。
 ```js
 // 这是防抖函数
-function debounce(callback,timeout,immediate){
+function debounce(callback,timeout){
     // 1. 声明定时器ID & 是否执行完毕(默认执行完毕)
     let id;// 定时器存储器
-    let flag = true;// 是否执行完毕
     return function(...arguments){
-        if(!flag) return;
-        flag = false;
         // 2. 清空定时器(所以防抖要清空)    
         clearTimeout(id);
-        !!immediate && callback.apply(this,arguments);
         id = setTimeout(()=>{
-            !immediate && callback.apply(this,arguments);
-            // 3. 恢复初始状态
-            flag = true;
+            callback.apply(this,arguments);
         },timeout);
     }
 }
 ```
 
 ## 三、节流：  
-场景：被频繁调用的，window.onresize()、mousemove事件、上传进度等  
-
+* **节流函数：防止多次调用，每隔一段时间进行一次调用。(口诀：每次执行前都要检查定时器，非空则返回，return一个闭包)**
+场景：被频繁调用的，window.onresize()、mousemove事件、上传进度等，希望可以间隔性的更新；是需要立即执行的。  
 ```js
 // 1.自我实现1 利用时间戳(立即执行)
 function throttle(callback,timeout){
     let lastExceTime = 0;
-    return function(...args){
+    return function(...arguments){
         let now = +new Date();
         if(now - lastExceTime > timeout){
-            callback.apply(this,args);
+            callback.apply(this,arguments);
             lastExceTime = now;
         }
     }
@@ -128,17 +122,16 @@ function throttle(callback,timeout,immediate = true){
     }
 }
 ```    
-
-
-
 ## 四、手写splice  
 1. this是原数组，通过slice进行截取  
 2. 通过`this[i] = newArr[i]`的形式进行改写  
-3. `this.length = newArr.length`，完成改造
+3. `this.length = newArr.length`，完成长度改造
+4. 注意入参、返回值、特性（会改变原数组）
 ```js
 Array.prototype.mysplice = function(start, nums, ...args) {    
-    let deleteCounts = this.slice(start,start+nums);// 被删除元素
-    //删除元素后原数组
+    // 被删除元素，这是最终的返回值
+    let deleteCounts = this.slice(start,start+nums);
+    // 删除元素后应该的原数组
     let newArr = [...this.slice(0, start), ...args, ...this.slice(start+nums)];
     
     for(let i = 0; i< newArr.length; i++) {
@@ -147,6 +140,7 @@ Array.prototype.mysplice = function(start, nums, ...args) {
     }
     // 改变原数组的核心步骤
     this.length = newArr.length;
+    
     return deleteCounts;
 }
 
@@ -159,7 +153,7 @@ console.log(arr.mysplice(-2,1),arr);
 3. 核心逻辑：改变this对象(context)，把调用函数新增到新对象上(context)，执行完再删除。
 
 **call**
-```
+```js
 Function.prototype.myCall = function (context) {
   var context = context || window;
   // 1. [添函数]给 context 添加函数
@@ -182,7 +176,7 @@ a.myCall(b,'1','2');
 ```
 
 **apply**
-```
+```js
 Function.prototype.myApply = function (context) {
   context = context || window;
   context.fn = this;
@@ -191,7 +185,7 @@ Function.prototype.myApply = function (context) {
   // 需要判断是否存储第二个参数
   // 如果存在，就将第二个参数展开
   if(arguments[1]){
-    result = context.fn(...arguments[1]);
+    result = context.fn([...arguments[1]]);// 入参是数组
   }else {
     result = context.fn();
   }
@@ -204,7 +198,7 @@ Function.prototype.myApply = function (context) {
 **bind是个难点，要晕了！TODO**  
 [参链1](https://yhlben.com/interview/js.html#_6%E3%80%81%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA-bind-%E5%87%BD%E6%95%B0)  
 [参链2](https://blog.csdn.net/q3254421/article/details/82999718)
-```
+```js
 Function.prototype.mybind = function(ctx, ...rest) {
   // 根本不需要进行判断，如果是其他类型，会因为找不到mybind函数而报错的
   //if (typeof this !== 'function') {
@@ -238,25 +232,26 @@ Function.prototype.mybind = function(ctx, ...rest) {
 1. 概念：什么是Promise，一种可以链式调用、解决之前回调地域的异步编程方式  
 2. 回调地域：指一层嵌套一层，代码冗余、难以维护、可读性差的异步编程方式  
 3. Promise用法：
-```
+```js
 // then()返回的也是个Promise对象
-    let p1 = new Promise((resolve,reject)=>{
-        resolve();// 是个函数
-        reject();// 是个函数
-    });
+let p1 = new Promise((resolve,reject)=>{
+    resolve();// 是个函数
+    reject();// 是个函数
+});
 
-    p1.then((resolve,reject)=>{
-        resolve();// 是个函数
-        reject();// 是个函数
-        }
-    )
-    .then()
-    .then()
+p1.then((resolve,reject)=>{
+    resolve();// 是个函数
+    reject();// 是个函数
+    }
+)
+.then()
+.then()
 ```
 
 ## 七、手写instanceof：  
-**判断实例对象的原型链(__proto__)上是否有构造函数的原型prototype (口诀：要是new出来的实例对象)**
-[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof)
+**判断实例对象的原型链(__proto__)上是否有构造函数的原型prototype (口诀：要是new出来的实例对象，考察的API的定义，原型链的含义)**
+[MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof)  
+小米一面真题
 ```js
 function myInstanceof(left,right){
 	left = left.__proto__;
@@ -349,7 +344,6 @@ Array.prototype.myFlat = function(num = 1){
     }
 
     return _this;
-
 }
 
 let a = [1,[2,[3,[4,[5]]]]];
@@ -400,6 +394,7 @@ Promise.myPromiseAll = function (arr = []){
 ```
 
 ## 总结&参链：
+* 1. 手写原理API实现，最重要是三点：入参，特性，返回值。20220110 铭科苑 F6
 * [剖析并手写十五个重要 API 的实现：神三元](https://mp.weixin.qq.com/s/BTzLPZpU6VeDEmeocgQSGA)
 
 
