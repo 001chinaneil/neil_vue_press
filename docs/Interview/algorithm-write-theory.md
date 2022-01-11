@@ -140,7 +140,7 @@ Array.prototype.mysplice = function(start, nums, ...args) {
     }
     // 改变原数组的核心步骤
     this.length = newArr.length;
-    
+
     return deleteCounts;
 }
 
@@ -149,21 +149,18 @@ console.log(arr.mysplice(-2,1),arr);
 ```  
 ## 五、手写call、apply、bind函数  
 1. arguments是类数组，里面是所有的入参，[...arguments]可以转换成真正的数组;  
-2. this是待调用函数，  
-3. 核心逻辑：改变this对象(context)，把调用函数新增到新对象上(context)，执行完再删除。
-
+2. this是被调用函数，context是目标对象。  
+3. 核心逻辑：让目标对象有之前没有的调用函数，返回执行结果，再把新增的调用函数删除。
 **call**
 ```js
-Function.prototype.myCall = function (context) {
-  var context = context || window;
-  // 1. [添函数]给 context 添加函数
-  context.fn = this;
-  // 2. [取参数]将 context 后面的参数取出来
-  var args = [...arguments].slice(1);
-  var result = context.fn(...args);
-  // 3. [删函数]删除函数
-  delete context.fn;
-  return result;
+// 让目标对象有之前没有的调用函数，返回执行结果，再把新增的调用函数删除；入参：目标对象，字符串
+// 工具函数入参中的...arguments，能把调用函数时的其余入参合并成一个数组形式。
+// 调用函数时入参中的...arguments，能把数组转成一个个元素的形式。
+Function.prototype.myCall = function(context,...arguments){
+    context.fn = this;
+    let result = context.fn(...arguments);
+    delete context.fn;
+    return result;
 }
 
 function a(){
@@ -175,30 +172,40 @@ let b = {
 a.myCall(b,'1','2');
 ```
 
-**apply**
+**apply**  
+[MDN apply](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Function/apply)  
+todo 没有实现apply合并数组的并改变原数组的功能，MDN上有示例。
 ```js
-Function.prototype.myApply = function (context) {
-  context = context || window;
-  context.fn = this;
-
-  let result
-  // 需要判断是否存储第二个参数
-  // 如果存在，就将第二个参数展开
-  if(arguments[1]){
-    result = context.fn([...arguments[1]]);// 入参是数组
-  }else {
-    result = context.fn();
-  }
-
-  delete context.fn
-  return result
+// 让目标对象有之前没有的调用函数或属性，返回执行结果，并删除新增的函数或属性；入参：obj, 数组参数；
+Function.prototype.myApply = function (context,arguments){
+    let fn = Symbol('fn');
+    context[fn] = this;
+    let result = context[fn](arguments);
+    delete context[fn];
+    return result;
 }
+
+let a = {
+};
+
+let b = {
+    c: function(arr){
+        return arr[0] + arr[1];
+    }
+}
+
+console.log(b.c.myApply(a,[1,2]));
+console.log(a);
 ```
 
 **bind是个难点，要晕了！TODO**  
 [参链1](https://yhlben.com/interview/js.html#_6%E3%80%81%E6%89%8B%E5%86%99%E4%B8%80%E4%B8%AA-bind-%E5%87%BD%E6%95%B0)  
-[参链2](https://blog.csdn.net/q3254421/article/details/82999718)
+[参链2](https://blog.csdn.net/q3254421/article/details/82999718)  
+* bind返回的是个函数
+* 对于普通函数，绑定this指向。
+* 对于构造函数，如果当前this是返回函数的示例，就返回this否则返回context，并保证原函数的原型对象上的属性不丢失。
 ```js
+// 复杂版，还是没看懂
 Function.prototype.mybind = function(ctx, ...rest) {
   // 根本不需要进行判断，如果是其他类型，会因为找不到mybind函数而报错的
   //if (typeof this !== 'function') {
@@ -225,6 +232,20 @@ Function.prototype.mybind = function(ctx, ...rest) {
   console.log(result,result.prototype);
   return result;
 };
+```
+
+```js
+// 20220111 早 神三元版本
+Function.prototype.myBind = function(context, ...args) {
+    let self = this;//谨记this表示调用bind的函数
+    let fBound = function() {
+        //this instanceof fBound为true表示构造函数的情况。如new func.bind(obj)
+        return self.apply(this instanceof fBound ? this : context || window, args);
+    }
+    // fBound.prototype = Object.create(this.prototype);//保证原函数的原型对象上的属性不丢失 ？？
+    fBound.prototype = this.prototype;
+    return fBound;
+}
 ```
 
 ## 六、Promise的实现：TODO
