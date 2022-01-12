@@ -426,6 +426,14 @@ ReactDOMServer.renderToString(element);
 
 20211220：
 * [参链：DOM 元素](https://react.docschina.org/docs/dom-elements.html) todo
+
+### HOOK
+20220111午：  
+* [参链：概览](https://react.docschina.org/docs/hooks-overview.html)
+1. State Hook，`const [count, setCount] = useState(0);`，useState会返回一对值：当前状态和一个让你更新它的函数。声明组件内的变量，是一个个声明的，和Vue统一在data中声明不一样。
+2. Effect Hook，useEffect就是一个Effect Hook，给函数组件增加了操作副作用的能力。它合并了Class组件中的componentDidMount、componentDidUpdate和componentWillUnmount；useEffect应用于数据获取、订阅、手动修改过DOM。
+3. Hook就是JavaScript函数，额外的两个规则：只能在函数最外层调用Hook；只能在React的函数组件中调用Hook。Hook是一种复用状态逻辑的方式，它不复用state本身。
+4. 其他Hook：`useContext`可以不使用组件嵌套就可以订阅React的Context；`useReducer`可以通过reducer来管理组件本地的复杂state。
   
 
 

@@ -351,15 +351,15 @@ console.log(b);// 6
 ```
 
 ## 十、手写flat
-+ 功能：实现数组降维  
++ 功能：实现数组降维，数组扁平化  
 + 参数：数字(在原先基础上降几维)  
-+ 返回值：新的数组
++ 返回值：返新不改旧
 ```js
 Array.prototype.myFlat = function(num = 1){
     // num默认为1，while是个简版递归
     let _this = this;
     let count = 0;
-    while(_this.some((item) => (Array.isArray(item))) && count < num){
+    while(_this.some( (item) => (Array.isArray(item)) ) && count < num){
         count++;
         _this = [].concat(..._this);
     }
@@ -376,11 +376,12 @@ console.log(b);// [ 1, 2, 3, 4, [ 5 ] ]
 + 使用while和some特性
 + 返回新数组，不能改变原this
 + some 简写的用法，什么时候可以不用return: 在不用{}的情况下，如果分不清，就用()括起来
+* [官链 MDN flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)
 
 ## 十一、手写Promise.all 
-* 1. 参数是个数组，非数组，返回错误信息
+* 1. 入参：参数是个数组，非数组，返回错误信息
 * 2. 数组里面有一个报错就结束全部请求，一切正常的话，返回一个数组(依据索引)来对应参数的顺序
-* 3. 返回的是一个Promise对象[这是手写API的框架重点]
+* 3. 返回值：是一个Promise对象[这是手写API的框架重点]
 
 ```js
 Promise.myPromiseAll = function (arr = []){
@@ -397,16 +398,16 @@ Promise.myPromiseAll = function (arr = []){
             let curr = arr[i];
             let currPromise = curr.then ? curr : Promise.resolve(curr);
             currPromise.then((res)=>{
-                console.log(res);
+                // 关键步骤：依据索引进行匹配
                 resultValue[i] = res;
                 
                 // 关键步骤
                 count++;
+                // 关键步骤：当全部拿到结果后，整体返回
                 if(count == arr.length){
                     resolve(resultValue);
                 }
             },(error)=>{
-                console.log(error);
                 reject(error);
             });
         }
