@@ -103,6 +103,7 @@ module.exports = {
                     collapsable: true,
                     children: [
                         'project-zyb',// 按面试节点划分
+                        'project-baidu',
                     ]
                 },
             ]
