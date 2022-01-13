@@ -415,6 +415,59 @@ Promise.myPromiseAll = function (arr = []){
 }
 ```
 
+## 十二、手写map
+* [官链 MDN map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+```js
+// 20220113 
+// 入参：callback(item,index,arr),thisArr
+// 返回值：返新不改旧
+// 特性：循环遍历，thisArr是callback的this
+
+Array.prototype.myMap = function (callback,thisArr){
+    let result = [];
+    this.forEach((item,index,arr)=>{
+        result.push(callback.call(thisArr,item,index,arr));
+    });
+
+    return result;
+}
+
+let a = [1,2,3];
+
+console.log(
+    a.myMap((item) => {
+        return item * 2;
+    })
+);
+```
+
+## 十三、Object.create()
+* [MDN 官链 Object.create()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
+```js
+// 入参：原型对象
+// 返回值：实例
+// 特性：入参是新函数对象的原型对象
+
+Object.create = function (proto){
+    let F = function (){}
+    F.prototype = proto;
+    return new F;
+}
+
+console.log(
+    Object.create({d: 1})
+);
+```
+
+## 十四、实现单例模式
+todo
+
+## 十五、实现EventEmit
+todo
+
+## 十六：用ES5实现类的继承效果
+todo
+
 ## 总结&参链：
 * 1. 手写原理API实现，最重要是三点：入参，特性，返回值。20220110 铭科苑 F6
 * [剖析并手写十五个重要 API 的实现：神三元](https://mp.weixin.qq.com/s/BTzLPZpU6VeDEmeocgQSGA)
