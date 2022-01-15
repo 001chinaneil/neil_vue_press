@@ -461,6 +461,7 @@ console.log(
 
 ## 十四、实现单例模式
 todo
+* [JavaScript 设计模式（一）：单例模式](https://juejin.cn/post/6844903874210299912)
 
 ## 十五、实现EventEmit
 todo

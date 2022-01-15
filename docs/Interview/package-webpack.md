@@ -16,7 +16,7 @@
 * 2. webpack是通过Tapable进行事件流管理；
 
 ## 运行原理
-* 口诀：6步(读配置、生成compiler；读entries、遍历入口；loader编译、解析Ast；重复编译、重复解，依赖关系做优化；最终打包入IIFE[自执行函数])
+* 口诀：6步（**读配置、生成compiler；读entries、遍历入口；loader编译、解析Ast；重复编译、重复解，依赖关系做优化；最终打包入IIFE[自执行函数]**）
 * 1. 读取 webpack.config.js 配置文件，生成 compiler 实例，并把 compiler 实例注入 plugin 中的 apply 方法中。
 * 2. 读取配置的 Entries，递归遍历所有的入口文件。
 * 3. 对入口文件进行编译，开始 compilation 过程，使用 loader 对文件内容编译，再将编译好的文件内容解析成 AST 静态语法树。
