@@ -1,4 +1,5 @@
 # 其他未分类集
+20220116 第二遍刷本节 百度大厦A座 F3 四和春 功夫用在平时！！
 
 ## 一、千分位  
 * 1. 利用数组splice截取后改变原数组的特性  
@@ -44,7 +45,6 @@ function chunk(arr = [],size = 1){
     return result;
 }
 ```  
-
 ## 三、把多维数组转化为一维数组  
 *解法一：*  
 * 1. flat(n)：会按照指定的深度去遍历数组，并返回新数组(也就是把嵌套数组扒n层皮~)，默认1  
@@ -119,8 +119,10 @@ console.log(arr);
 ```
 
 ## 五、快速返回色值
+2021年夏天 快手 本地生活 三面真题
 * 1. 快速：Math.random()
-* 2. 色值：16进制
+* 2. 色值：toString(16) 16进制
+* 3. slice(2,8)，6位值，把前面的 `0.` 过滤掉
 
 字符串形式
 ```js
@@ -139,19 +141,59 @@ function getColor(){
 }
 ```
 
-**总结**：  
-* 1. [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString) Number.prototype.toString([radix]);
+```js
+function color16(){
+    let r = Math.floor(Math.random()*256);
+    let g = Math.floor(Math.random()*256);
+    let b = Math.floor(Math.random()*256);
+
+    return '#' + r.toString(16) + g.toString(16) + b.toString(16);
+}
+```
+
+**思考总结**：  
+* 1. [MDN Number.prototype.toString([radix])](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Number/toString)
 * 2. 就是利用了Number.prototype.toString([radix]); 参数是进制的特性，16代表16进制(0-9,a-f)
 * 3. 36代表36进制(0-9,a-z) => 可以拓展成随机字符串
 * 4. **随机类型，就要想到Math.random();**
-* 5. Number.toFixed(2);// 保留2位小数，四舍五入，返回一个字符串类型的数字，(这个API是返新值，什么情况下是改变原值，什么情况是返回新值呢？TODO)
+* 5. Number.toFixed(2);// 保留2位小数，四舍五入，返回一个字符串类型的数字，(这个API是返新值）
+* 6. [参链：JS生成随机颜色值](https://blog.csdn.net/weixin_40920953/article/details/86582142)
 
-**参考**:
-* 1. [JS生成随机颜色值](https://blog.csdn.net/weixin_40920953/article/details/86582142) TODO实践
-
-## 六、如何比较两个对象是否相同 TODO(为什么)
+## 六、如何比较两个对象是否相同
 ```js
-如何比较两个对象是否相等？用JSON.stringify();
+// 方法一：
+// 局限性：2个对象的key顺序都要一致才可以
+JSON.stringify();
+```
+
+```js
+// 方法二：
+// 使用Object.getOwnPropertyNames()，能把自身对象属性（包括不可枚举属性但不包括以Symbol值的属性）组成一个数组。
+// 和Object.keys()的使用效果是一样的
+// 和递归思想
+// 值是函数的情况还是判断不了 todo
+// 功夫用在平时，有步骤有章法的学习、工作、生活 20220116 百度大厦A座 F3 四和春
+function isObjectEqual(obj1,obj2){
+    let arr1 = Object.getOwnPropertyNames(obj1);
+    let arr2 = Object.getOwnPropertyNames(obj2);
+    if(arr1.length !== arr2.length){
+        return false;
+    }
+
+    for(let key of arr1){
+        // typeof 判断对象 数组 null都是object，所以把null的情况排除出去；一切都回归了本质，回归了最基础的概念和内容
+        if(obj1[key] && obj2[key] && typeof obj1[key] === 'object' && typeof obj2[key] === 'object'){
+            // 利用递归思想
+            if( !isObjectEqual(obj1[key],obj2[key]) ){
+                return false;
+            }
+        }else if(obj1[key] !== obj2[key]){
+            return false;
+        }
+    }
+
+    return true;
+}
 ```
 
 ## 七、如何快速打乱一个数组

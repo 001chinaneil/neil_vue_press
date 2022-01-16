@@ -85,17 +85,24 @@ module.exports = {
                     title: '算法思想',
                     collapsable: true,
                     children: [
-                        'algorithm-sort',
-                        'algorithm-print',
-                        'algorithm-write-theory',
-                        'algorithm-string',
-                        'algorithm-de-weight',
-                        'algorithm-pointer',
-                        'algorithm-dynamic-programming',
-                        'algorithm-linked-list',
-                        'algorithm-binary-tree',
-                        'algorithm-others',
-                        'algorithm-summary',
+                        'algorithm-summary',// 算法思想总结
+                        'algorithm-sort',// 排序算法系列
+                        'algorithm-print',// 各种输出系列
+                        'algorithm-write-theory',// 实现原理系列
+                        'algorithm-de-weight',// 去重专题系列
+                        // -----------------------------------
+                        'algorithm-array',// 数组操作系列
+                        'algorithm-linked-list',// 链表专题系列
+                        'algorithm-hash',// 哈希操作系列
+                        'algorithm-string',// 字符操作系列
+                        'algorithm-pointer',// 双指针系列集
+                        'algorithm-stack-and-queue',// 栈与队列系列
+                        'algorithm-binary-tree',// 二叉树系列集 todo
+                        'algorithm-recall',// 回溯算法系列 todo
+                        'algorithm-greed',// 贪心算法系列 todo
+                        'algorithm-dynamic-programming',// 动态规划系列 todo
+                        'algorithm-dull-stack',// 单调栈 todo
+                        'algorithm-others',// 其他未分类集
                     ],
                 },
                 {
