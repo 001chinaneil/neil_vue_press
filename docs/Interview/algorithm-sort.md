@@ -93,7 +93,7 @@ function insertSort(arr = []){
 
 ## 五、选择排序 TODO
 
-## 六、归并排序 TODO
+## 六、归并排序
 * 1. 口诀：**先分解，分到不能再分，return递归合并；后合并，合到其一为空，起变量，用shift，concat连。**(20210627总结口诀)
 
 ```js

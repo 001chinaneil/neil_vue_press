@@ -52,8 +52,8 @@ async1 start
 async2
 promise1
 script end
-async1 end
-promise2
+async1 end // 微任务
+promise2 // 微任务
 
 setTimeout
 ```

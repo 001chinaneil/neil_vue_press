@@ -211,11 +211,15 @@ function compose() {
 题解一：利用函数的嵌套，JS的调用栈
 ```js
 function compose(middleware) {
+    // 利用JS的调用栈
     return function (){
         dispatch(0);
+
         function dispatch(i){
             let fn = middleware[i];
+            // 终止条件
             if(!fn) return null;
+            // 拿到之后，把下一个执行函数塞进去
             fn(function next(){
                 dispatch(i+1);
             });
