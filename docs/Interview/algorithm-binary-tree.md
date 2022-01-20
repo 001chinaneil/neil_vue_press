@@ -17,7 +17,7 @@ var preorderTraversal = function(root){
 	let result = [];
     function order(root){
         if(root == null) return;
-        // 先序遍历preOrder
+        // 前序遍历preOrder
     	result.push(root.val);
         order(root.left);
       	order(root.right);
@@ -32,6 +32,7 @@ var preorderTraversal = function(root){
         // order(root.right);
       	// result.push(root.val);
     }
+    // 利用了闭包
     order(root);
   	return result;
 }
@@ -198,7 +199,7 @@ var isSymmetric = function(root) {
 };
 ```
 
-方法3：实际问题3：路径总和
+### 实际问题3：路径总和
 * 总结：`return关键字，只会退出当前函数`，不会全部推出再上一层的函数。
 
 **递归**
@@ -216,4 +217,78 @@ var hasPathSum = function(root, targetSum) {
 ```
 
 **迭代** TODO
+
+--------------------------20220119 后面是代码随想录的学习总结
+## 三、二叉树理论基础
+### 种类枚举：
+* 种类：满二叉树和完全二叉树。
+* **满二叉树**：如果一棵二叉树只有度为0和度为2的节点，并且度为0的节点在同一层上，则这棵二叉树为满二叉树。有(2^K)-1个节点。
+* **完全二叉树**：除了最底层节点没有填满外，其余节点都填完了，而且最底层也是集中在最左侧的位置。节点范围1 ~ (2^K)-1。
+* 优先级队列就是一个堆，堆就是一棵完全二叉树，保证父子节点的顺序关系。
+* **二叉搜索树**：是有序树，左 < 根 < 右
+* **平衡二叉搜索树**AVL（Adelson-Velsky and Landis）：它是一棵空树或它的**左右两个子树的高度差不超过1**，并且左右2个子树都是平衡二叉树。
+
+### 存储方式
+* 链式存储（用指针），顺序存储（用数组）
+
+### 遍历方式
+* 深度优先遍历：先往深走，遇到叶子节点再往回走
+```js
+前序遍历（递归法，迭代法）
+中序遍历（递归法，迭代法）
+后序遍历（递归法，迭代法）
+```
+* 广度优先遍历：一层一层的去遍历
+```js
+层次遍历（迭代法）  
+```
+总结：
+1. 用递归的方式深度遍历比较方便，而栈是递归的一种实现结构，所以深度遍历都可以用栈而非递归的方式去实现。
+2. 广度优先一般用队列的结构来实现。
+
+### 二叉树的定义
+```js
+// JS版本
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+```
+
+## 递归遍历
+递归算法的三要素：
+```js
+1. 确定入参和返回值
+2. 写明终止条件，防止栈溢出
+3. 确定单层逻辑
+```
+```js
+// 前序遍历
+var preorderTraversal = function(root, res = []) {
+    if (!root) return res;
+    res.push(root.val);
+    preorderTraversal(root.left, res)
+    preorderTraversal(root.right, res)
+    return res;
+};
+```
+```js
+// 前序遍历的第二种解法
+var preorderTraversal = function(root) {
+    let res=[];
+    const dfs = function(root){
+        if(root === null) return ;
+        //先序遍历所以从父节点开始
+        res.push(root.val);
+        //递归左子树
+        dfs(root.left);
+        //递归右子树
+        dfs(root.right);
+    }
+    //只使用一个参数 使用闭包进行存储结果
+    dfs(root);
+    return res;
+};
+```
 
