@@ -1,17 +1,59 @@
 # 二叉树系列集--进阶算法开始 todo
+20220122 海淀图书馆（北区）F3 第二遍 第7节 二叉树周末总结学完了
+
 * [LeetCode教程](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/x63shc/)
 
-## 一、树的遍历--介绍
+## 一、理论基础
+### 种类枚举：
+* 种类：满二叉树和完全二叉树。
+* **满二叉树**：如果一棵二叉树只有度为0和度为2的节点，并且度为0的节点在同一层上，则这棵二叉树为满二叉树。有(2^K)-1个节点。
+* **完全二叉树**：除了最底层节点没有填满外，其余节点都填完了，而且最底层也是集中在最左侧的位置。节点范围1 ~ (2^K)-1。
+* 优先级队列就是一个堆，堆就是一棵完全二叉树，保证父子节点的顺序关系。
+* **二叉搜索树**：是有序树，左 < 根 < 右
+* **平衡二叉搜索树**AVL（Adelson-Velsky and Landis）：它是一棵空树或它的**左右两个子树的高度差不超过1**，并且左右2个子树都是平衡二叉树。
+
+### 存储方式
+* 链式存储（用指针），顺序存储（用数组）
+
+### 二叉树的定义
+```js
+// JS版本
+function TreeNode(val, left, right) {
+    this.val = (val===undefined ? 0 : val)
+    this.left = (left===undefined ? null : left)
+    this.right = (right===undefined ? null : right)
+}
+```
+
+## 二、树的遍历--介绍
 * 1. 前序遍历：根左右；中序遍历：左根右；后序遍历：左右根；(`前中后序依【根】定，左右孩子不变更`) 这个顺序是打印输出的顺序
 * 2. 对于二叉搜索树，通过【中序遍历】可以得到一个递增的有序数列。
-* 3. 当删除节点时，将按照【后序遍历】的方式进行，即先删除左子树，再删除右子树，最后再删除节点。
+* 3. 当删除节点时，将按照【后序遍历】的方式进行，即先删除左子树，再删除右子树，最后再删除中节点。
 * 4. 递归算法的方法论：  
     4.1 确定递归算法的参数和返回值(`确定参数和返值`)  
     4.2 确定终止条件，防止栈溢出(`终止条件要说明，防止溢出来破坏`)  
     4.3 确定单层递归逻辑(`核心逻辑是单层`)
 * 5. 具体代码实现：递归解法，这个解法可以应对前序遍历、中序遍历、后序遍历，只不过是遍历算法里面的先后顺序换一下  
 
-**递归版：递归三部曲**
+### 遍历方式
+* 深度优先遍历：先往深走，遇到叶子节点再往回走
+```js
+前序遍历（递归法，迭代法）
+中序遍历（递归法，迭代法）
+后序遍历（递归法，迭代法）
+```
+
+* 广度优先遍历：一层一层的去遍历
+```js
+层次遍历（迭代法）  
+```
+总结：
+1. 用递归的方式深度遍历比较方便，而栈是递归的一种实现结构，所以深度遍历都可以用栈而非递归的方式去实现。
+2. 广度优先一般用队列的结构来实现。
+
+
+
+### 递归版：递归三部曲
 ```js
 var preorderTraversal = function(root){
 	let result = [];
@@ -38,7 +80,9 @@ var preorderTraversal = function(root){
 }
 ```
 
-**其他算法的实现：前序遍历**
+### 迭代版
+**迭代法：前序遍历**
+20220122 done
 * 1. 实现一：利用栈：先进后出，所以是先把右节点压栈，再把左节点压栈。   
 ```js
 // 前序遍历：根左右
@@ -59,10 +103,11 @@ var preorderTraversal = function(root){
 }
 ```
 
-**其他算法的实现：中序遍历**
-* [参链1：](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/er-cha-shu-de-zhong-xu-bian-li-by-leetcode-solutio/)  [参链2：](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/shou-hua-tu-jie-yong-zhan-mo-ni-zhong-xu-bian-li-z/)  
+**迭代法：中序遍历**
+* [官方题解：](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/er-cha-shu-de-zhong-xu-bian-li-by-leetcode-solutio/)  
+* [「手画图解」用栈模拟中序遍历，怎么做以及为什么 | 递归与迭代：](https://leetcode-cn.com/problems/binary-tree-inorder-traversal/solution/shou-hua-tu-jie-yong-zhan-mo-ni-zhong-xu-bian-li-z/)  
 
-实现一：利用栈TODO，口诀：2次左偏瘫(while循环，push(root) .left)，1次右一点  
+实现一：利用栈TODO，口诀：2次左偏瘫(while循环，push(root) .left)，1次右一点；**入栈能左就左，出栈查右** 
 ```js
 // 口诀：2次左偏瘫(while循环，push(root) .left)，1次右一点
 var inorderTraversal = function(root) {
@@ -89,18 +134,44 @@ var inorderTraversal = function(root) {
 };
 ```
 
-实现二：Morris算法TODO  
+**迭代法：后序遍历** 
+```js
+// 20221022
+// 入参：root
+// 返回值：res数组
+// 后序遍历：左右中-翻转 => 中右左-出栈 => 中左右-入栈
+const postOrder = function (root){
+    let res = [];
+    let stack = [];
+    if(root){
+        stack.push(root);
+    }
 
-**其他算法的实现：后序遍历** TODO
+    while(stack.length){
+        let curr = stack.pop();
+        res.push(curr.val);
+        if(curr.left){
+            stack.push(curr.left);
+        }
+        if(curr.right){
+            stack.push(curr.right);
+        }
+    }
 
-**层序遍历：**逐层遍历树结构
+    return res.reverse();
+}
+```
+
+**前中后序统一迭代法** 不好理解，TODO 二选一即可
+
+**层序遍历：** 逐层遍历树结构
 * 1. 广度优先搜索，多应用于树和图数据结构，进行遍历和搜索的算法 === 也就是用层序遍历顺序的。
 * 2. 通常用队列的数据结构来帮助做广度优先搜索。
 * 3. [官方题解](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/er-cha-shu-de-ceng-xu-bian-li-by-leetcode-solution/)  
-[题解](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/er-cha-shu-de-ceng-xu-bian-li-bfs-by-zxh-51dl/) 看懂了，搞一个队列，里面元素[val,level]，左右入队，一个个出队。
+[题解](https://leetcode-cn.com/problems/binary-tree-level-order-traversal/solution/er-cha-shu-de-ceng-xu-bian-li-bfs-by-zxh-51dl/) 看懂了，搞一个队列，里面元素[val,level]，左右入队，一个个出队，入队列时进行标记：[[val,level]]。
 
 ```js
-var levelOrder = function(root) {
+const levelOrder = function(root) {
     // 利用队列的特点：先进先出进行实现 shift
     if(!root) return [];
     let queue = [[root,0]];// 初始化，root，第0层，最好的记忆模板
@@ -122,8 +193,48 @@ var levelOrder = function(root) {
 };
 ```
 
-## 二、运用递归解决问题：递归是解决树相关问题的最常用、最有效的方法之一
-* [官方链接](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xefb4e/) 真是好例子，可以二刷总结
+```js
+// 第二种解法
+// 20220123
+// 广度优先，层序遍历
+// 入参：root
+// 返回值：二维数组，里面每个数组元素是每层的节点
+// 核心逻辑：层与层的区别，记录当前层次的节点个数，去进行遍历；队列数据结构
+const levelOrder = function (root){
+    // 临界情况
+    if(root === null){
+        return [];
+    }
+    let res = [],queue = [];
+    queue.push(root);
+
+    // 循环队列
+    while(queue.length){
+        let currLevelLength = queue.length;
+        // 当前层级节点的容器
+        let currLevelArr = [];
+        // 当前层数有多少个节点，就循环遍历几次
+        for(let i = 0;i < currLevelLength;i++){
+            let curr = queue.shift();
+            currLevelArr.push(curr.val);
+            // 把当前节点的左右子树放入队列里面去
+            if(curr.left){
+                queue.push(curr.left);
+            }
+            if(curr.right){
+                queue.push(curr.right);
+            }
+        }
+        res.push(currLevelArr);
+    }
+
+    return res;
+}
+```
+
+## 三、运用递归解决问题
+递归是解决树相关问题的最常用、最有效的方法之一
+* [官方链接](https://leetcode-cn.com/leetbook/read/data-structure-binary-tree/xefb4e/) 真是好例子，可以二刷总结，20220122二刷完成
 * 1. `关注每个单节点的问题`，通过函数调用来解决其他节点的问题。        
 * 2. 两种方式：《自上向下》、《自下向上》
 * 3. 《自上向下》：如果可以从自身出发得到答案，并可以把有价值的参数传给子节点
@@ -142,7 +253,7 @@ var maxDep = function(root){
 }
 ```
 
-方法2：广度优先搜索：迭代
+方法2：广度优先搜索：迭代  
 [参链](https://leetcode-cn.com/problems/maximum-depth-of-binary-tree/solution/dai-ma-sui-xiang-lu-qiu-shu-de-zui-da-sh-f988/)
 * 总结：层序遍历中的while中的内容是遍历的变化部分，根据不同的目的，进行不同的变化。比如层级打印、最大深度。
 
@@ -218,77 +329,37 @@ var hasPathSum = function(root, targetSum) {
 
 **迭代** TODO
 
---------------------------20220119 后面是代码随想录的学习总结
-## 三、二叉树理论基础
-### 种类枚举：
-* 种类：满二叉树和完全二叉树。
-* **满二叉树**：如果一棵二叉树只有度为0和度为2的节点，并且度为0的节点在同一层上，则这棵二叉树为满二叉树。有(2^K)-1个节点。
-* **完全二叉树**：除了最底层节点没有填满外，其余节点都填完了，而且最底层也是集中在最左侧的位置。节点范围1 ~ (2^K)-1。
-* 优先级队列就是一个堆，堆就是一棵完全二叉树，保证父子节点的顺序关系。
-* **二叉搜索树**：是有序树，左 < 根 < 右
-* **平衡二叉搜索树**AVL（Adelson-Velsky and Landis）：它是一棵空树或它的**左右两个子树的高度差不超过1**，并且左右2个子树都是平衡二叉树。
-
-### 存储方式
-* 链式存储（用指针），顺序存储（用数组）
-
-### 遍历方式
-* 深度优先遍历：先往深走，遇到叶子节点再往回走
+## 四、经典实战
+### 翻转二叉树
+把每个节点的左右子树互换一下，整个树就都翻转了。
+todo 还有其他版本的写法
 ```js
-前序遍历（递归法，迭代法）
-中序遍历（递归法，迭代法）
-后序遍历（递归法，迭代法）
-```
-* 广度优先遍历：一层一层的去遍历
-```js
-层次遍历（迭代法）  
-```
-总结：
-1. 用递归的方式深度遍历比较方便，而栈是递归的一种实现结构，所以深度遍历都可以用栈而非递归的方式去实现。
-2. 广度优先一般用队列的结构来实现。
-
-### 二叉树的定义
-```js
-// JS版本
-function TreeNode(val, left, right) {
-    this.val = (val===undefined ? 0 : val)
-    this.left = (left===undefined ? null : left)
-    this.right = (right===undefined ? null : right)
-}
-```
-
-## 递归遍历
-递归算法的三要素：
-```js
-1. 确定入参和返回值
-2. 写明终止条件，防止栈溢出
-3. 确定单层逻辑
-```
-```js
-// 前序遍历
-var preorderTraversal = function(root, res = []) {
-    if (!root) return res;
-    res.push(root.val);
-    preorderTraversal(root.left, res)
-    preorderTraversal(root.right, res)
-    return res;
-};
-```
-```js
-// 前序遍历的第二种解法
-var preorderTraversal = function(root) {
-    let res=[];
-    const dfs = function(root){
-        if(root === null) return ;
-        //先序遍历所以从父节点开始
-        res.push(root.val);
-        //递归左子树
-        dfs(root.left);
-        //递归右子树
-        dfs(root.right);
+// 递归版
+var invertTree = function(root) {
+    //1. 首先使用递归版本的前序遍历实现二叉树翻转
+    //交换节点函数
+    const inverNode = function(left,right){
+        // let temp = left;
+        // left = right;
+        // right = temp;
+        [left,right] = [right,left];
+        //需要重新给root赋值一下
+        root.left = left;
+        root.right = right;
     }
-    //只使用一个参数 使用闭包进行存储结果
-    dfs(root);
-    return res;
+    //确定递归函数的参数和返回值inverTree=function(root)
+    //确定终止条件
+    if(root === null){
+        return root;
+    }
+    //确定节点处理逻辑 交换
+    inverNode(root.left,root.right);
+
+    invertTree(root.left);
+    invertTree(root.right);
+    return root;
 };
 ```
+
+
 

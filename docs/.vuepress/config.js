@@ -23,7 +23,7 @@ module.exports = {
                 // 侧边栏分组
                 {
                     title: '应用框架(Framework)',// 分组标题
-                    collapsable: false,
+                    collapsable: true,
                     children: [// 分组下的页面
                         'Vue',
                         'React',
@@ -31,11 +31,53 @@ module.exports = {
                 },
                 {
                     title: '工具集合(Tools)',
-                    collapsable: false,
+                    collapsable: true,
                     children: [
                         "Git",
                     ],
-                }
+                },
+                {
+                    title: '工程架构系列',
+                    collapsable: true,
+                    children: [
+                        "engineering",
+                    ],
+                },
+                {
+                    title: '微前端系列集',
+                    collapsable: true,
+                    children: [
+                        "micro-front-end",
+                    ],
+                },
+                {
+                    title: '低代码系列集',
+                    collapsable: true,
+                    children: [
+                        "low-code",
+                    ],
+                },
+                {
+                    title: '多端跨端系列',
+                    collapsable: true,
+                    children: [
+                        "across-client-side",
+                    ],
+                },
+                {
+                    title: '服务器渲染集',
+                    collapsable: true,
+                    children: [
+                        "server-rendering",
+                    ],
+                },
+                {
+                    title: '动效可视化集',
+                    collapsable: true,
+                    children: [
+                        "visualization",
+                    ],
+                },
             ],
             '/Interview/': [
                 {
@@ -98,6 +140,7 @@ module.exports = {
                         'algorithm-pointer',// 双指针系列集
                         'algorithm-stack-and-queue',// 栈与队列系列
                         'algorithm-binary-tree',// 二叉树系列集 todo
+                        'algorithm-binary-tree-levelorder',// 二叉树系列集 todo
                         'algorithm-recall',// 回溯算法系列 todo
                         'algorithm-greed',// 贪心算法系列 todo
                         'algorithm-dynamic-programming',// 动态规划系列 todo

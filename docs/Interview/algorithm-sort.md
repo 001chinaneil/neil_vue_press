@@ -90,6 +90,7 @@ function insertSort(arr = []){
 总结：算法题贵在精不在多，在精的前提下，尽量的多。20210808午首著一层
 
 ## 四、二分法排序 TODO
+[二分法：indexOf](https://www.cnblogs.com/honkerzh/p/10531964.html)
 
 ## 五、选择排序 TODO
 
