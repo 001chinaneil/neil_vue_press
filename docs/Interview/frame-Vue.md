@@ -11,7 +11,7 @@ tips: **Dep 对象用于依赖收集**，它实现了一个发布订阅模式，
 参链：  
 [深入响应式原理](https://cn.vuejs.org/v2/guide/reactivity.html)
 
-## 二、异步更新
+## 二、异步更新或者nextTick原理
 * 1. Data 对象：Vue模板的 data 方法中返回的对象。
 * 2. Dep 对象：每一个 Data 属性都会创建一个 Dep，用来搜集所有使用到这个 Data 的 Watcher 对象。
 * 3. Watcher 对象：主要用于渲染 DOM。
@@ -20,15 +20,19 @@ tips: **Dep 对象用于依赖收集**，它实现了一个发布订阅模式，
 * 何时可以获取更新后的Dom：Vue的nextTick()回调中。
 * Vue在利用Watcher更新视图时，并不是直接更新，而是把Watcher对象放到队列里，具体更新视图的方法**flushSchedulerQueue**，放入nextTick里面进行调用。
 * this.$nextTick()其实就是源码中的nextTick()，只是Vue.prototype.$nextTick = function(){ return nextTick(fn,this) }，**本质是对JavaScript执行原理EventLoop的一种应用**。
-* 由于 nextTick 只是单纯通过 Promise 、SetTimeout 等方法模拟的异步任务，
+* 由于 nextTick 只是单纯通过 Promise 、SetTimeout 等方法模拟的**异步任务**，
 所以也可以手动执行一个异步任务，来实现和 this.$nextTick 相同的效果。
 * 为什么要异步进行回调？是为了提高性能吗？防止卡顿？是  
 
 * 口诀：Watcher入队列，异步任务nextTick
+```js
 1. 修改 Vue 中的 Data 时，就会触发所有和这个 Data 相关的 Watcher 进行更新。
-2. 首先，会将所有的 Watcher 加入队列 Queue。
+2. 首先，会将所有的 Watcher 加入队列 Queue（原因是：避免重复计算和不必要的DOM操作）。
 3. 然后，调用 nextTick 方法，执行异步任务。
 4. 在异步任务的回调中，对 Queue 中的 Watcher 进行排序，然后执行对应的 DOM 更新。
+```
+参链：
+[一次弄懂 Vue2 和 Vue3 的 nextTick 实现原理](https://juejin.cn/post/7021688091513454622)
 
 ## 三、diff算法
 * 源码位置：node_modules/vue/src/core/vdom/patch.js
@@ -46,8 +50,15 @@ tips: **Dep 对象用于依赖收集**，它实现了一个发布订阅模式，
 [[Vue的diff算法详解和key作用(较详细)]](https://blog.csdn.net/qq_39414417/article/details/104763824)
 
 ## 四、双向绑定 
-TODO
-视图更新数据，数据更新视图。 
+* 视图更新数据，数据更新视图。 
+单项绑定过程(自己总结的)：  
+1. 变量变了，由set发通知给watcher；  
+2. watcher告知虚拟DOM树，叫它该比较了，我这有值变了；  
+3. 于是生成新的dom树进行一个比较，然后逐级分类比较，比较出哪个元素发生变化就把这个元素更新到页面，这就是单项数据绑定原理。
+4. v-model原理其实就是给input事件绑定oninput事件，就会立刻调用底层对象对应的setter方法，改变data里的属性的值，从而实现双向数据绑定。
+
+参链：  
+[用自己的话总结vue双向绑定数据原理](https://juejin.cn/post/6844904015516401678)
 
 ## 五、Rouer机制
 1. 核心：更新视图，但不重新请求页面；浏览器：hash\history，Node：abstract
@@ -110,6 +121,16 @@ vm.render() //更新视图
 
 参链：
 [面试官：Vue3有了解过吗？能说说跟Vue2的区别吗？](https://blog.csdn.net/weixin_44475093/article/details/112386778)
+
+## 八、new Vue()发生了什么
+20220219 海淀图书馆（北区）F3  
+参链：[new Vue到底发生了什么（2.0）](https://juejin.cn/post/6844903874612953096)
+1. Vue实例
+2. 初始化和挂载：初始化生命周期、事件、 props、 methods、 data、 computed 与 watch 等，最重要的是通过 Object.defineProperty 设置 setter 与 getter 函数，用来实现「响应式」以及「依赖收集」。
+3. 编译：compile编译可以分成 parse、optimize 与 generate 三个阶段，最终需要得到 render function。
+4. 响应式
+5. Virtual DOM：render function 会被转化成 VNode 节点。
+6. 更新视图
 
 ## 参链
 1. [12道vue高频原理面试题,你能答出几道?](https://zhuanlan.zhihu.com/p/101330697)

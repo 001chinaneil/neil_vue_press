@@ -380,8 +380,9 @@ console.log(b);// [ 1, 2, 3, 4, [ 5 ] ]
 * [官链 MDN flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)
 
 ## 十一、手写Promise.all 
+20220215 海淀铭科苑 三刷
 * 1. 入参：参数是个数组，非数组，返回错误信息
-* 2. 数组里面有一个报错就结束全部请求，一切正常的话，返回一个数组(依据索引)来对应参数的顺序
+* 2. 数组里面有一个报错就结束全部请求，一切正常的话，返回一个数组(依据索引)来对应参数的顺序，for循环里面把单个数组元素promise执行一遍
 * 3. 返回值：是一个Promise对象[这是手写API的框架重点]
 
 ```js

@@ -18,9 +18,7 @@
 ## async...await
 * 1. 概念：async 函数就是将 Generator 函数的星号（*）替换成 async，将 yield 替换成 await，仅此而已。 
 * 2. 优点：内置执行器；更好的语义；更广的适用性； 
-
-### 考点
-* 1. `await func().catch((error)=>{})` // 因为await返回的是一个Promise对象
+* 3. **await后面尽量跟一个promise对象，否则原来是什么就还是什么。async是不管内部函数返回什么，都是处理成一个promise对象进行返回。**
 
 ## 典型真题
 1. JS按顺序执行多个异步函数
@@ -108,8 +106,9 @@ async function mySort(arr = []){
 }
 ```
 
-2. 限制数量请求池函数实现
+2. 限制数量请求池函数实现 todo  
 参链：[限制数量请求池函数实现](https://segmentfault.com/a/1190000040197250)  
+[23行代码实现一个带并发数限制的fetch请求函数](https://juejin.cn/post/6844903796506624014)  todo  
 20220109 百度大厦F3 四和春 第一次自主写出来了 赞！
 ```js
 const request = createRequestPool(3);
@@ -266,6 +265,7 @@ function compose(middleware){
 ```
 
 TODO：还有其他类型的Promise面试题吗？
+* [建议星星】要就来45道Promise面试题一次爽到底(1.1w字用心整理)](https://juejin.cn/post/6844904077537574919) [非常赞！]
 
 参链：
 * [Promise入门详解和基本用法](https://www.cnblogs.com/qianguyihao/p/12660393.html)

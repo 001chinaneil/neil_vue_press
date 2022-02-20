@@ -26,6 +26,7 @@ module.exports = {
                     collapsable: true,
                     children: [// 分组下的页面
                         'Vue',
+                        'Vue3',
                         'React',
                     ]
                 },
