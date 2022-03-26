@@ -63,6 +63,54 @@ console.log(b);// 4037913
 ```
 参链：[js中实现阶乘（多种方法）以及阶乘求和](https://blog.csdn.net/weixin_44880730/article/details/108328099)
 
+* 2. js实现顺时针填写N阶矩阵
+```js
+// 20220224 铭科苑
+// 小红书-商业化一面笔试题、邑邻科技CTO面笔试题
+// 参链：https://juejin.cn/post/6844903946008395789
+function matrixPrint(n,startNum){
+    //N阶矩阵
+    let data = new Array(n);
+    for(let i = 0;i < n;i++) {
+        data[i] = new Array();     //声明data二维数组
+    }
+    
+    function full(startNum, size, begin) {
+        let i, j, number = startNum;   //i表示行号，j列号
+        
+        if(size == 0) {    //递归的边界条件，如果size等于0，无须填写
+            return;
+        }
+        
+        if(size == 1) {    //递归的边界条件
+            data[begin][begin] = number;
+            return;
+        }
+        
+        i = begin, j = begin;    //初始化左上角下标
+        
+        for(let k = 0; k < size-1; k++) {    //填写区域上
+            data[i][j++] = number++;
+        }
+        for(let k = 0; k < size-1; k++) {    //填写区域右
+            data[i++][j] = number++;
+        }
+        for(let k = 0; k < size-1; k++) {    //填写区域下
+            data[i][j--] = number++;
+        }
+        for(let k = 0; k < size-1; k++) {    //填写区域左
+            data[i--][j] = number++;
+        }
+        full(number, size-2, begin+1);   //递归求解，左上角下标为begin+1
+    }
+
+    full(startNum,n,0);
+    return data;
+}
+
+matrixPrint(4,0);
+```
+
 ## 总结：  
 * 1. 到了这个时候，原则就是会写的一定要冷静、耐心、思路清晰的写对，不会写的尽量说明白思路，尽力表达。    
 * 2. 一类一类的去刷题，总结反思。  

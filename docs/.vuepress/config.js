@@ -8,10 +8,10 @@ module.exports = {
                 text: '专题学习',
                 link: '/topic/'
             },
-            {
-                text: '工作总结',
-                link: '/foo/'
-            },
+            // {
+            //     text: '工作总结',
+            //     link: '/foo/'
+            // },
             {
                 text: 'Interview',
                 // text: '面试准备',
@@ -28,6 +28,7 @@ module.exports = {
                         'Vue',
                         'Vue3',
                         'React',
+                        'React-Hooks',
                     ]
                 },
                 {

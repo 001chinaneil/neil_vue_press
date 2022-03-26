@@ -40,7 +40,7 @@
 * 8. 开发环境的关闭注释：options.output.pathinfo => 空间纬度
 * 9. 生产环境用**tree shaking**，只打包用到的模块，删除没用的模块 => 空间纬度
 
-* 参链：[webpack解惑：多入口文件打包策略：吕大豹](https://www.cnblogs.com/lvdabao/p/5944420.html)
+* 参链：[webpack解惑：多入口文件打包策略：吕大豹](https://www.cnblogs.com/lvdabao/p/5944420.html)  
 原则：
 1. 选择合适的打包粒度，生成的单文件大小不要超过500KB
 2. 充分利用浏览器的并发请求，同时保证并发数不超过6

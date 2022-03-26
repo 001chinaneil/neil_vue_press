@@ -1,4 +1,8 @@
 # 实现原理编码
+## 总结&参链：
+* 1. 手写原理API实现，最重要是三点：入参，特性，返回值。20220110 铭科苑 F6
+* [剖析并手写十五个重要 API 的实现：神三元](https://mp.weixin.qq.com/s/BTzLPZpU6VeDEmeocgQSGA)
+* [死磕36个JS手写题：大海我来了](https://juejin.cn/post/6946022649768181774) 非常赞！
 
 ## 一、深拷贝  
 20220110 铭科苑 F6 二刷
@@ -249,28 +253,7 @@ Function.prototype.myBind = function(context, ...args) {
 }
 ```
 
-## 六、Promise的实现：TODO
-参链：[JavaScript异步与Promise实现](https://zhuanlan.zhihu.com/p/26815654)  
-1. 概念：什么是Promise，一种可以链式调用、解决之前回调地域的异步编程方式  
-2. 回调地域：指一层嵌套一层，代码冗余、难以维护、可读性差的异步编程方式  
-3. Promise用法：
-```js
-// then()返回的也是个Promise对象
-let p1 = new Promise((resolve,reject)=>{
-    resolve();// 是个函数
-    reject();// 是个函数
-});
-
-p1.then((resolve,reject)=>{
-    resolve();// 是个函数
-    reject();// 是个函数
-    }
-)
-.then()
-.then()
-```
-
-## 七、手写instanceof：  
+## 六、手写instanceof：  
 **判断实例对象的原型链(__proto__)上是否有构造函数的原型prototype (口诀：要是new出来的实例对象，考察的API的定义，原型链的含义)**
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/instanceof)  
 小米一面真题
@@ -291,7 +274,7 @@ function myInstanceof(left,right){
 }
 ```
 
-## 八、手写new操作符  
+## 七、手写new操作符  
 参链：  
 [MDN](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/new)  
 [js如何手写一个new](https://www.cnblogs.com/sunhang32/p/11905393.html)  
@@ -321,6 +304,59 @@ function myNew(father,...rest){
 
     return result instanceof Object ? result : obj;
 }
+```
+
+## 八、手写map、forEach
+* [官链 MDN map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+```js
+// 20220113 
+// 入参：callback(item,index,arr),thisArr
+// 返回值：返新不改旧
+// 特性：循环遍历，thisArr是callback的this
+
+Array.prototype.myMap = function (callback,thisArr){
+    let result = [];
+    this.forEach((item,index,arr)=>{
+        result.push(callback.call(thisArr,item,index,arr));
+    });
+
+    return result;
+}
+
+let a = [1,2,3];
+
+console.log(
+    a.myMap((item) => {
+        return item * 2;
+    })
+);
+```
+### 手写forEach
+* some、filter都是类似的原理去手写实现
+```js
+// 手写数组原型函数forEach 20220303 铭科苑
+// 1. 边界情况判断 this，callback
+// 2. 入参：callback，thisArg
+// 3. 返回值：无
+Array.prototype.myForEach = function(callback,thisArg){
+    // 边界情况：this不为数组
+    if(!Array.isArray(this)){
+        return new Error('非数组调用，请检查~~');
+    }
+    if(!(callback instanceof Function)){
+        return new Error('入参非函数，请检查~');
+    }
+    let newArr = [...this];
+    for(let i = 0;i < newArr.length;i++){
+        callback.call(thisArg,newArr[i],i,newArr);
+    }
+}
+
+// 测试
+let arr = [1,2,3];
+arr.forEach((item,index,array)=>{
+    console.log(item*2,index,array);
+});
 ```
 
 ## 九、手写reduce  
@@ -379,7 +415,31 @@ console.log(b);// [ 1, 2, 3, 4, [ 5 ] ]
 + some 简写的用法，什么时候可以不用return: 在不用{}的情况下，如果分不清，就用()括起来
 * [官链 MDN flat](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/flat)
 
-## 十一、手写Promise.all 
+
+
+
+## 十一、Promise的实现：TODO
+参链：[JavaScript异步与Promise实现](https://zhuanlan.zhihu.com/p/26815654)  
+1. 概念：什么是Promise，一种可以链式调用、解决之前回调地域的异步编程方式  
+2. 回调地域：指一层嵌套一层，代码冗余、难以维护、可读性差的异步编程方式  
+3. Promise用法：
+```js
+// then()返回的也是个Promise对象
+let p1 = new Promise((resolve,reject) => {
+    resolve();// 是个函数
+    reject();// 是个函数
+});
+
+p1.then((resolve,reject) => {
+        resolve();// 是个函数
+        reject();// 是个函数
+    }
+)
+.then()
+.then()
+```
+
+## 十二、手写Promise.all、race、allSettled、any 
 20220215 海淀铭科苑 三刷
 * 1. 入参：参数是个数组，非数组，返回错误信息
 * 2. 数组里面有一个报错就结束全部请求，一切正常的话，返回一个数组(依据索引)来对应参数的顺序，for循环里面把单个数组元素promise执行一遍
@@ -417,31 +477,62 @@ Promise.myPromiseAll = function (arr = []){
 }
 ```
 
-## 十二、手写map
-* [官链 MDN map](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Array/map)
+### 手写Promise.race
+* 返回第一个Promise形式的resolve或reject结果
 ```js
-// 20220113 
-// 入参：callback(item,index,arr),thisArr
-// 返回值：返新不改旧
-// 特性：循环遍历，thisArr是callback的this
-
-Array.prototype.myMap = function (callback,thisArr){
-    let result = [];
-    this.forEach((item,index,arr)=>{
-        result.push(callback.call(thisArr,item,index,arr));
+Promise.myRace = function(promiseArr) {
+    return new Promise((resolve, reject) => {
+        promiseArr.forEach(p => {
+            Promise.resolve(p).then(val => {
+                resolve(val)
+            }, err => {
+                rejecte(err)
+            });
+        });
     });
-
-    return result;
 }
-
-let a = [1,2,3];
-
-console.log(
-    a.myMap((item) => {
-        return item * 2;
-    })
-);
 ```
+
+### 手写Promise.allSettled
+* 概念：每个元素都结束（无论是成功还是失败）才返回
+```js
+// 手写实现Promise.allSettled 20220303 铭科苑F6
+// 1. 入参：数组
+// 2. 返回值：promise值
+// 3. 核心：无论成功与否都等全部返回再返回
+Promise.myAllSettled = function(arr = []){
+    // 边界情况处理
+    if(!Array.isArray(arr)){
+        return new Error('入参格式错误，请检查~');
+    }
+
+    return new Promise((resolve,reject)=>{
+        let result = [];
+        for(let i = 0;i < arr.length;i++){
+            Promise.resolve(arr[i]).then((res)=>{
+                result[i] = {
+                    status: 'fulfilled',
+                    val: res,
+                }
+                if(result.length === arr.length){
+                    resolve(result);
+                }
+            },(error)=>{
+                result[i] = {
+                    status: 'rejected',
+                    reason: error
+                }
+                if(result.length === arr.length){
+                    resolve(result);
+                }
+            })
+        }
+    });
+}
+```
+### 手写Promise.any
+* 和all正好相反，any是只要有一个fulfilled的就整体返回，要不就等全部错误才整体返回
+
 
 ## 十三、Object.create()
 * [MDN 官链 Object.create()](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/create)
@@ -465,15 +556,91 @@ console.log(
 todo
 * [JavaScript 设计模式（一）：单例模式](https://juejin.cn/post/6844903874210299912)
 
-## 十五、实现EventEmit
-todo
+## 十五、实现EventEmitter
+```js
+// 手写事件总线：订阅发布模式 20220303 铭科苑F6
+// 增on，删off，执行emit，存储constructor
+class EventEmitter{
+    // 构造函数
+    constructor(){
+        this.catch = {};
+    }    
+    // 增
+    on(name,fn){
+        if(this.catch[name]){
+            this.catch[name].push(fn);
+        }else {
+            this.catch[name] = [fn];
+        }
+    }
+    // 删
+    off(name,fn){
+        // 查找
+        let currIndex = this.catch[name].findIndex(item => item === fn);
+        if(currIndex >= 0){
+            this.catch[name].splice(currIndex,1);
+        }
+    }
+    // 执行
+    emit(name,once = false,...args){
+        let fnArr = this.catch[name];
+        for(let item of fnArr){
+            item(...args)
+        }
+        if(once){
+            delete this.catch[name];
+        }
+    }
+}
 
-## 十六：用ES5实现类的继承效果
-todo
+// 测试
+let eventBus = new EventEmitter();
+let fn1 = function(name,age){
+    console.log(name,age);
+}
+let fn2 = function(name,age){
+    console.log('hello',name,age);
+}
+// 订阅
+eventBus.on('aaa',fn1);
+eventBus.on('aaa',fn2);
+eventBus.off('aaa',fn1);
+eventBus.emit('aaa',false,'张国彪',31);
+```
 
-## 总结&参链：
-* 1. 手写原理API实现，最重要是三点：入参，特性，返回值。20220110 铭科苑 F6
-* [剖析并手写十五个重要 API 的实现：神三元](https://mp.weixin.qq.com/s/BTzLPZpU6VeDEmeocgQSGA)
+## 十五：图片懒加载
+```js
+// 图片懒加载 20220303 铭科苑F6
+// 1. 图片距离视口的高度 < 窗口高度，加载图片
+// 2. 已经加载完的图片，不再二次加载
+// 3. 如果都加载完，就移除事件监听
+let imgList = [...document.querySelectorAll('img')];
+let length = imgList.length;
+
+let lazyLoadImg = (function(){
+    let count = 0;// 利用闭包原理
+    return function(){
+        let loadedImgList = [];
+        imgList.forEach((item,index)=>{
+            let top = item.getBoundingClientRect();
+            if(top < window.innerHeight){
+                item.src = item.dataset.src;
+                count++;
+                loadedImgList.push(index);
+            }
+            if(count >= length){
+                document.removeEventListener('scroll',lazyLoadImg)
+            }
+        });
+        // 剔除已加载图片
+        imgList = imgList.filter((img,index)=>{ return !loadedImgList.includes(index) });
+    }
+})();
+
+document.addEventListener('scroll',lazyLoadImg);
+```
+## 十六：函数柯力化 todo
+* 偏函数 todo 他俩的意义是什么呢？
 
 
 

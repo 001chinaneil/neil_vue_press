@@ -57,6 +57,27 @@
 
 ### 小程序性能优化
 TODO
+1. [腾讯课堂小程序性能极致优化——综合篇](https://mp.weixin.qq.com/s?__biz=MzI1ODE4NzE1Nw==&mid=2247490060&idx=1&sn=76b56bd4d3565cbf6abfb99abfc1c921&chksm=ea0d50f6dd7ad9e09e765def4873de0690699e107f3212bf89e28b6f1c60afde6e36baa70366&scene=178&cur_album_id=1751402241124532228#rd)
+```js
+定位：启动慢、请求慢、交互慢
+// 启动层面
+1. 减少代码包体积：独立分包，静态资源上传CDN
+2. 降低代码复杂度
+3. 减少同步代码接口调用
+4. 降低页面结构复杂度
+5. 减少自定义组件数量
+
+// 请求层面
+1. 冷启动开启数据预拉取
+2. 页面路由切换时提前拉取数据
+3. 对数据进行缓存
+
+// 交互层面
+1. wx.request最大并发是10个，首页分步渲染
+2. 保障与用户相关的接口正常发送
+```
+
+2. [腾讯课堂小程序性能极致优化——网络请求优化篇](https://link.juejin.cn/?target=http%3A%2F%2Fmp.weixin.qq.com%2Fs%3F__biz%3DMzI1ODE4NzE1Nw%3D%3D%26mid%3D2247490094%26idx%3D1%26sn%3Dfd8ce44a8d90beae9637645894d309dd%26chksm%3Dea0d50d4dd7ad9c270a4133bea3274a705e902100836c70126269a62b686d25024499c435f6f%26scene%3D21%23wechat_redirect)
 1. [腾讯课堂小程序性能极致优化——独立分包和性能测速上报](https://juejin.cn/post/6989244664561811469)
 2. 官链：[分包加载](https://developers.weixin.qq.com/miniprogram/dev/framework/subpackages.html)
 

@@ -264,14 +264,84 @@ function compose(middleware){
 }
 ```
 
-TODO：还有其他类型的Promise面试题吗？
-* [建议星星】要就来45道Promise面试题一次爽到底(1.1w字用心整理)](https://juejin.cn/post/6844904077537574919) [非常赞！]
+## 其他类型的Promise面试题
+* [【建议星星】要就来45道Promise面试题一次爽到底(1.1w字用心整理)](https://juejin.cn/post/6844904077537574919) [非常赞！]
+```js
+const p1 = new Promise((resolve) => {
+  setTimeout(() => {
+    resolve('resolve3');
+    console.log('timer1')
+  }, 0)
+  resolve('resovle1');
+  resolve('resolve2');
+}).then(res => {
+  console.log(res)
+  setTimeout(() => {
+    console.log(p1)
+  }, 1000)
+}).finally(res => {
+  console.log('finally', res)
+})
+// 输出结果：
+// resovle1 
+// finally undefined
+// timer1
+// Promise resovled undefined
+
+// 知识点：
+1. Promise的状态一旦改变就无法改变。
+2. finally不管Promise的状态是resolved还是rejected都会执行，
+且它的回调函数是接收不到Promise的结果的，所以finally()中的res是一个迷惑项。
+3. 最后一个定时器打印出的p1其实是.finally的返回值，
+我们知道.finally的返回值如果在没有抛出错误的情况下默认会是上一个Promise的返回值(3.10中也有提到), 
+而这道题中.finally上一个Promise是.then()，
+但是这个.then()并没有返回值，所以p1打印出来的Promise的值会是undefined，
+如果你在定时器的下面加上一个return 1，则值就会变成1。
+```
+
+### 实现每隔1秒输出1,2,3
+```js
+// 解法一：利用Promise.then的顺序特性
+function printNums(arr = []){
+    arr.reduce((prev,curr)=>{
+        return prev.then(()=>{
+            return new Promise((resolve)=>{
+                setTimeout(()=>{
+                    console.log(curr)
+                    resolve();
+                },1000);
+            });
+        });
+    },Promise.resolve());
+}
+
+// 解法二：利用循环和setTimeout时间参数
+function printNums(arr = []){
+    for(let i = 0;i < arr.length;i++){
+        setTimeout(()=>{
+            console.log(arr[i]);
+        },i*1000);
+    }
+}
+
+// 解法三：利用递归的特性
+function printNums(arr = [],i = 0){
+    setTimeout(()=>{
+        if(i < arr.length){
+            console.log(arr[i]);
+            printNums(arr,i+1);
+        }else {
+            return;
+        }
+    },1000);
+}
+```
 
 参链：
-* [Promise入门详解和基本用法](https://www.cnblogs.com/qianguyihao/p/12660393.html)
-* [大厂面试题手写Promise源码](https://www.cnblogs.com/lyt0207/p/12387564.html) [重点]
-* [async 函数的含义和用法](http://www.ruanyifeng.com/blog/2015/05/async.html) [阮一峰]
+1. [Promise入门详解和基本用法](https://www.cnblogs.com/qianguyihao/p/12660393.html)
+2. [大厂面试题手写Promise源码](https://www.cnblogs.com/lyt0207/p/12387564.html) [重点]
+3. [async 函数的含义和用法](http://www.ruanyifeng.com/blog/2015/05/async.html) [阮一峰]
 
 总结：
-* 1. 每学一遍知识点，要有**悟的过程和悟的结论**，战胜懒惰，追求极致。20210618
-* 2. 当前如果知识点晦涩难懂，也许是讲述的问题，换个文章去看，也许会对自己的思路。
+1. 每学一遍知识点，要有**悟的过程和悟的结论**，战胜懒惰，追求极致。20210618
+2. 当前如果知识点晦涩难懂，也许是讲述的问题，换个文章去看，也许会对自己的思路。

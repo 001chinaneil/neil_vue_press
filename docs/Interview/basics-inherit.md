@@ -57,6 +57,28 @@ var stu1 = new Student(1001);
 3. `constructor`用于创建和初始化一个由class创建的对象，一个构造函数可以使用`super关键字`来调用一个父类的构造函数。
 4. `static`关键字用来定义一个类的静态方法。类的实例对象不能访问静态方法，通常用于为一个类的工具函数。point.displayName，其中point是类名
 5. `extends`关键字来扩展子类，如果子类中定义了构造函数，那么要先在constructor中使用super，才能使用this。
+```js
+class Animal {
+    constructor(name) {
+        this.name = name
+    } 
+    getName() {
+        return this.name
+    }
+}
+class Dog extends Animal {
+    constructor(name, age) {
+        super(name)
+        this.age = age
+    }
+    getAge(){
+        return this.age;
+    }
+}
+let dog1 = new Dog('宁宁',30);
+console.log(dog1.getName());
+console.log(dog1.getAge());
+```
 
 参链：
 * 1. [Object.create()和new object()和{}的区别](https://www.cnblogs.com/amujoe/p/13411181.html) Object.create(obj) obj将继承到原型链上。

@@ -17,7 +17,7 @@
 8、背包问题、换零钱问题
 ```
 
-## 一、实现斐波那契数列
+## 一、[第一周]实现斐波那契数列
 * 1. 入参：n，第n个数是第n-1和第n-2个数相加得出的
 * 2. 0 1 1 2 3 5 8 13 21 ...
 * 3. 完美深刻认识并理解递归思想的好例子[20210815]
@@ -53,7 +53,22 @@ fibonacci(30);
 方法三：循环，巧用结构赋值进行交换值，解决重复计算问题，`动态规划思想`
 * 1. 时间复杂度O(n)，空间复杂度O(n)
 ```js
+// 20220304晨
+let fib = function(n){
+    // 初始化dp
+    let dp = [];
+    dp[0] = 0;
+    dp[1] = 1;
+    for(let i = 2;i <= n;i++){
+        dp[n] = dp[n-1] + dp[n-2];
+    }
+    return dp[n];
+}
+```
+```js
 let fibonacci = function (n) {
+    if(n === 0){ return 0 }
+    if(n === 1 || n === 2){ return 1 }
     let n1 = 1; n2 = 1;
     for (let i = 2; i < n; i++) {// 从i = 2开始，因为返回的是n2
         [n1, n2] = [n2, n1 + n2]
@@ -75,6 +90,17 @@ fibonacci(30);
 [力扣题目链接](https://leetcode-cn.com/problems/climbing-stairs/)
 * dp[i] = dp[i-1] + dp[i-2];
 * 初始化dp[1] = 1，dp[2] = 2，从i=3开始递推
+```js
+var climbStairs = function(n) {
+    // dp[i] 为第 i 阶楼梯有多少种方法爬到楼顶
+    // dp[i] = dp[i - 1] + dp[i - 2]
+    let dp = [1 , 2]
+    for(let i = 2; i < n; i++) {
+        dp[i] = dp[i - 1] + dp[i - 2];
+    }
+    return dp[n - 1];
+};
+```
 
 ### 最小花费爬楼梯
 [力扣题目链接](https://leetcode-cn.com/problems/min-cost-climbing-stairs/)
@@ -82,8 +108,19 @@ fibonacci(30);
 * 递推公式：dp[i] = Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i])
 * 初始化：dp = [ cost[0],cost[1] ]
 * 返回值：Math.min(dp[i-1]+cost[i],dp[i-2]+cost[i])
+```js
+var minCostClimbingStairs = function(cost) {
+    const dp = [ cost[0], cost[1] ];
+    
+    for (let i = 2; i < cost.length; ++i) {
+        dp[i] = Math.min(dp[i -1] + cost[i], dp[i - 2] + cost[i]);
+    }
+    
+    return Math.min(dp[cost.length - 1], dp[cost.length - 2]);
+};
+```
 
-## 三、不同路径
+## 三、[第二周]不同路径
 ### 基础版
 [力扣题目链接](https://leetcode-cn.com/problems/unique-paths/)
 * 二维数组层次，dp[i][j] 代表 从（0，0）到（i，j）的路径方式数
@@ -110,7 +147,7 @@ let uniquePathsWithObstacles = function(obstacleGrid) {
     const m = obstacleGrid.length;
     const n = obstacleGrid[0].length;
     const dp = Array(m).fill().map(item => Array(n).fill(0));
-    
+    // 初始化
     for (let i = 0; i < m && obstacleGrid[i][0] === 0; ++i) {
         dp[i][0] = 1;
     }
@@ -174,7 +211,7 @@ const numTrees =(n) => {
 };
 ```
 
-## 六、01背包问题--动规的第二个阶段
+## 六、[第三周]01背包问题
 * 主要是01背包和完全背包，而完全背包又是01背包演变来的。
 
 ### 01背包
