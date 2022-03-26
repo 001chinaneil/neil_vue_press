@@ -29,6 +29,7 @@ module.exports = {
                         'Vue3',
                         'React',
                         'React-Hooks',
+                        'React-Apollo',
                     ]
                 },
                 {
