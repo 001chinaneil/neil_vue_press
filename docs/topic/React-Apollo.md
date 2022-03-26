@@ -10,7 +10,7 @@
 2. GraphQL：
     2.1 模式是包含字段的对象类型的集合。  
     2.2  
-    ```gql
+    ```js
     // 字段之间不用逗号分割
     "注释的格式xxxx"
     type SpaceCat {  
@@ -20,7 +20,7 @@
     }
     ```
     2.3 Query类型是可以让GraphQL服务器可以识别的，可以知道检索的是什么，是顶级字段。  
-    ```gql
+    ```
     // 服务器gql写法 可以嵌套复用
     const typeDefs = gql`
     # write your schema definitions here
