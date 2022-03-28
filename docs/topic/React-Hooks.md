@@ -9,8 +9,10 @@
 4. 其他Hook：`useContext`可以不使用组件嵌套就可以订阅React的Context；`useReducer`可以通过reducer来管理组件本地的复杂state。
 
 ## React Hooks免费视频教程：技术胖
+20220328 铭科苑F6 第一遍end
 * 参链：[React Hooks免费视频教程：技术胖](https://www.bilibili.com/video/av63409044/)
 * 前提知识准备：React、React-Router、Redux
+* 7个常用hooks函数
 ### 01：React Hooks介绍和环境搭建
 1. 按照creat-react-app，npm init react-app my-app（项目名）
 2. useState的用法比之前class的用法更简单了。
@@ -80,6 +82,19 @@ function Example(){
 
 export default Example;
 ```
+
+### 07&&08：useReducer代替Redux小案例
+1. const { dispatch } = useContext(ColorContext);// 一个是对象结构
+2. const [state,dispatch] = useReducer(reducer,'red');// 一个是数组结构
+
+### 09：useMemo优化React Hooks程序性能
+1. useMemo、useCallback主要用来解决Hooks无用渲染的性能问题。
+2. 因为失去了`shouldComponentUpdate`组件更新之前这个生命周期
+3. 函数组件也没有了mount和update这两个状态，导致函数组件只要已调用就会执行全部逻辑。
+4. 变量当数据渲染，函数当dom渲染。
+
+### 10：useRef用来获取Dom和保存变量
+### 11：自定义hooks函数来获取窗口大小
 
 
 

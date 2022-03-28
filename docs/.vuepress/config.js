@@ -28,8 +28,12 @@ module.exports = {
                         'Vue',
                         'Vue3',
                         'React',
+                        'React-Router',
+                        'Redux',
                         'React-Hooks',
                         'React-Apollo',
+                        'TypeScript',
+                        'Next'
                     ]
                 },
                 {
