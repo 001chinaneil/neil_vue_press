@@ -19,8 +19,9 @@
 ### 03&04：动态传参
 1. 传值规则：`<Route path="/list/:id"  element={<List/>} />`
 2. 具体传值：`<li><Link to="/list/123">列表</Link> </li>`
-3. 接收值：通过props接收值
+3. 接收值：`import {useParams} from 'react-router-dom'`，用useParams用法接收值
 
 参链：
 1. [阮一峰：React-Router](https://www.ruanyifeng.com/blog/2016/05/react_router.html)
 2. [官链：中文版](http://react-guide.github.io/react-router-cn/docs/Introduction.html)
+3. [官链：英文版](https://v5.reactrouter.com/web/guides/quick-start)
