@@ -6,7 +6,7 @@
 * 收益是什么？
 
 [官链](https://apollographqlcn.github.io/react-docs-cn/)
-## 第一部分：
+## 第一部分：Basics
 1. Apollo是React、GraphQL的集成框架
 2. GraphQL：
     2.1 模式是包含字段的对象类型的集合。  
@@ -82,7 +82,7 @@
     const { loading, error, data } = useQuery(TRACKS);
     ```
 
-## 第二部分：
+## 第二部分：Resolvers
 1. 解析器检索的数据可以来自各个地方：数据库、第三方API、webhook，它们之间可以任意混合。
 2. 典型的N+1问题，相同的一个接口，调用N次来获取结果格式相同而内容不同的数据
 3. 解析器的作用是为字段填充数据，它是一个函数，将数据转换成客户端需要的样子。
@@ -95,5 +95,16 @@ info：包含有关操作执行状态的信息
 ```
 5. Apollo Server是模式Schema、解析器、数据源完美协调的地方
 
-## 第三部分：
+## 第三部分：Arguments
 1. The `Query` type contains the entry points to our schema. In future courses, we'll take a look at 2 other possible entry points: `Mutation` and `Subscription`.
+
+## 第四部分：Mutations
+1. 写的操作：mutations
+2. Mutation names should start with a verb, followed by whatever data you're modifying! eg: `deleteMission`、`createMission`
+3. 
+```js
+// 例如：build the useMutation hook here
+const [assignSpaceship, {loading, error, data}] = useMutation(ASSIGN_SPACESHIP_MUTATION, {
+  variables: { spaceshipId, missionId },
+});
+```
