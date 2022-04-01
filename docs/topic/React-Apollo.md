@@ -5,6 +5,8 @@
 * 亮点或优势是什么？
 * 收益是什么？
 
+20220401 新华科技大厦 第一遍学完
+
 [官链](https://apollographqlcn.github.io/react-docs-cn/)
 ## 第一部分：Basics
 1. Apollo是React、GraphQL的集成框架
@@ -108,3 +110,8 @@ const [assignSpaceship, {loading, error, data}] = useMutation(ASSIGN_SPACESHIP_M
   variables: { spaceshipId, missionId },
 });
 ```
+
+## 第五部分：Production & the Schema Registry
+1. 生产环境部署
+2. 用Heroku进行上线，它是a cloud service platform。[官方地址](https://dashboard.heroku.com/terms-of-service)
+3. Client部署：done
