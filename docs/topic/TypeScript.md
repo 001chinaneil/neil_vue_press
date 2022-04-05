@@ -192,3 +192,83 @@ const teacher = new Teacher(18)
 console.log(teacher.age)
 console.log(teacher.name)
 ```
+## 13&14&15节
+20220404 铭科苑F6 晚上海淀剧院看完 开心麻花《变身怪杰》 回来继续学习
+1. 类的Getter属性：可以让类外部得到私有属性的属性
+2. 类的Setter属性：可以让类外部修改私有属性的属性
+```js
+class Hello {
+    private content = 'Hi 帅哥';
+    sayHi(){
+        return this.content;
+    }
+    get contentNew(){
+        return this.content;
+    }
+    set contentNew(arg: string){
+        this.content = arg;
+    }
+}
+let Hi = new Hello();
+Hi.contentNew = 'Hi 美女~';// 是属性不是方法
+console.log(
+    Hi.contentNew
+);
+```
+3. 类的静态休止符static：不用new关键字，就可以使用static关键字声明的属性或方法。
+4. 类的只读属性 readonly：定义之后就不能再修改了。
+5. 抽象类的关键字是abstract
+```js
+abstract class Girl{
+    abstract skill()  //因为没有具体的方法，所以我们这里不写括号，继承Girl类的子类就都要实现skill方法
+}
+```
+6. 配置文件tsconfig.json：是`tsc --init`命令生成的
+7. tscconfig.json里面的配置生效，命令行必须是`tsc`执行，文件里面的所有配置都必须是双引号。
+8. include：只包含哪些文件、exclude不包含哪些文件、file和include类似；这三个和`compilerOptions`是平级关系
+
+## 16&17&18联合类型联合保护
+20220405 北京铭科苑F6 清明假期最后一天的晚上
+1. compilerOptions属性：[管理：TS编译选项配置](https://www.tslang.cn/docs/handbook/compiler-options.html)
+```js
+// 常见的配置项
+// removeComments：代表是否删除ts代码里面的注释
+// strict：代表是否按照ts最严格的语法来校验
+    // 只有strict为false的情况下才会生效
+    // noImplicitAny：允许注解类型any不用特意表明
+    // strictNullChecks：不强制校验NULL类型 
+// rootDir：代表ts文件们的入口位置
+// outDir：代表ts文件们编译后的存放位置
+// allowJs：代表允许编译js文件（也就是不光编译ts文件，还可以编译js文件）
+// sourceMap：代表生成信息文件，在代码出错的情况下，可以显示原始代码
+// noUnuseLocals：代表不能有未使用的变量
+// noUnuseParameters：代表不能有未使用的函数
+```
+2. ts-node命令遵循tsconfig.json文件配置
+3. 联合类型：就是一个变量或参数不确定是什么类型的
+```js
+function add(first: number | string, second: number | string){
+    return xxxxxx;
+}
+```
+4. 类型保护：针对联合类型才会有类型保护
+```js
+// 1. 类型断言
+function judgeWho(animal: Waiter | Teacher) {
+  if (animal.anjiao) {
+    (animal as Teacher).skill();
+  }else{
+    (animal as Waiter).say();
+  }
+}
+// 2. in语法
+function judgeWhoTwo(animal: Waiter | Teacher) {
+  if ("skill" in animal) {
+    animal.skill();
+  } else {
+    animal.say();
+  }
+}
+// 3. typeof语法
+// 4. instanceof语法
+```
