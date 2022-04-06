@@ -272,3 +272,39 @@ function judgeWhoTwo(animal: Waiter | Teacher) {
 // 3. typeof语法
 // 4. instanceof语法
 ```
+
+## 19&20泛型&21
+* 师傅领进门，修行在个人。20220406 新华科技大厦 1621
+1. 枚举类型：enum
+```js
+// 枚举类型 enum，没有=号
+enum Status {
+    LIAOTIAN,
+    ANJIAO,
+    SPA,
+}
+
+function daBaoJian(status: any){
+    if(status === status.LIAOTIAN){
+        console.log('选了聊天')
+    }else if(status === status.ANJIAO){
+        console.log('选了按脚');
+    }else {
+        console.log('选了SPA');
+    }
+}
+daBaoJian(Status.SPA);
+console.log(Status.LIAOTIAN);// 0
+```
+2. 泛型：generic，泛指的类型
+```js
+class SelectGirl<T> {
+  constructor(private girls: T[]) {}
+  getGirl(index: number): T {
+    return this.girls[index];
+  }
+}
+
+const selectGirl = new SelectGirl<string>(["大脚", "刘英", "晓红"]);
+console.log(selectGirl.getGirl(1));
+```

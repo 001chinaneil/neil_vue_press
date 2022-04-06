@@ -33,7 +33,6 @@ module.exports = {
                         'React-Hooks',
                         'React-Apollo',
                         'TypeScript',
-                        'Next'
                     ]
                 },
                 {
@@ -69,6 +68,7 @@ module.exports = {
                     collapsable: true,
                     children: [
                         "across-client-side",
+                        "Hybrid-App"
                     ],
                 },
                 {
@@ -76,6 +76,8 @@ module.exports = {
                     collapsable: true,
                     children: [
                         "server-rendering",
+                        'Next',
+                        'Nuxt'
                     ],
                 },
                 {

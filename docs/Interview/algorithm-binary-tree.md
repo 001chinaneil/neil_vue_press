@@ -360,6 +360,79 @@ var invertTree = function(root) {
     return root;
 };
 ```
+### 对称二叉树
+20220406 新华科技大厦
+* 利用递归思想、队列数据结构进行迭代判断、栈数据结构进行迭代判断
+* [题目链接：](https://leetcode-cn.com/problems/symmetric-tree/)
+```js
+var isSymmetric = function(root) {
+    // 递归解法：对比左节点和右节点，是否相同
+    // function isSqueue (left,right){
+    //     // 先判断空节点的情况
+    //     if(left!==null&&right===null || left===null&&right!==null){
+    //         return false;
+    //     }else if(left===null&&right===null){
+    //         return true;
+    //     }else if(left.val !== right.val){
+    //         return false;
+    //     }
 
+    //     let leftResult = isSqueue(left.left,right.right);
+    //     let rightResult = isSqueue(left.right,right.left);
+
+    //     return leftResult && rightResult;
+    // }
+
+    // if(root === null){
+    //     return true;
+    // }
+
+    // return isSqueue(root.left,root.right);
+
+    // 队列解法：依次入队，依次出队
+    // if(root === null){
+    //     return true;
+    // }
+    // let squeue = [];
+    // // 初始化入队
+    // squeue.push(root.left,root.right);
+    // while(squeue.length){
+    //     // 依次出队
+    //     let left = squeue.shift();
+    //     let right = squeue.shift();
+    //     // 各种空节点情况判断
+    //     if(left === null && right === null){ continue }
+    //     if(left === null || right === null || left.val !== right.val){ return false }
+    //     // 依次入队
+    //     squeue.push(left.left,right.right,left.right,right.left);
+    // }
+    // // 默认兜底值
+    // return true;
+
+    // 利用栈结构实现迭代判断
+    if(root === null){
+        return true;
+    }
+    let stack = [];
+    // 入队初始化
+    stack.push(root.left,root.right);
+    while(stack.length){
+        // 依次出队
+        let rightNode = stack.pop();
+        let leftNode = stack.pop();
+        if(rightNode===null&&leftNode===null){
+            // 如果都为空节点，则跳过此次循环判断
+            continue;
+        }
+        if(rightNode === null || leftNode === null || rightNode.val !== leftNode.val){
+            return false;
+        }
+        // 依次入队
+        stack.push(leftNode.left,rightNode.right,leftNode.right,rightNode.left);
+    }
+    // 默认兜底值
+    return true;
+};
+```
 
 
