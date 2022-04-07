@@ -33,10 +33,10 @@ source $(brew --prefix nvm)/nvm.sh
 1. 官方README文档：https://github.com/ohmyzsh/ohmyzsh（非常好）
 2. 下载失败：Error: git clone of oh-my-zsh repo failed
     手动下载压缩包，手动复制到根目录：https://juejin.cn/post/6844904178075058189
-3. 自动补全插件下载失败：官方介绍：https://github.blog/2021-09-01-improving-git-protocol-security-github/ 找到解决方案
+3. 自动补全插件（zsh-autosuggestions）下载失败：官方介绍：https://github.blog/2021-09-01-improving-git-protocol-security-github/ 找到解决方案
     git仓库代码有2种下载方式：
         git clone 通过https或ssh Get！
-4. 语法高亮插件
+4. 语法高亮插件：zsh-syntax-highlighting
 5. 命令语言：mv移动 cp拷贝
 6. ~/.zshrc oh-my-zsh配置文件
 
