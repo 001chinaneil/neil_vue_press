@@ -362,7 +362,7 @@ var invertTree = function(root) {
 ```
 ### 对称二叉树
 20220406 新华科技大厦
-* 利用递归思想、队列数据结构进行迭代判断、栈数据结构进行迭代判断
+* 利用**递归思想**、**队列数据结构**进行迭代判断、**栈数据结构**进行迭代判断
 * [题目链接：](https://leetcode-cn.com/problems/symmetric-tree/)
 ```js
 var isSymmetric = function(root) {

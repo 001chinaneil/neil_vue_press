@@ -2,6 +2,7 @@
 
 ## 01介绍&02静态类型&03基础静态类型和对象类型
 20220331 铭科苑F6
+20220407 新华科技大厦 1621 完成第一遍学习
 * [技术胖：TypeScript 从入门到精通图文视频教程-免费教程](https://jspang.com/article/63)
 1. `tsc xxx.ts`用来把ts文件转换成js文件
 2. ts-node npm包可以直接查看ts文件执行结果
@@ -308,3 +309,9 @@ class SelectGirl<T> {
 const selectGirl = new SelectGirl<string>(["大脚", "刘英", "晓红"]);
 console.log(selectGirl.getGirl(1));
 ```
+
+## 22命名空间namespace&23&24&25Parcel打包
+1. 声明用namespace，用export暴露出来的类才是全局的。优势：减少了全局变量污染，实现了基本封装。
+2. 调用：`new Home.page();`
+3. 如果用import引入模块或组件，需要用require.js进行处理。
+4. 利用Parcel来进行打包处理
