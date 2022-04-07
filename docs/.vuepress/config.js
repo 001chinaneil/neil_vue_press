@@ -40,6 +40,7 @@ module.exports = {
                     collapsable: true,
                     children: [
                         "Git",
+                        "computer-install",// 新电脑装机攻略
                     ],
                 },
                 {

@@ -435,4 +435,134 @@ var isSymmetric = function(root) {
 };
 ```
 
+### 二叉树的最大深度
+20220407 新华科技大厦
+* **递归遍历**：深度优先
+* **层序遍历**：广度优先
+```js
+// 递归遍历
+var maxDepth = function(root) {
+    // 递归遍历 三部曲
+    // 确定参数和返回值
+    // 确定终止条件
+    // 确定递归的单层逻辑
+    const findDepth = function(node){
+        if(node === null){ return 0 }
+
+        let leftDepth = findDepth(node.left);
+        let rightDepth = findDepth(node.right);
+        let depth = 1 + Math.max(leftDepth,rightDepth);
+
+        return depth;
+    }
+
+    return findDepth(root);
+};
+
+// N叉树的最大深度
+var maxDepth = function(root) {
+    // 递归遍历 三部曲
+    // 确定参数和返回值
+    // 确定终止条件
+    // 确定单层逻辑
+    const findDepth = function(node){
+        if(node === null){ return 0 }
+
+        let depth = 0;
+        for(let item of node.children){
+            depth = Math.max(depth,findDepth(item));
+        }
+
+        return depth + 1;
+    }
+
+    return findDepth(root);
+};
+```
+```js
+// 层序遍历
+var maxDepth = function(root) {
+    if(root === null){
+        return 0;
+    }
+    let queue = [root],res = [];
+    while(queue.length){
+        let currLevelLength = queue.length;
+        let currLevelArr = [];
+        for(let i = 0;i < currLevelLength;i++){
+            let curr = queue.shift();
+            currLevelArr.push(curr.val);
+            curr && curr.left && queue.push(curr.left);
+            curr && curr.right && queue.push(curr.right);
+        }
+        res.push(currLevelArr);
+    }
+
+    return res.length;
+};
+
+// N叉树的最大深度
+var maxDepth = function(root) {
+    // 层序遍历
+    // 用2层的while循环 第一层循环每一次+1
+    if(root === null){ return 0 }
+    let squeue = [root];
+    let length = 0;
+    while(squeue.length){
+        length++;
+        let size = squeue.length;
+        while(size--){// 把队列里面的都遍历完才算一轮
+            let nextNode = squeue.shift();
+            // 把非空子节点都放到队列中
+            for(let item of nextNode.children){
+                item && squeue.push(item);
+            }
+        }
+    }
+
+    return length;
+};
+```
+
+### 二叉树的最小深度
+```js
+// 递归遍历
+var minDepth = function(root) {
+    // 递归遍历 三部曲
+    // 1. 确定参数和返回值
+    // 2. 确定终止条件
+    // 3. 确定单层逻辑
+    
+    if(!root) return 0;
+    if(!root.left && !root.right){ return 1 } // 如果左右子节点都为空，则返回1
+    // 如果左节点为空，则递归右节点
+    if(!root.left){ return minDepth(root.right) + 1 }
+    // 如果右节点为空，则递归左节点
+    if(!root.right){ return minDepth(root.left) + 1 }
+
+    return Math.min(minDepth(root.left),minDepth(root.right)) + 1;
+};
+```
+```js
+// 层序遍历
+var minDepth = function(root) {
+    if(root === null){
+        return 0;
+    }
+    let queue = [root],minHeight = 0;
+    while(queue.length){
+        let currLevelLength = queue.length;
+        minHeight++;
+        for(let i = 0;i < currLevelLength;i++){
+            let curr = queue.shift();
+            curr && curr.left && queue.push(curr.left);
+            curr && curr.right && queue.push(curr.right);
+            if(!curr.left && !curr.right ){
+                return minHeight;
+            }
+        }
+    }
+    return minHeight;
+};
+```
 
