@@ -11,6 +11,7 @@
 3. 在线文档：Wiki
 4. 代码仓库：Github
 5. 项目管理：Jira
+6. 公司邮箱
 
 ## 开发环境
 1. Brew：[官链](https://brew.sh/index_zh-cn) [优质安装贴](https://zhuanlan.zhihu.com/p/111014448)
