@@ -566,3 +566,63 @@ var minDepth = function(root) {
 };
 ```
 
+
+### 完全二叉树的节点树
+* [LeetCode题目](https://leetcode-cn.com/problems/count-complete-tree-nodes/)
+```js
+var countNodes = function(root) {
+    // 递归解法 三部曲
+    // 1. 确定入参和返回值
+    // 2. 确定终止条件
+    // 3. 确定单层逻辑
+    const countNums = function(node){
+        if(node === null){ return 0 }
+        let leftNums = countNums(node.left);
+        let rightNums = countNums(node.right);
+        return leftNums + rightNums + 1;// 把中间节点加上
+    }
+
+    return countNums(root);
+};
+
+var countNodes = function(root) {
+    // 层序遍历
+    // 用2个while循环，用变量记录节点数量
+    if(root === null){ return 0 }
+    let squeue = [root];
+    let nodeNums = 0;
+    while(squeue.length){
+        let size = squeue.length;
+        while(size--){
+            nodeNums++;
+            let currNode = squeue.shift();
+            currNode.left && squeue.push(currNode.left);
+            currNode.right && squeue.push(currNode.right);
+        }
+    }
+
+    return nodeNums;
+};
+
+var countNodes = function(root) {
+    // 完全二叉树 一定是满二叉树，满二叉树的节点树是2^n-1
+    // todo 还不是特别理解
+    if(root === null){return 0}
+    let left = root.left;
+    let right = root.right;
+    let leftHeight = 0,rightHeight = 0;
+    while(left){
+        left = left.left;
+        leftHeight++;
+    }
+    while(right){
+        right = right.right;
+        rightHeight++;
+    }
+    if(leftHeight === rightHeight){
+        return Math.pow(2,leftHeight+1) - 1;
+    }
+
+    return countNodes(root.left) + countNodes(root.right) + 1;
+};
+```
