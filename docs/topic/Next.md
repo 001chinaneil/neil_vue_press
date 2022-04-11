@@ -94,3 +94,64 @@ Router.events.on('hashChangeComplete',(...args)=>{
     console.log('6,hashChangeComplete->hash跳转完成时,参数为:',...args)
 })
 ```
+
+## 07getInitialProps&08style jsx编写样式
+1. Next使用getInitialProps来获取远程数据
+2. 使用style jsx来写样式
+```js
+import React, { useState } from 'react';
+
+// 函数命名要大写，React是识别大小写的
+function JsPang(){
+    const [color, setColor] = useState('blue');
+
+    function colorChange(){
+        setColor(color == 'blue' ? 'red' : 'blue');
+    }
+
+    return (
+        <>
+            <style jsx>
+                {
+                    `
+                        div{color: ${color};}
+                    `
+                }
+            </style>
+            <div>技术胖</div>
+            <button onClick={colorChange}>改变颜色</button>
+            <JSPang>按钮组件</JSPang>
+        </>
+    )
+}
+
+export default JsPang;
+```
+
+## 09懒加载&10Head的SEO
+1. 懒加载模块
+```js
+import React, {useState} from 'react'
+//删除import moment
+function Time(){
+
+    const [nowTime,setTime] = useState(Date.now())
+
+    const changeTime= async ()=>{ //把方法变成异步模式
+        const moment = await import('moment') //等待moment加载完成
+        setTime(moment.default(Date.now()).format()) //注意使用defalut
+    }
+    return (
+        <>
+            <div>显示时间为:{nowTime}</div>
+            <div><button onClick={changeTime}>改变时间格式</button></div>
+        </>
+    )
+}
+export default Time
+```
+2. 懒加载组件：用dynamic
+3. Head的SEO：`import Head from 'next/head'`，框架提供的封装后的组件
+
+## 11&12
+1. `@zeit/next-css`让next框架可以加载CSS文件
