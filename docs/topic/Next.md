@@ -153,5 +153,11 @@ export default Time
 2. 懒加载组件：用dynamic
 3. Head的SEO：`import Head from 'next/head'`，框架提供的封装后的组件
 
-## 11&12
+## 11集成antd库&12部署
 1. `@zeit/next-css`让next框架可以加载CSS文件
+2. next11及其之后都是用SWC代替了babel进行编译
+3. 2种形式的预渲染：
+    * 1. SSG：静态生成，在构建时生成，后面就复用了
+    * 2. SSR：服务端渲染，每次请求进行重复渲染。（当每次请求都需要更新数据时，推荐）
+4. 使用`getStaticProps`进行数据静态生成。它仅在服务器端运行。
+5. 使用`getServerSideProps`进行服务器渲染的数据生成。（原来是这样啊！）
