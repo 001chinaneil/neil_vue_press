@@ -151,6 +151,7 @@ module.exports = {
                         'algorithm-stack-and-queue',// 栈与队列系列
                         'algorithm-binary-tree',// 二叉树系列集 todo
                         'algorithm-binary-tree-levelorder',// 二叉树系列集 todo
+                        'algorithm-binary-tree-practice', // 二叉树实战
                         'algorithm-recall',// 回溯算法系列 todo
                         'algorithm-greed',// 贪心算法系列 todo
                         'algorithm-dynamic-programming',// 动态规划系列 todo
