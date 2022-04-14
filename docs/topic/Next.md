@@ -4,6 +4,14 @@
 * [Next框架教程：技术胖](https://jspang.com/article/51)
 * [Next官链文档](https://www.nextjs.cn/)
 * 只需要把控标准和成本，具体过程由执行者负责。20220413
+* 框架必要部分：
+    * 1. 赋值数据的语法：`{}`
+    * 2. 事件的调用：onClick
+    * 3. 组件间数据传递的方式：todo
+    * 4. 路由系统：pages文件夹下自动是页面路由
+    * 5. 全局数据：Hooks
+    * 6. 获取远程数据：`getStaticProps`和`getServerSideProps`
+    * 7. 样式开发：style jsx
 
 ## 技术胖教程笔记
 ## 01&02安装&03pages&components
