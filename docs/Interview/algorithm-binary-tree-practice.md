@@ -323,3 +323,38 @@ var isBalanced = function(root) {
     return !(getHeigth(root) === -1);
 };
 ```
+## 二叉树的所有路径
+* [题目链接](https://leetcode-cn.com/problems/binary-tree-paths/)
+* 递归思想 + 回溯思想
+```js
+// 20220415 新华科技大厦
+var binaryTreePaths = function(root) {
+    // 递归解法：三部曲
+    // 1. 确定参数和返回值
+    // 2. 确定终止条件
+    // 3. 确定单层逻辑
+    // ->这种的标志
+    let res = [];
+    function findPath(node,curPath){
+        // 终止条件
+        if(node.left==null && node.right==null){
+            // !!curPath ? curPath += ('->'+node.val) : curPath += (node.val);
+            curPath += node.val;
+            res.push(curPath);
+            // 此路径到最后的节点了，可以终止返回了
+            return;
+        }
+        // !!curPath ? curPath += ('->'+node.val) : curPath += (node.val);
+        curPath += node.val+'->';
+        // 开始递归
+        node.left && findPath(node.left,curPath);
+        node.right && findPath(node.right,curPath);
+    }
+
+    // 初始化
+    findPath(root,'');
+    // 最终的返回值
+    return res;
+};
+// todo 迭代解法
+```
