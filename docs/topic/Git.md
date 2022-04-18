@@ -203,7 +203,7 @@ git remote add gitee git@gitee.com:zhangguobiao/learngitee
     删除stash:  git stash drop <stash@{id}> ;    git  stash clear  (stash list全部被删除了)  
 7. 建立与本地分支相对应的远程分支：git push --set-upstream origin article_addVideo  
 
-## 多Git账号对多个Git服务器
+## 实践：多Git账号对多个Git服务器
 20220410晚 铭科苑F6
 * 参链：[Git多账号配置，同一电脑多个ssh-key的管理](https://www.cnblogs.com/popfisher/p/5731232.html) [同一台电脑配置多个git公钥](https://blog.csdn.net/qq_38041873/article/details/122874895)
 1. 新建多个公钥/私钥
