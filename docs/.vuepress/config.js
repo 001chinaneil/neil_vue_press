@@ -22,25 +22,25 @@ module.exports = {
             '/topic/': [
                 // 侧边栏分组
                 {
-                    title: '应用框架(Framework)',// 分组标题
+                    title: '应用框架(Frame)',// 分组标题
                     collapsable: true,
                     children: [// 分组下的页面
-                        'Vue',
-                        'Vue3',
-                        'React',
-                        'React-Router',
-                        'Redux',
-                        'React-Hooks',
-                        'React-Apollo',
-                        'TypeScript',
+                        'Frame-Vue',
+                        'Frame-Vue3',
+                        'Frame-React',
+                        'Frame-React-Router',
+                        'Frame-Redux',
+                        'Frame-React-Hooks',
+                        'Frame-React-Apollo',
+                        'Frame-TypeScript',
                     ]
                 },
                 {
                     title: '工具集合(Tools)',
                     collapsable: true,
                     children: [
-                        "Git",
-                        "computer-install",// 新电脑装机攻略
+                        "Tools-Git",
+                        "Tools-computer-install",// 新电脑装机攻略
                     ],
                 },
                 {
@@ -69,7 +69,7 @@ module.exports = {
                     collapsable: true,
                     children: [
                         "across-client-side",
-                        "Hybrid-App"
+                        "Acs-Hybrid-App"
                     ],
                 },
                 {
@@ -77,8 +77,8 @@ module.exports = {
                     collapsable: true,
                     children: [
                         "server-rendering",
-                        'Next',
-                        'Nuxt'
+                        'Sr-Next',
+                        'Sr-Nuxt'
                     ],
                 },
                 {
@@ -88,6 +88,13 @@ module.exports = {
                         "visualization",
                     ],
                 },
+                {
+                    title: '服务端知识集',
+                    collapsable: true,
+                    children: [
+                        "server-size-knowledge"
+                    ]
+                }
             ],
             '/Interview/': [
                 {
@@ -151,6 +158,7 @@ module.exports = {
                         'algorithm-stack-and-queue',// 栈与队列系列
                         'algorithm-binary-tree',// 二叉树系列集 todo
                         'algorithm-binary-tree-levelorder',// 二叉树系列集 todo
+                        'algorithm-binary-tree-practice', // 二叉树实战
                         'algorithm-recall',// 回溯算法系列 todo
                         'algorithm-greed',// 贪心算法系列 todo
                         'algorithm-dynamic-programming',// 动态规划系列 todo
