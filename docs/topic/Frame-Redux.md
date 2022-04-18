@@ -41,7 +41,7 @@ constructor(props) {
 ```
 4. 调试工具
 ```js
-// 前提是按照了redux-devtools的chrome插件
+// 前提是安装了redux-devtools的chrome插件
 let store = createStore(
     reducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
