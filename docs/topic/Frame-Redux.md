@@ -50,3 +50,10 @@ let store = createStore(
 
 ## 09&10&11&12
 1. 20220419 官方教程又更新了（推荐使用@reduxjs/toolkit），技术胖的技术2019已经是延后的了。
+2. 技巧一：实际项目中，往往会把actionType都抽离出来成一个单独的文件（actionTypes.js），清晰，易调试。
+3. 技巧二：实际项目中，往往也会把action都抽离出来成一个单独的文件（actionCreates.js），集中管理action
+4. 总结：
+    * 1. store只能有1个
+    * 2. reducer只能接收值，不能改变值，改变值是在store里面做的，reducer只需要把新值返回回去即可。
+    * 3. reducer只能是纯函数，即函数结果只能由入参决定，比如不能在里面做ajax调用或new Date()这类操作
+5. 思考：Redux没有分模块的概念吗？比如Vuex里面的分模块概念

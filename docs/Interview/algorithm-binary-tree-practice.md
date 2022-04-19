@@ -358,3 +358,30 @@ var binaryTreePaths = function(root) {
 };
 // todo 迭代解法
 ```
+
+## 比较两棵树是否相同
+```js
+var isSameTree = function(p, q) {
+    // 递归解法，三部曲
+    // 1. 确定入参
+    function checkNode(tree1,tree2){
+        // 2. 确定终止条件
+        if(tree1 === null && tree2 === null){
+            return true;
+        }else if(tree1 === null || tree2 === null){
+            return false;
+        }else if(tree1.val !== tree2.val){
+            return false;
+        }
+
+        // 3. 确定单层条件
+        // 进到这里都是两个节点相等的情况了
+        let leftCase = checkNode(tree1.left,tree2.left);
+        let rightCase = checkNode(tree1.right,tree2.right);
+    
+        return leftCase && rightCase;
+    }
+
+    return checkNode(p,q);
+};
+```
