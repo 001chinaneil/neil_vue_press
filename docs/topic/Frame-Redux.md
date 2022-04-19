@@ -14,7 +14,7 @@
 2. React Components、Action Creators、Store、Reducer
 3. 创建react项目的脚手架命令：`npx create-react-app xxx（项目名字）`，[官链](https://create-react-app.dev/docs/getting-started/)，框架知识是随着迭代而变化的，之前全局安装create-react-app的方式官方已经不支持了。
 
-### 05创建&06
+### 05创建&06&07&08
 1. 创建store
 ```js
 // ...省略引入
@@ -47,3 +47,6 @@ let store = createStore(
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 ```
+
+## 09&10&11&12
+1. 20220419 官方教程又更新了（推荐使用@reduxjs/toolkit），技术胖的技术2019已经是延后的了。
