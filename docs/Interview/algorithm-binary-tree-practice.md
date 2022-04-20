@@ -385,3 +385,53 @@ var isSameTree = function(p, q) {
     return checkNode(p,q);
 };
 ```
+
+## 左叶子之和
+* 20220420 新华科技大厦 1621 午 32℃
+* 左叶子的概念：当前节点为左节点，而且该节点的左右子节点都为空
+* [LeetCode题链：](https://leetcode-cn.com/problems/sum-of-left-leaves/)
+```js
+var sumOfLeftLeaves = function(root) {
+    // 递归解法：三部曲
+    // 1. 确定入参和返回值
+    // 2. 确定终止条件
+    // 3. 确定单层逻辑
+    let leftSum = 0;
+    function findLeftNode(node){
+        if(node === null) return;
+        // 左叶子节点的概念：当前节点不为null，而该节点的左右子节点是null
+        if(node.left && node.left.left === null && node.left.right === null){ 
+            console.log(node.left.val);
+            leftSum += node.left.val;
+        }
+
+        if(node.right){
+            findLeftNode(node.right);
+        }
+
+        if(node.left){
+            findLeftNode(node.left);
+        }
+    }
+
+    findLeftNode(root);
+    return leftSum;
+};
+```
+```js
+// 迭代解法：利用queue队列数据结构和while遍历函数
+var sumOfLeftLeaves = function(root) {
+    // 迭代解法：用队列queue数据结果，依次入队列，while函数
+    let queue = [],sum = 0;
+    queue.push(root);
+    while(queue.length){
+        let curr = queue.shift();// 出队
+        if(curr.left && !curr.left.left && !curr.left.right){
+            sum += curr.left.val;
+        }
+        curr.left && queue.push(curr.left);// 入队
+        curr.right && queue.push(curr.right);// 入队
+    }
+    return sum;
+};
+```

@@ -57,3 +57,7 @@ let store = createStore(
     * 2. reducer只能接收值，不能改变值，改变值是在store里面做的，reducer只需要把新值返回回去即可。
     * 3. reducer只能是纯函数，即函数结果只能由入参决定，比如不能在里面做ajax调用或new Date()这类操作
 5. 思考：Redux没有分模块的概念吗？比如Vuex里面的分模块概念
+
+## 13UI和逻辑分离&14无状态组件
+1. 业务抽离：把UI和逻辑分两个文件进行编写，通过props进行传递属性和函数
+2. 无状态组件就是Hooks，通过props进行接收
