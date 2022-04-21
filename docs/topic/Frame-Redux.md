@@ -61,3 +61,7 @@ let store = createStore(
 ## 13UI和逻辑分离&14无状态组件
 1. 业务抽离：把UI和逻辑分两个文件进行编写，通过props进行传递属性和函数
 2. 无状态组件就是Hooks，通过props进行接收
+
+## 15异步请求&16&17
+1. 好用的Mock工具Apifox，最好是下载桌面版（功能齐全），账号222xxx邮箱。todo 扩展使用 [参链](https://www.bilibili.com/read/cv16000201)
+2. 用axios库进行异步请求

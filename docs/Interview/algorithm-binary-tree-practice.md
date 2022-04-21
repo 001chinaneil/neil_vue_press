@@ -435,3 +435,34 @@ var sumOfLeftLeaves = function(root) {
     return sum;
 };
 ```
+
+## 找树左下角的值
+* 20220421 下午六点三十一分 新华科技大厦
+* [LeetCode题链](https://leetcode-cn.com/problems/find-bottom-left-tree-value/)
+```js
+var findBottomLeftValue = function(root) {
+    // 层序遍历：queue，while
+    let queue = [root];
+    let resultLeftVal = '';
+    while(queue.length){
+        let size = queue.length;
+        // 每一层
+        // 此处用for循环可以很方便的拿到每层左边的第一个节点，用while就不太好了。
+        // while(size--){
+        //     let curr = queue.shift();
+        //     curr.left && queue.push(curr.left) && (resultLeftVal = curr.left.val);
+        //     curr.right && queue.push(curr.right);
+        //     if(!curr.left && !curr.right){
+        //         resultLeftVal = curr.val;
+        //     }
+        // }
+        for(let i = 0;i < size;i++){
+            let curr = queue.shift();
+            if(i === 0){ resultLeftVal = curr.val }
+            curr.left && queue.push(curr.left);
+            curr.right && queue.push(curr.right);
+        }
+    }
+    return resultLeftVal;
+};
+```
