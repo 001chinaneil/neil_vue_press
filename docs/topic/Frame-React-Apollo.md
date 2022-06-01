@@ -7,10 +7,12 @@
 
 20220401 新华科技大厦 第一遍学完
 
-[官链](https://apollographqlcn.github.io/react-docs-cn/)
+[React-Apollo官链](https://apollographqlcn.github.io/react-docs-cn/)  
+[GraphQL.JS官方教程](https://graphql.cn/graphql-js/) 很好！  
+[React-Apollo官链英文版](https://www.apollographql.com/docs/react/data/queries)
 ## 第一部分：Basics
 1. Apollo是React、GraphQL的集成框架
-2. GraphQL：
+2. GraphQL：  
     2.1 模式是包含字段的对象类型的集合。  
     2.2  
     ```js
@@ -22,27 +24,27 @@
         missions: [Mission] // 表示包含一个列表
     }
     ```
-    2.3 Query类型是可以让GraphQL服务器可以识别的，可以知道检索的是什么，是顶级字段。  
-    ```
+    2.3 Query类型是可以让GraphQL服务器可以识别的，可以知道检索的是什么，是顶级字段。schema是后端提供给前端的  
+    ```js
     // 服务器gql写法 可以嵌套复用
     const typeDefs = gql`
-    # write your schema definitions here
-    type Query {
-        spaceCats: [SpaceCat]
-    }
+        # write your schema definitions here
+        type Query {
+            spaceCats: [SpaceCat]
+        }
 
-    type SpaceCat {
-        id: ID!
-        name: String!
-        age: Int
-        missions: [Mission]
-    }
+        type SpaceCat {
+            id: ID!
+            name: String!
+            age: Int
+            missions: [Mission]
+        }
 
-    type Mission {
-        id: ID!
-        name: String!
-        description: String!
-    }
+        type Mission {
+            id: ID!
+            name: String!
+            description: String!
+        }
     `
     ````
     2.4 graphql提供解析GraphQL查询的核心逻辑；@apollo/client包含构建客户端所需的一切，比如内存缓存、本地状态管理、错误处理。  
@@ -62,19 +64,19 @@
     ```js
     /** TRACKS query to retrieve all tracks */
     export const TRACKS = gql`
-    query getTracks {
-        tracksForHome {
-        id
-        title
-        thumbnail
-        length
-        modulesCount
-        author {
-            name
-            photo
+        query getTracks {
+            tracksForHome {
+                id
+                title
+                thumbnail
+                length
+                modulesCount
+                author {
+                    name
+                    photo
+                }
+            }
         }
-        }
-    }
     `;
     ```
 
@@ -83,6 +85,7 @@
     // 在React的UI组件里面进行使用
     const { loading, error, data } = useQuery(TRACKS);
     ```
+    2.8 graphiql是简化前端js查询的一个工具，直接写期望的返回数据格式就可以
 
 ## 第二部分：Resolvers
 1. 解析器检索的数据可以来自各个地方：数据库、第三方API、webhook，它们之间可以任意混合。
