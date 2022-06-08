@@ -344,7 +344,7 @@ function alertName(): void{
 ### 类型推论
 1. 就是没有明显注明类型，但是ts会根据使用情况进行类型推断，如果上下不符，会进行报错。
 ### 联合类型
-1. 就是或者的意思
+1. 就是**或者**的意思
 2. Union Types表示取值可以为多种类型中的一种，用`|`进行分割每种类型。
 ```js
 let myFavoriteNumber: string | number;
@@ -398,8 +398,98 @@ interface ArrayNumber{
 }
 let fibonacci: ArrayNumber = [1,2,3];
 ```
-### 类数组
-1. 类数组不是数组，比如arguments，实际上TypeScript已经内置了类数组的类型，比如Iarguments，拓展阅读是[内置对象](http://ts.xcatliu.com/basics/built-in-objects.html)
+4. 类数组，类数组不是数组，比如arguments，实际上TypeScript已经内置了类数组的类型，比如Iarguments，拓展阅读是[内置对象](http://ts.xcatliu.com/basics/built-in-objects.html)
 
-### any在数组中的应用
-1. any表示在数组中可出现任意类型，`let arr : any[] = [1,'2',{b: 3}]`
+5. any在数组中的应用，any表示在数组中可出现任意类型，`let arr : any[] = [1,'2',{b: 3}]`
+
+### 函数的类型
+1. 函数声明，入参和返回值的类型都要注意到
+```js
+function sum(one: number,two: number): number{
+  return one + two
+}
+```
+2. 函数表达式，
+```js
+// 这样可以通过编译，但是等号左边的mySun是通过右边的类型推断出来的
+let mySum = function(one: number,two: number): number{
+  return one + two;
+}
+// 完整写法如下：
+let mySum: (one: number,two: number) => number = function(one: number,two: number): number{
+  return one + two;
+}
+```
+在TypeScript类型定义中`=>`用来表示函数的定义，左边是输入类型，需要用括号括起来，右边是输出类型；   
+在ES6中的`=>`代表的是箭头函数  
+3. 用接口定义函数的形状
+```js
+interface search{
+  (one: string,two: string): boolean
+}
+let mySearch: search;
+mySearch = function(one: string,two: string){
+  return one.search(two) !== -1;
+}
+```
+4. 可选参数，依然用`?`表示，但是可选参数后面不能再出现必需参数了
+```js
+function sum(one: number,two: number,three?: number): number{
+  if(three){
+    return one + two + three;
+  }else {
+    return one + two;
+  }
+}
+```
+5. 参数默认值，设置了参数默认值的入参就自动变为可选参数，而且不受`可选参数后面不能再出现必需参数`的限制
+```js
+function sum(one: number = 10,two: number,three: number): number{
+  if(one){
+    return one + two + three;
+  }else {
+    return two + three;
+  }
+}
+```
+6. 剩余参数，可以用`...rest`的方式获取，它是一个数组类型，可以用数组的方式定义类型，而且只能是最后一个参数使用
+```js
+function push(arr: any[],...rest: any[]){
+  // xxx
+}
+```
+7. 重载，需求是入参类型不确定的，期望是针对不确定入参给出确定性的入参和返回值类型
+```js
+function reverse(x: number): number;
+function reverse(x: string): string;
+function reverse(x: number | string): number | string | void {
+    if (typeof x === 'number') {
+        return Number(x.toString().split('').reverse().join(''));
+    } else if (typeof x === 'string') {
+        return x.split('').reverse().join('');
+    }
+}
+```
+
+### 类型断言
+1. 用来手动指定一个值的类型。`值 as 类型`（推荐的写法）或者`<类型>值`（还有可能表示泛型）
+2. 用途：  
+```js
+1. 将联合类型断言为其中一个类型，谨慎使用，防止运行时错误
+function isFish(animal: Cat | Fish) {
+  if (typeof (animal as Fish).swim === 'function') {
+      return true;
+  }
+  return false;
+}
+2. 将一个父类断言为一个更为具体的子类
+3. 将任何一个类型断言为any，比如：`window as any`，是解决TypeScript问题的最后一个手段，
+除非非常肯定，否则不要滥用。
+4. 将any断言为一个具体的类型，解决历史遗留代码中any的一种方式，提高可维护性。
+```
+
+### 声明文件
+1. 声明语句：`declare var`声明全局变量
+2. 声明文件：把声明语句集中放在一个文件里，以xxx.d.ts结尾，一般来说，ts会解析项目所有的ts文件，xxx.d.ts文件的。
+3. 建议统一用@types管理第三方库，查询库对应的声明文件：[链接](https://microsoft.github.io/TypeSearch/)
+4. npm包：TODO
