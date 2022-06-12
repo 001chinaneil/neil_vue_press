@@ -492,4 +492,18 @@ function isFish(animal: Cat | Fish) {
 1. 声明语句：`declare var`声明全局变量
 2. 声明文件：把声明语句集中放在一个文件里，以xxx.d.ts结尾，一般来说，ts会解析项目所有的ts文件，xxx.d.ts文件的。
 3. 建议统一用@types管理第三方库，查询库对应的声明文件：[链接](https://microsoft.github.io/TypeSearch/)
-4. npm包：TODO
+4. npm包：
+```js
+  1. npm包里面就有自己的types类型文件，这是npm作者自己一道开发的类型文件，最为推荐的方式
+  2. @types里面的类型文件，说明npm作者自己没做类型文件，是其他人进行的补充开发
+  3. 以上都没有的话，需要在自己项目的types目录下自定义开发类型组件，xxx.d.ts文件
+```
+[语法链接：](http://ts.xcatliu.com/basics/declaration-files.html#export)
+```js
+// 语法
+  1. export 导出变量
+  2. export namespace 包含子属性的对象
+  3. export default es6默认导出
+  4. export = commonjs 导出模块
+```
+5. UMD库：TODO
