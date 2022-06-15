@@ -656,3 +656,53 @@ enum Days {
 
 2. 默认枚举值会被赋予从 0 开始递增的值
 3. 感觉可以再看一遍 TODO
+
+### 类
+
+#### 类的概念
+
+1. 类（Class）：定义了**一件事物**的抽象特点，包含属性和方法。
+2. 对象（Object）：类的实例，通过`new`实现。
+3. 面向对象（OOP）的三大特性：封装、继承、多态。
+4. 封装（Encapsulation）：对内部数据处理细节隐藏起来，对外只暴露接口，这样外面不能任意修改对象的内部数据。
+5. 继承（Inheritance）：子类继承父类，除了拥有父类所有的特性外，还可以有自己的一些特性。
+6. 多态（Ploymorphism）：由继承产生了相关的不同类型的类，对同一个方法可以有不同的响应。
+7. 存取器（getter & setter）：用以改变属性的读取和赋值行为。
+8. 修饰符（Modifiers）：是一些关键字，限制成员和属性的性质，比如 public 表示公有属性和方法。
+9. 抽象类（Abstract Class）：抽象类是供其他类继承的基类，不允许被实例化，抽象类中的方法必须在子类中被实现。
+10. 接口（Interface）：不同类之间的公有属性和方法，可以抽象成一个接口，接口可以被类实现。类只能继承自一个类，但是可以实现多个接口。
+
+#### ES6 中类的用法
+
+20220615 上午 新华科技大厦 1621 Tripalink
+
+1. 属性和方法：使用`Class`定义类，使用`constructor`定义构造函数，**使用`new`生成实例时，会自动调用构造函数**。
+2. 类的继承：使用`extends`来实现继承，子类中用`super`来调用父类中的构造函数和属性方法。
+3. 存取器：用 getter、setter 来改变属性的读取和赋值行为
+
+```js
+class Animal{
+  constructor(name){
+    this.name = name;
+  }
+  get name(){
+    return this.name
+  }
+  set name(){
+    this.name = name
+  }
+}
+```
+
+4. 静态方法：用`static`修饰符修饰的方法，实例调用是不行的（也不需要），而是可以通过类直接调用。
+
+```js
+class Animal {
+  static isAnimal(a) {
+    return a instanceof Animal;
+  }
+}
+// 调用
+let a = new Animal();
+Animal.isAnimal(a);
+```
