@@ -706,3 +706,68 @@ class Animal {
 let a = new Animal();
 Animal.isAnimal(a);
 ```
+
+#### ES7 中类的用法
+
+1. 实例属性：ES6 中实例属性只能通过 constructor 中的`this.xxx`来定义，ES7 可以直接在 class 里面进行定义。
+2. 静态属性：通过**static**关键字定义
+
+```js
+class Anima {
+  name = "Jack"; // 实例属性
+  static age = 25; // 静态属性
+  constructor() {}
+}
+```
+
+#### TypeScript 中类的用法
+
+1. 三种访问修饰符（Access Modifiers）:
+
+- public: 实例化可以访问，可以修改
+- protected: 只能在**子类中**进行访问，实例化中不能访问
+- private: 那里都不能被访问
+
+2. 参数属性：修饰符和 readonly 还可以用在构造函数参数中，等同于类中定义该属性的同时给属性赋值。
+3. readonly: 只读属性关键字，只能出现在属性声明、索引签名或构造函数中。和其他修饰符同时存在的话，readonly 需要写在后面。
+4. 抽象类：abstract 用于定义抽象类和抽象方法。
+
+- 抽象类不允许被实例化。
+- 抽象类中的抽象方法必须在子类中被实现。
+
+```js
+abstract class Animal {
+  public name;
+  public constructor(name) {
+    this.name = name;
+  }
+  public abstract sayHi();
+}
+
+class Cat extends Animal {
+  public sayHi() {
+    console.log(`Meow, My name is ${this.name}`);
+  }
+}
+
+let cat = new Cat('Tom');
+```
+
+### 类的类型
+
+1. 给类加类型和接口类似
+
+```js
+class Animal {
+  name: string;
+  constructor(name: string) {
+    this.name = name;
+  }
+  sayHi(): string {
+    return `My name is ${this.name}`;
+  }
+}
+
+let a: Animal = new Animal("Jack");
+console.log(a.sayHi()); // My name is Jack
+```
