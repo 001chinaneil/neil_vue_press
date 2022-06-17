@@ -753,7 +753,7 @@ class Cat extends Animal {
 let cat = new Cat('Tom');
 ```
 
-### 类的类型
+#### 类的类型
 
 1. 给类加类型和接口类似
 
@@ -771,3 +771,27 @@ class Animal {
 let a: Animal = new Animal("Jack");
 console.log(a.sayHi()); // My name is Jack
 ```
+
+### 类与接口
+
+1. 接口除了可以给一个事物进行抽象之外，还有另一个用途：给类的一部分行为进行抽象。
+
+#### 类实现接口
+
+1.
+
+#### 接口继承接口
+
+```js
+interface Animal{
+  eat(): void
+}
+interface Dog extends interface Animal{
+  drink(): void
+  sleep(): void
+}
+```
+
+#### 接口继承类
+
+1. 在 TypeScript 中接口是可以继承类的，但是类里面的 constructor、静态属性、静态方法是不能继承的。只能继承类中的**实例属性和实例方法**。
