@@ -377,6 +377,7 @@ console.log(selectGirl.getGirl(1));
 ## xcatliu 教程：
 
 - [中文翻译版](http://ts.xcatliu.com/introduction/index.html) 入门很友好，阅读起来真的很友好 20220601 铭科苑 F6
+- 20220619 学习完毕 好的教程真的是深入浅出啊
 
 1. 知识的获取，每次只能在原来的基础上获得一定数量的新知识和新理解，所以要做好已有知识的整理，也要做好新知识精准的部分学习，而不是妄图一次全部学会。
 2. 一门学科知识，高频在使用的知识可能只占全部的 40%左右，所以花一部分时间学习最实用的知识是性价比最高的
@@ -795,3 +796,69 @@ interface Dog extends interface Animal{
 #### 接口继承类
 
 1. 在 TypeScript 中接口是可以继承类的，但是类里面的 constructor、静态属性、静态方法是不能继承的。只能继承类中的**实例属性和实例方法**。
+
+### 泛型
+* 终于接触到这个很陌生又很熟悉的概念了。20220618 铭科苑
+1. 概念：泛型（Generics）指的是**定义函数、接口和类**的时候不预先指定类型，而是在**使用的时候**指定类型。
+#### 简单的实例
+```js
+function createArray<T>(length: number,value: T): Array<T>{
+  let arr: T[] = [];
+  for(let i = 0;i < length;i++>){
+    arr.push(value);
+  }
+  return arr;
+}
+```
+#### 多个类型参数
+```js
+function swap<T,U>(arr: [T,U]): [U,T]{
+  return [arr[1],arr[0]];
+}
+```
+
+#### 泛型约束
+1. 因为泛型代表任意类型，有时候又需要一定的属性限制，利用`extends`关键字。
+```js
+interface args{
+  length: number
+}
+function isLength<T extends args>(value: T): T{
+  if(value.length){
+    return true;
+  }else {
+    return false;
+  }
+}
+``` 
+#### 泛型接口 TODO
+#### 泛型类 TODO
+#### 泛型参数的默认类型 TODO
+
+### 声明合并
+20220619 周日 晴 铭科苑 
+- 编程技术是赖以谋生的工具和自己的利刃，怎么能够不重视呢？
+- 经过6年的为了生存而学习的编程技术，现在慢慢的也有了浓厚的兴趣，是不是也可以说，只要时间到位了，陌生也会变热爱呢？
+
+1. 如果定义了两个名字相同的**函数、接口、类**，它们会合并成一个类型。
+```js
+interface Alarm {
+    price: number;
+    alert(s: string): string;
+}
+interface Alarm {
+    weight: number;
+    alert(s: string, n: number): string;
+}
+// 相当于
+interface Alarm {
+  price: number;
+  weight: number;
+  alert(s: string): string;
+  alert(s: string,n: number): string;
+}
+```
+
+## 工程
+### 代码检查
+1. ts文件解析器：@typescript-eslint/parser；配置选项：@typescript-eslint/plugin；

@@ -48,6 +48,13 @@ module.exports = {
                     collapsable: true,
                     children: [
                         "engineering",
+                        "engineering-lagou-start",
+                        "enginneering-management-tool",
+                        "enginneering-Architecture-ecosystem",
+                        "engineering-Design-patterns",
+                        "engineering-actual-combat",
+                        "engineering-Full-stack",
+                        "engineering-lagou-end",
                     ],
                 },
                 {
