@@ -138,3 +138,13 @@
 4. Non-JavaScript Resources：是指对其他非 JavaScript 类型资源导入的支持能力。
 5. Output Module Formats：导出模式要灵活，可以配置 ESM、CommonJS 等规范的内容
 6. Transformations：编译、转义过程。对 JavaScript 代码的压缩，无用代码的删除。构建工具只做构建分内的事情，其他扩展能力通过插件化机制来完成。
+
+## 5. Vite实现：从源码分析出发，构建bundleless开发工程
+20220626 下午 铭科苑F6 热    
+静下心来读Vite源码，发现也并不难读懂。
+[官链](https://cn.vitejs.dev/guide/)
+1. Vite关键点：
+    - Vite基于ESM，实现了快速启动和即时模块热更新的能力。
+    - Vite在服务端实现了按需编译。
+    - Vite在开发环境下并没有打包和构建的过程。
+2. runServer的实现：TODO
