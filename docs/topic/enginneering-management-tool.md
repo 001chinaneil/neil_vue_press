@@ -147,4 +147,5 @@
     - Vite基于ESM，实现了快速启动和即时模块热更新的能力。
     - Vite在服务端实现了按需编译。
     - Vite在开发环境下并没有打包和构建的过程。
-2. runServer的实现：TODO
+2. runServer的实现：20220627（Vite的源码真的是很易读，真的可以学到很实用的写法啊），启动一个KoaServer，来实现对浏览器请求的响应。
+3. createServer的实现：TODO
