@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Git todo | 持续变强</title>
+    <meta name="generator" content="VuePress 1.9.5">
+    
+    <meta name="description" content="学习笔记 &amp; 工作总结 &amp; 面试准备">
+    
+    <link rel="preload" href="/neil_vue_press/assets/css/0.styles.9193f6e8.css" as="style"><link rel="preload" href="/neil_vue_press/assets/js/app.cb53dc93.js" as="script"><link rel="preload" href="/neil_vue_press/assets/js/2.89fbda32.js" as="script"><link rel="preload" href="/neil_vue_press/assets/js/68.69a6e920.js" as="script"><link rel="prefetch" href="/neil_vue_press/assets/js/10.e2bd4a45.js"><link rel="prefetch" href="/neil_vue_press/assets/js/11.f8ad0fb4.js"><link rel="prefetch" href="/neil_vue_press/assets/js/12.4857cbe1.js"><link rel="prefetch" href="/neil_vue_press/assets/js/13.fd12469d.js"><link rel="prefetch" href="/neil_vue_press/assets/js/14.1fcb2941.js"><link rel="prefetch" href="/neil_vue_press/assets/js/15.92db2df1.js"><link rel="prefetch" href="/neil_vue_press/assets/js/16.98ad61d8.js"><link rel="prefetch" href="/neil_vue_press/assets/js/17.0c07cd91.js"><link rel="prefetch" href="/neil_vue_press/assets/js/18.ff4c3e9f.js"><link rel="prefetch" href="/neil_vue_press/assets/js/19.44d9a6d6.js"><link rel="prefetch" href="/neil_vue_press/assets/js/20.e2336ce5.js"><link rel="prefetch" href="/neil_vue_press/assets/js/21.c84c08ae.js"><link rel="prefetch" href="/neil_vue_press/assets/js/22.5147a270.js"><link rel="prefetch" href="/neil_vue_press/assets/js/23.d5de3edb.js"><link rel="prefetch" href="/neil_vue_press/assets/js/24.c86832c1.js"><link rel="prefetch" href="/neil_vue_press/assets/js/25.c95aa119.js"><link rel="prefetch" href="/neil_vue_press/assets/js/26.3a779b7b.js"><link rel="prefetch" href="/neil_vue_press/assets/js/27.e51ead36.js"><link rel="prefetch" href="/neil_vue_press/assets/js/28.28708113.js"><link rel="prefetch" href="/neil_vue_press/assets/js/29.efa826bc.js"><link rel="prefetch" href="/neil_vue_press/assets/js/3.807f8931.js"><link rel="prefetch" href="/neil_vue_press/assets/js/30.99fa9a8b.js"><link rel="prefetch" href="/neil_vue_press/assets/js/31.17783c8d.js"><link rel="prefetch" href="/neil_vue_press/assets/js/32.86b6a0bd.js"><link rel="prefetch" href="/neil_vue_press/assets/js/33.bc7ea39c.js"><link rel="prefetch" href="/neil_vue_press/assets/js/34.5164584e.js"><link rel="prefetch" href="/neil_vue_press/assets/js/35.9fc40872.js"><link rel="prefetch" href="/neil_vue_press/assets/js/36.e103e051.js"><link rel="prefetch" href="/neil_vue_press/assets/js/37.18e3ff1c.js"><link rel="prefetch" href="/neil_vue_press/assets/js/38.0721a139.js"><link rel="prefetch" href="/neil_vue_press/assets/js/39.5852de00.js"><link rel="prefetch" href="/neil_vue_press/assets/js/4.e071057e.js"><link rel="prefetch" href="/neil_vue_press/assets/js/40.5a257969.js"><link rel="prefetch" href="/neil_vue_press/assets/js/41.b7ecb5c0.js"><link rel="prefetch" href="/neil_vue_press/assets/js/42.3256df1b.js"><link rel="prefetch" href="/neil_vue_press/assets/js/43.391b1ada.js"><link rel="prefetch" href="/neil_vue_press/assets/js/44.106d6fb4.js"><link rel="prefetch" href="/neil_vue_press/assets/js/45.a6022af1.js"><link rel="prefetch" href="/neil_vue_press/assets/js/46.dfcbf4af.js"><link rel="prefetch" href="/neil_vue_press/assets/js/47.596d0036.js"><link rel="prefetch" href="/neil_vue_press/assets/js/48.11dbef69.js"><link rel="prefetch" href="/neil_vue_press/assets/js/49.a18e96b2.js"><link rel="prefetch" href="/neil_vue_press/assets/js/5.47db7140.js"><link rel="prefetch" href="/neil_vue_press/assets/js/50.539a40e2.js"><link rel="prefetch" href="/neil_vue_press/assets/js/51.bcf17d77.js"><link rel="prefetch" href="/neil_vue_press/assets/js/52.fa14dc5c.js"><link rel="prefetch" href="/neil_vue_press/assets/js/53.6e0dd53d.js"><link rel="prefetch" href="/neil_vue_press/assets/js/54.2f48376c.js"><link rel="prefetch" href="/neil_vue_press/assets/js/55.f81886d6.js"><link rel="prefetch" href="/neil_vue_press/assets/js/56.52c3ebc3.js"><link rel="prefetch" href="/neil_vue_press/assets/js/57.4b528d08.js"><link rel="prefetch" href="/neil_vue_press/assets/js/58.ce999de7.js"><link rel="prefetch" href="/neil_vue_press/assets/js/59.bbfc36d9.js"><link rel="prefetch" href="/neil_vue_press/assets/js/6.ee8a4ee8.js"><link rel="prefetch" href="/neil_vue_press/assets/js/60.24423b26.js"><link rel="prefetch" href="/neil_vue_press/assets/js/61.22a211b8.js"><link rel="prefetch" href="/neil_vue_press/assets/js/62.c8497a2a.js"><link rel="prefetch" href="/neil_vue_press/assets/js/63.867be389.js"><link rel="prefetch" href="/neil_vue_press/assets/js/64.5d369944.js"><link rel="prefetch" href="/neil_vue_press/assets/js/65.2669f81f.js"><link rel="prefetch" href="/neil_vue_press/assets/js/66.13bb7c7d.js"><link rel="prefetch" href="/neil_vue_press/assets/js/67.6075039e.js"><link rel="prefetch" href="/neil_vue_press/assets/js/69.19fd79f1.js"><link rel="prefetch" href="/neil_vue_press/assets/js/7.41737acf.js"><link rel="prefetch" href="/neil_vue_press/assets/js/70.a57a6c18.js"><link rel="prefetch" href="/neil_vue_press/assets/js/71.1b6e99a2.js"><link rel="prefetch" href="/neil_vue_press/assets/js/72.368b7b0b.js"><link rel="prefetch" href="/neil_vue_press/assets/js/73.e01aa9b8.js"><link rel="prefetch" href="/neil_vue_press/assets/js/74.cd3319fe.js"><link rel="prefetch" href="/neil_vue_press/assets/js/75.d4df6666.js"><link rel="prefetch" href="/neil_vue_press/assets/js/76.b09182a9.js"><link rel="prefetch" href="/neil_vue_press/assets/js/77.d1a61617.js"><link rel="prefetch" href="/neil_vue_press/assets/js/78.08ddb2f5.js"><link rel="prefetch" href="/neil_vue_press/assets/js/79.9c6c3ae3.js"><link rel="prefetch" href="/neil_vue_press/assets/js/8.00134a80.js"><link rel="prefetch" href="/neil_vue_press/assets/js/80.3f6c3498.js"><link rel="prefetch" href="/neil_vue_press/assets/js/81.b11e05ea.js"><link rel="prefetch" href="/neil_vue_press/assets/js/82.648c75a4.js"><link rel="prefetch" href="/neil_vue_press/assets/js/9.b23e78a6.js">
+    <link rel="stylesheet" href="/neil_vue_press/assets/css/0.styles.9193f6e8.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/neil_vue_press/" class="home-link router-link-active"><!----> <span class="site-name">持续变强</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/neil_vue_press/topic/" class="nav-link router-link-active">
+  专题学习
+</a></div><div class="nav-item"><a href="/neil_vue_press/Interview/" class="nav-link">
+  Interview
+</a></div> <!----></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/neil_vue_press/topic/" class="nav-link router-link-active">
+  专题学习
+</a></div><div class="nav-item"><a href="/neil_vue_press/Interview/" class="nav-link">
+  Interview
+</a></div> <!----></nav>  <ul class="sidebar-links"><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>应用框架(Frame)</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading open"><span>工具集合(Tools)</span> <span class="arrow down"></span></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/neil_vue_press/topic/Tools-Git.html" aria-current="page" class="active sidebar-link">Git todo</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/neil_vue_press/topic/Tools-Git.html#基础知识" class="sidebar-link">基础知识</a></li><li class="sidebar-sub-header"><a href="/neil_vue_press/topic/Tools-Git.html#节点总结" class="sidebar-link">节点总结</a></li><li class="sidebar-sub-header"><a href="/neil_vue_press/topic/Tools-Git.html#实践-多git账号对多个git服务器" class="sidebar-link">实践：多Git账号对多个Git服务器</a></li></ul></li><li><a href="/neil_vue_press/topic/Tools-computer-install.html" class="sidebar-link">装机攻略</a></li></ul></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>工程架构系列</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>微前端系列集</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>低代码系列集</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>多端跨端系列</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>服务器渲染集</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>动效可视化集</span> <span class="arrow right"></span></p> <!----></section></li><li><section class="sidebar-group collapsable depth-0"><p class="sidebar-heading"><span>服务端知识集</span> <span class="arrow right"></span></p> <!----></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="git-todo"><a href="#git-todo" class="header-anchor">#</a> Git todo</h1> <ul><li>从锤子笔记迁移而来。20211024晚</li></ul> <h2 id="基础知识"><a href="#基础知识" class="header-anchor">#</a> 基础知识</h2> <ol><li>优势：版本控制，协同合作。</li> <li>渊源：由创建Linux的Linus，使用C语言编写了git版本控制系统。</li> <li>SVN等集中式版本控制系统需要联网，必须有“中央服务器”；Git不需要联网，在局域网内可以互推送版本，大多数也会有“中央服务器”。</li> <li>安装Git:</li></ol> <div class="language-js extra-class"><pre class="language-js"><code>$ git config <span class="token operator">--</span>global user<span class="token punctuation">.</span>name <span class="token string">&quot;Your Name&quot;</span>
+$ git config <span class="token operator">--</span>global user<span class="token punctuation">.</span>email <span class="token string">&quot;email@example.com&quot;</span>
+</code></pre></div><ol start="5"><li>创建版本库：
+新建目录：<code>mkdir learngit</code><br>
+查看当前目录：<code>pwd</code><br>
+通过<code>git init</code>命令把这个目录变成Git可以管理的仓库<br>
+用<code>ls -ah</code>可以看到.git文件，它是用来记录git仓库的。<br>
+版本控制系统，只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等；图片、视频二进制文件只能知道大小的变化，微软的Word文件也是二进制格式，不要用windows自带记事本编辑程序文件。<br>
+readme.txt 放到仓库目录下</li></ol> <div class="language-js extra-class"><pre class="language-js"><code>git add <span class="token punctuation">.</span>
+git commit <span class="token operator">-</span>m <span class="token string">&quot;&quot;</span>
+</code></pre></div><p>小结：<br>
+初始化一个Git仓库，使用git init命令。<br>
+添加文件到Git仓库，分两步：<br>
+第一步，使用命令<strong>git add 文件名称</strong>，注意，可反复多次使用，添加多个文件；<br>
+第二步，使用命令 <strong>git commit -m &quot;&quot;</strong> 完成。</p> <ol start="6"><li><p>时光机穿梭：
+小结<br>
+要随时掌握工作区的状态，使用<code>git status</code>命令。<br>
+如果git status告诉你有文件被修改过，用git diff 【在add之前使用】。
+<code>git diff</code>是工作区和 中间区比较，<code>git diff --cached</code>是中间区和仓库比较。<br>
+Untracked files 未跟踪文件</p> <ul><li><ol><li>版本回退<br> <code>git log</code>查看历史记录<br> <code>git log --pretty=oneline</code>用简洁的方式查看历史记录<br>
+用HEAD表示当前版本 上个版本就是HEAD^ 上上个版本就是HEAD^^  依次类推<br>
+【<code>git reflog</code>用来记录你的每一次命令：】所以可以穿越过来，穿越到现在。<br>
+回到以前的某个版本后，想再回来 $ git reset --hard 3628164<br>
+Git 回退版本非常快的原因【因为Git在内部有个指向当前版本的HEAD指针】<br>
+英文状态下，按q退出git log。</li></ol></li> <li><ol start="2"><li>工作区和暂存区<br>
+【理清系统顺序，明确核心概念，最后记死命令】<br>
+工作区（Working Directory）—— 版本库（Repository）【暂存区stage,master分支，指针HEAD】<br>
+版本库在工作区的一个隐藏目录里 .git<br> <code>add是把所有修改放到了暂存区，commit才把暂存区里的所有文件提交到当前分支</code>。</li></ol></li> <li><ol start="3"><li>管理修改</li></ol></li> <li><ol start="4"><li>撤销修改<br>
+直接丢弃工作区的修改时，用命令git checkout -- file 【--后面有空格,前提是该文件已经被跟踪，如果是新增文件就不行了】<br>
+(想丢弃全部修改文件怎么办？) git checkout -- .<br>
+添加到了暂存区时，想丢弃修改 命令git reset HEAD file<br>
+【三种状态之间的切换】 working stage repository</li></ol></li> <li><ol start="5"><li>删除文件</li></ol> <div class="language-js extra-class"><pre class="language-js"><code>rm file<span class="token punctuation">.</span>name
+git checkout <span class="token operator">--</span> test<span class="token punctuation">.</span>txt
+</code></pre></div><p>其实是用版本库里的版本替换工作区的版本，无论工作区是修改还是删除，都可以“一键还原”。<br>
+【如果新增文件一次都没有commit到版本库，那么git checkout -- file 是不起作用的】<br>
+【纵向的是git log版本历史的回退，横向的是三种状态的回退】</p> <div class="language-js extra-class"><pre class="language-js"><code>git reset <span class="token operator">--</span>hard commitid    
+git log、gitreflog
+rm file<span class="token punctuation">.</span>name    git checkout <span class="token operator">--</span> file    git reset <span class="token constant">HEAD</span> file 
+</code></pre></div></li></ul></li> <li><p>远程仓库<br>
+杀手级功能--远程仓库，其实在一台电脑上是可以克隆多个版本库的。<br>
+本地仓库和github远程仓库是通过SSH加密传输的<br>
+创建SSH key:<code>ssh-keygen -t rsa -C &quot;youremail@example.com&quot;</code>
+可以自己在自己的服务器上搭建git服务器，很简单，公司内部开发必备。<br>
+Vim file.name 是打开某个文件<br>
+【测试：ssh git@github.com】<br>
+【①Github远程仓库添加公钥后，只是识别这台电脑了，② git remote add origin git@github.com:001chinaneil/02githubStudy.git  (这是仓库建立了链接)<br>
+在远程新建一个仓库，并在本地执行上述代码，然后git push -u origin master<br>
+这才完成了全部连接操作。默认第一个分支是master分支。在github新建一个仓库后，会有提示后续操作】<br>
+如果本地仓库已经有提交的记录，而远程仓库也有文件，在建立连接之后，需要使用<br>
+git pull --rebase origin master 【把远程仓库文件和本地仓库文件进行合并】<br>
+（待梳理）仓库下各分支与远程各分支的一一对应关系的建立<br>
+（待梳理）不在网页远程库，而是在本地命令行新建个仓库的方法，新建分支<br>
+[新方式]：【本地新建好仓库后，远程新建仓库，什么文件也不建，会有引导的，这样<br>
+git remote add origin git@github.com:001chinaneil/07nuxt_demo.git<br>
+git push -u origin master
+就OK了。】</p> <ul><li><ol><li>添加远程库</li></ol></li> <li><ol start="2"><li>从远程库克隆<br>
+git clone git@github.com:001chinaneil/02gitskills.git<br>
+从远程克隆仓库会把文件目录都克隆出来的，并自动在本地初始化仓库。</li></ol></li></ul></li> <li><p>分支管理<br>
+Git的分支就像是平行的宇宙，互相不影响的。创建，切换，删除都很快。</p> <ul><li><ol><li>创建与合并分支<br>
+HEAD指向分支（master），分支（master）指向提交。<br>
+创建并切换分支：git checkout -b 分支.name  [== git branch 分支.name + git checkout 分支.name]<br>
+git merge 分支.name 用于合并指定分支到当前分支。<br>
+删除分支：git branch -d 分支.name</li></ol></li> <li><ol start="2"><li>解决冲突<br>
+以下命令可以查看分支合并情况<br>
+$ git log --graph --pretty=oneline --abbrev-commit</li></ol></li> <li><ol start="3"><li>分支管理策略<br>
+master充当发布分支，不在上面干活儿，在其他分支开发。</li></ol></li> <li><ol start="4"><li>Bug分支：<br>
+Git提供了“储藏”功能，git stash把当前工作区储存起来；<br>
+git stash list 查看储存的列表；<br>
+恢复工作区：<br>
+方法一：git stash apply 恢复后，stash内容并不删除，还需git stash drop来删除<br>
+方法二：git stash pop 恢复并删除了stash内容<br>
+（恢复并删除不是最近的一个stash，是 git stash pop stash@{2}吗？<br>
+多次stash后，用git stash apply stash@{0} 来恢复指定的stash。<br>
+【使用stash功能首页该文件要在被跟踪的前提下，即至少一次的add后；在add后，commit前就可以使用stash功能；git stash list列表里按stash时间线倒排序，0是最近的一次stash。】<br>
+实验：在1分支stash，那么在2分支stash pop会把暂存的释放出来吗？会，会把1分支的状态全部带到2分支里面去，也就是说stash功能不分分支的。</li></ol></li> <li><ol start="5"><li>Feature分支<br>
+开发新功能最好新建一个分支，然后合并到主分支上，删除一个没有被合并的分支，需要使用强制删除 git branch -D 分支.name</li></ol></li> <li><ol start="6"><li>多人协作<br>
+查看远程库信息，使用git remote -v；<br>
+本地新建的分支如果不推送到远程，对其他人就是不可见的；<br>
+从本地推送分支，使用git push origin branch-name，如果推送失败，先用git pull抓取远程的新提交；<br>
+在本地创建和远程分支对应的分支，使用git checkout -b branch-name origin/branch-name，本地和远程分支的名称最好一致；（如果远程没有这个分支呢？这个命令会创建吗？）<br>
+建立本地分支和远程分支的关联，使用git branch --set-upstream branch-name origin/branch-name；<br>
+从远程抓取分支，使用git pull，如果有冲突，要先处理冲突。<br>
+实验：在1分支本地可以推送代码到2分支远程吗？<br>
+1）在远程仓库新建分支？<br>
+可以在远程库里面可视化手动新建分支，或者在本地git checkout -b 新分支.name ，并git push origin 新分支.name，这样远程仓库就多了一个新分支<br>
+2）一旦本地分支和远程某分支建立连接关系，本地分支的修改是不能push到其他远程分支去的。同理，pull也不会。本地当前在哪个分支就会把远程哪个对应的分支pull下来，其他的分支不会pull下来。<br>
+（待梳理）本地 git pull 会把其他人新建的分支pull下来是怎么回事儿？</li></ol></li></ul></li> <li><p>标签管理<br>
+Tag就是一个有意义的名字，它和某个commit绑定在一起。</p> <ul><li><ol><li>创建标签<br>
+1）切换到需要打标签的分支上：$ git tag v1.0<br>
+2）创建带有说明的标签：$ git tag -a v0.1 -m &quot;version 0.1 released&quot; 3628164  -a代表版本号，-m代表说明文字<br>
+标签默认是打在最近一次commit上的，如果想打在以前的某个commit上：$ git tag v0.9 6224937<br>
+3）查看所有标签：$ git tag<br>
+git tag是按字母顺序排列，而不是按时间顺序排列。<br>
+4）用<strong>git show 标签名称</strong>查看标签信息。<br>
+(没理解)**git tag -s 标签名称 -m &quot;blablabla...&quot;**可以用PGP签名标签。</li></ol></li> <li><ol start="2"><li>操作标签<br>
+1）推送标签到远程：git push origin v0.1  一次性推送所有标签：git push origin --tags<br>
+2）删除本地标签：git tag -d v0.1<br>
+3）删除远程标签：先删除本地标签，在删除远程标签：git push origin :refs/tags/v0.1</li></ol></li></ul></li> <li><p>使用GitHub<br>
+参与开源项目：<br>
+1）到开源项目主页，fork<br>
+2）从自己的仓库下克隆项目<br>
+3）自己本地修改，提交，然后向开源项目发起一个pull request。一旦通过，自己的修改就被开源项目使用了。<br>
+fork后是在远程新建了一个仓库，自己clone也是在本地新建一个仓库。<br>
+（疑问）在自己开发期间，别人的提交代码通过了，自己怎么获取最新的代码。</p></li> <li><p>使用码云<br>
+查看远程库信息：git remote -v<br>
+删除已关联的名为origin的远程库：git remote rm origin<br>
+本地连接远程库：git remote add origin git@gitee.com:liaoxuefeng/learngit.git<br>
+(问题)使用码云过程中，在本地编写的汉字，上传后，看到的是乱码。<br>
+实现：一个本地库同时同步两个远程仓库 [一对多的关系]<br>
+方案：git默认给远程起的名称是origin，如果同步两个就要用不同的远程名称来区分。<br>
+第一步：先删除对远程库的连接 git remote rm origin<br>
+第二步：用不同的远程库名字来指定不同的远程仓库<br>
+git remote add github git@github.com:001chinaneil/02githubStudy<br>
+git remote add gitee git@gitee.com:zhangguobiao/learngitee<br>
+第三步：使用 git push github master   ;    git push gitee master<br>
+(疑问)一对多的关系不用分支匹配连接吗？gitee起码没用到<br>
+总结：新建仓库，新建分支 仓库底下是分支</p></li> <li><p>自定义Git<br>
+让Git显示颜色：git config --global color.ur true<br>
+[代码就是某些目录下的一些文件，用PHP路由连接起来，再放到服务器上，注册个域名，把IP和命名绑定号，然后大家就可以全网观看了]</p></li></ol> <ul><li><ol><li>忽略特殊文件<br>
+1）新建.gitignore文件<br>
+2）某文件被忽略，想放到git中:  <strong>git add -f file.name</strong><br>
+3）查找gitignore的问题：git check-gitignore -v file.name<br>
+4）touch .gitignore 在命令行里新建.gitignore文件<br>
+5）git status是检验文件是否被忽略的标准。</li></ol></li> <li><ol start="2"><li>配置别名<br>
+git config --global alias.st status (用st代表status)<br>
+当前仓库配置文件放在了 .git/config中<br>
+打开文件：cat .git/config<br>
+（待梳理）当前用户（全局配置文件） 在主目录的 .gitconfig文件下（并没有打开全局配置项）</li></ol></li> <li><ol start="3"><li>搭建Git服务器</li></ol></li></ul> <p>(复习)git stash使用：http://www.cnblogs.com/tocy/p/git-stash-reference.html</p> <h2 id="节点总结"><a href="#节点总结" class="header-anchor">#</a> 节点总结</h2> <ol><li>检查修改：<br>
+已修改，未暂存：git diff<br>
+已暂存，未提交：git diff --cached<br>
+已提交，未推送：git diff master origin/master</li> <li>撤销修改<br>
+已修改，未暂存：git checkout .  或者  git reset --hard<br>
+已暂存，未提交：<br>
+（git reset   +  git checkout .）  或者  （git reset --hard）<br>
+已提交，未推送：git reset --hard origin/master<br>
+已推送：git reset --hard HEAD^  +  git push -f(强制push到远程)</li> <li>查看当前目录下，所有显示和隐藏的文件 ls -a<br>
+删除文件：rm -rf filename</li> <li>新建仓库和新建分支<br>
+直接在github上新建仓库，拉取下来本地就有了新仓库；在GitHub新建分支，本地拉取一下，分支就也下来了。</li> <li>本地和远程不同的项目合并：<br>
+假如我们的源是origin，分支是master，那么我们 需要这样写git pull origin master --allow-unrelated-histories</li> <li>stash应用：<br>
+添加改动到stash:  git stash save -a &quot;messeag&quot;  (包括了新添加的文件)<br>
+删除stash:  git stash drop &lt;stash@{id}&gt; ;    git  stash clear  (stash list全部被删除了)</li> <li>建立与本地分支相对应的远程分支：git push --set-upstream origin article_addVideo</li></ol> <h2 id="实践-多git账号对多个git服务器"><a href="#实践-多git账号对多个git服务器" class="header-anchor">#</a> 实践：多Git账号对多个Git服务器</h2> <p>20220410晚 铭科苑F6</p> <ul><li>参链：<a href="https://www.cnblogs.com/popfisher/p/5731232.html" target="_blank" rel="noopener noreferrer">Git多账号配置，同一电脑多个ssh-key的管理<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> <a href="https://blog.csdn.net/qq_38041873/article/details/122874895" target="_blank" rel="noopener noreferrer">同一台电脑配置多个git公钥<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></li></ul> <ol><li>新建多个公钥/私钥
+<ul><li><ol><li>创建ssh-key：</li></ol></li></ul> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">//创建命令。这里创建两个。~/.ssh/id_rsa中的id_rsa为文件名。默认id_rsa</span>
+ssh<span class="token operator">-</span>keygen <span class="token operator">-</span>t rsa <span class="token operator">-</span><span class="token constant">C</span> <span class="token string">&quot;您的邮箱&quot;</span> <span class="token operator">-</span>f <span class="token operator">~</span><span class="token operator">/</span><span class="token punctuation">.</span>ssh<span class="token operator">/</span>id_rsa
+ssh<span class="token operator">-</span>keygen <span class="token operator">-</span>t rsa <span class="token operator">-</span><span class="token constant">C</span> <span class="token string">&quot;您的邮箱&quot;</span> <span class="token operator">-</span>f <span class="token operator">~</span><span class="token operator">/</span><span class="token punctuation">.</span>ssh<span class="token operator">/</span>xct_rsa
+</code></pre></div><ul><li><ol start="2"><li>ssh-add添加私钥</li></ol></li></ul> <div class="language-js extra-class"><pre class="language-js"><code>ssh<span class="token operator">-</span>add <span class="token operator">~</span><span class="token operator">/</span><span class="token punctuation">.</span>ssh<span class="token operator">/</span>id_rsa
+ssh<span class="token operator">-</span>add <span class="token operator">~</span><span class="token operator">/</span><span class="token punctuation">.</span>ssh<span class="token operator">/</span>xct_rsa
+<span class="token comment">// 查看是否添加成功命令：ssh-add -l</span>
+</code></pre></div></li> <li>配置config文件，来控制公钥对应的Git服务器</li></ol> <div class="language-js extra-class"><pre class="language-js"><code><span class="token comment">// 创建文件</span>
+touch <span class="token operator">~</span><span class="token operator">/</span><span class="token punctuation">.</span>ssh<span class="token operator">/</span>config
+<span class="token comment">// 然后在里面写入：</span>
+# Host 为域名别名
+# Hostname 真实地址
+# User 用户名
+# IdentityFile rsa的地址
+# PreferredAuthentications 认证方式（publickey<span class="token operator">--</span>公钥的方式）
+
+# 账号<span class="token number">1</span><span class="token operator">-</span>github
+   Host github<span class="token punctuation">.</span>com
+   Hostname github<span class="token punctuation">.</span>com
+   IdentityFile <span class="token operator">~</span><span class="token operator">/</span><span class="token punctuation">.</span>ssh<span class="token operator">/</span>xct_rsa
+   PreferredAuthentications publickey
+
+# 账号<span class="token number">2</span><span class="token operator">-</span>参考账号<span class="token number">1</span>即可
+</code></pre></div><ol start="3"><li>注意事项</li></ol> <ul><li>Host的命名会影响到命令，比如Host为<code>workgithub.com</code>，那clone时要为<code>git clone git@workgithub:xxxxxx</code></li></ul></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/neil_vue_press/topic/Frame-TypeScript.html" class="prev">
+        TypeScript
+      </a></span> <span class="next"><a href="/neil_vue_press/topic/Tools-computer-install.html">
+        装机攻略
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/neil_vue_press/assets/js/app.cb53dc93.js" defer></script><script src="/neil_vue_press/assets/js/2.89fbda32.js" defer></script><script src="/neil_vue_press/assets/js/68.69a6e920.js" defer></script>
+  </body>
+</html>
