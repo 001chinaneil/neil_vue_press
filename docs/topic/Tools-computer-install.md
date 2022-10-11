@@ -1,46 +1,66 @@
 # 装机攻略
+
 20220407 新华科技大厦
-* 每次新电脑配置过程都大同小异，会有一定的时间浪费，特意整理一份装机攻略
+
+- 每次新电脑配置过程都大同小异，会有一定的时间浪费，特意整理一份装机攻略
+
 ## 工作账号
-1. 浏览器：Chrome，登录Google账号，自动同步收藏标签
+
+1. 浏览器：Chrome，登录 Google 账号，自动同步收藏标签
 2. 编辑器：VsCode，一些常用插件
-    1. Git History Diff、
-    2. ESLint、
-    3. Chiness(Simplified) Language Pack for VSCode、
-    4. Prettier-Code formatter
+   1. Git History Diff、
+   2. ESLint、
+   3. Chiness(Simplified) Language Pack for VSCode、
+   4. Prettier-Code formatter
 3. 在线文档：Wiki
 4. 代码仓库：Github
 5. 项目管理：Jira
 6. 公司邮箱
 
 ## 开发环境
+
 1. Brew：[官链](https://brew.sh/index_zh-cn) [优质安装贴](https://zhuanlan.zhihu.com/p/111014448)
+
 ```js
 1. 软件安装的目标：/opt/homebrew/Cellar
 2. 查看某软件的安装目标：brew info xxx(软件名：nvm)
 ```
-2. NVM：优先装它，有了它也就有了Node和Npm，`brew install nvm`
+
+2. NVM：优先装它，有了它也就有了 Node 和 Npm，`brew install nvm`
+
 ```js
 // 把下面代码加入到.zshrc文件里面
 export NVM_DIR=~/.nvm
 source $(brew --prefix nvm)/nvm.sh
 ```
+
 3. Node：`nvm install v16.14.0`
 4. NRM：`npm install nrm -g`
 5. Npm && Yarn
 6. Git：`brew install git`
 
-## 命令行iTerm
-1. 官方README文档：https://github.com/ohmyzsh/ohmyzsh（非常好）
-2. oh-my-zsh的下载：手动下载压缩包，手动复制到根目录：[参链](https://juejin.cn/post/6844904178075058189)，设置主题：agnoster
-3. 自动补全插件（zsh-autosuggestions）[官方介绍](https://github.blog/2021-09-01-improving-git-protocol-security-github/) 
+## 命令行 iTerm
+
+1. 官方 README 文档：https://github.com/ohmyzsh/ohmyzsh（非常好）
+2. oh-my-zsh 的下载：手动下载压缩包，手动复制到根目录：[参链](https://juejin.cn/post/6844904178075058189)，设置主题：agnoster
+3. 自动补全插件（zsh-autosuggestions）[官方介绍](https://github.blog/2021-09-01-improving-git-protocol-security-github/)
 4. 语法高亮插件（zsh-syntax-highlighting）：
-5. 命令语言：mv移动 cp拷贝
-6. ~/.zshrc oh-my-zsh配置文件
-7. 每个插件下面都有README.md里面有详细说明，比如Git插件 cat $ZSH/plugins/git/README.md
-8. 快捷键：查看剪贴板历史command+shift+h
-9. 工程的尽头是艺术设计。  
-参链：[iTerm2+oh-my-zsh+配色](https://juejin.cn/post/7064496372648509471) [（item2 + oh-my-zsh + solarized配色方案）](https://www.cnblogs.com/weixuqin/p/7029177.html)
+5. 跳转文件插件 (autojump)：可以在任意目录之间跳转
+6. 命令语言：
+
+- mv 移动 cp 拷贝
+- open ~/.zshrc：用文本打开.zshrc 文件
+- open . ：用 Finder 打开当前目录文件夹
+
+7. ~/.zshrc oh-my-zsh 配置文件
+8. 每个插件下面都有 README.md 里面有详细说明，比如 Git 插件 cat $ZSH/plugins/git/README.md
+9. 快捷键：查看剪贴板历史 command+shift+h
+
+10. 感悟总结：
+
+- 工程的尽头是艺术设计。
+- <极客精神，通过工作自己能收获或积累什么，或者对业务的思考成体系> 20221008 装机攻略更新
+  参链：[iTerm2+oh-my-zsh+配色](https://juejin.cn/post/7064496372648509471) [（item2 + oh-my-zsh + solarized 配色方案）](https://www.cnblogs.com/weixuqin/p/7029177.html)
 
 ```js
 // zshrc配置文件
@@ -180,11 +200,13 @@ prompt_context() {
 ```
 
 ## 文件分类
+
 1. 01work_code、
 2. 02zgb_code、
 3. 03zgb_docs
 
 ## 办公软件
+
 1. 欧陆词典、
 2. 滴答清单、
 3. 有道云笔记
