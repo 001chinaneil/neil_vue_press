@@ -77,4 +77,4 @@ uniqBy(array, [iteratee]); // 迭代器
 uniqWith(array, [comparator]); // 比较器
 ```
 
-## 集合
+## 集合(对象)
