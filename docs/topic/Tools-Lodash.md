@@ -78,3 +78,10 @@ uniqWith(array, [comparator]); // 比较器
 ```
 
 ## 集合(对象)
+
+```js
+countBy(collection, [iteratee]); // 一个可迭代集合中各个key出现的次数
+groupBy(collection, [iteratee]); // 一个可迭代集合中各个key组成的元素
+
+orderBy(collection, [iteratees=[_.identity]], [orders]) 针对对象类型的数组迭代很方便
+```
