@@ -83,5 +83,11 @@ uniqWith(array, [comparator]); // 比较器
 countBy(collection, [iteratee]); // 一个可迭代集合中各个key出现的次数
 groupBy(collection, [iteratee]); // 一个可迭代集合中各个key组成的元素
 
-orderBy(collection, [iteratees=[_.identity]], [orders]) 针对对象类型的数组迭代很方便
+orderBy(collection, [(iteratees = [_.identity])], [orders]); // 针对对象类型的数组迭代很方便
+
+partition(collection, [(predicate = _.identity)]); // 创建一个分成两组的数组，把原数组中真值放在第一个数组，假值放在第二个数组。这个挺好用
+sample(collection); // 随机取出一个值；
+sampleSize(collection, n); // 随机取出n个值；
+size(collection); // 返回数组、类数组、字符串等的长度，或者对象可枚举的属性
+sortBy(collection, [(iteratees = [_.identity])]); // 稳定排序是它最大的特点
 ```
