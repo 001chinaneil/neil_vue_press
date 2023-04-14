@@ -10,6 +10,7 @@
    - 好的第一人教练和老师
 
 3. 很多 API 函数都是重复的，掌握增删改查常用的 API 就足够了。
+4. `Lodash`更像是一个工具函数字典，掌握高频常用的函数就可以了，其他的随用随查。20230411新华科技大厦1901 北京 沙尘暴
 
 ## 数组
 
@@ -91,3 +92,27 @@ sampleSize(collection, n); // 随机取出n个值；
 size(collection); // 返回数组、类数组、字符串等的长度，或者对象可枚举的属性
 sortBy(collection, [(iteratees = [_.identity])]); // 稳定排序是它最大的特点
 ```
+
+## 函数
+
+```js
+debounce(func,wait,[options=]) // 防抖 options.leading = true 指定在防抖前开始；options.trailing = true 指定在防抖结束后执行
+throttle(func,wait,[options=]) // 节流
+```
+
+## 语言
+
+### 拷贝
+```js
+clone(value) // 浅拷贝
+cloneDeep(value) // 深拷贝
+cloneWith(value,[customizer]) // 接收一个可以定制的克隆返回值
+cloneDeepWith(value,[customizer]) // 深拷贝
+
+isArray(value) // 返回true/false
+isArrayLike(value) // 判断是否类数组，不是函数，并且length大于等于0，返回Boolean值
+isArrayLikeObject(value) // 判断是否是数组，并且value是个对象，返回Boolean值
+isEmpty(value) //判断是否是空对象
+isEqual(value,othervalue) // ToDo，场景比较多
+```
+

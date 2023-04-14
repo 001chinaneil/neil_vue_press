@@ -13,8 +13,8 @@ module.exports = {
         link: "/workSummary/",
       },
       {
-        text: "Interview",
-        // text: '面试准备',
+        // text: "Interview",
+        text: "面试攻略",
         link: "/Interview/",
       },
     ],
