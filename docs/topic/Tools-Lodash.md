@@ -108,11 +108,34 @@ clone(value) // 浅拷贝
 cloneDeep(value) // 深拷贝
 cloneWith(value,[customizer]) // 接收一个可以定制的克隆返回值
 cloneDeepWith(value,[customizer]) // 深拷贝
+```
 
+```js
 isArray(value) // 返回true/false
 isArrayLike(value) // 判断是否类数组，不是函数，并且length大于等于0，返回Boolean值
 isArrayLikeObject(value) // 判断是否是数组，并且value是个对象，返回Boolean值
 isEmpty(value) //判断是否是空对象
-isEqual(value,othervalue) // ToDo，场景比较多
+isEqual(value,othervalue) // 不支持函数和Dom节点比较
+isEqualWith(value,othervalue,[customizer]) //customizer是个函数，用来定制比较值函数
+
+toString(value) //转换为字符串，null 和 undefined 会被转换为空字符串；原生的String()会把null和undefined转换为'null'和'undefined' 20230417
+```
+
+## 数学
+
+```js
+max(array) // 返回数组中的最大值
+maxBy(array,fn) // 通过迭代函数fn返回迭代函数返回值的最大值
+mean(array) // array的元素平均值
+mean(array,fn) // 通过迭代函数fn返回数组各个元素属性值的平均值
+min(array) // 返回数组中的最小值
+minBy(array,fn) // 通过迭代函数fn返回函数各返回值的最小值
+sum(array) // 返回数组中的元素和
+sumBy(array,fn) // 通过迭代函数fn返回数组各个元素某个某个属性的和
+```
+
+## 对象
+```js
+at(object,[paths]) // 创建一个数组，元素来自于object的path路径的值
 ```
 

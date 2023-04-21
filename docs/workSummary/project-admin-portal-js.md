@@ -1,4 +1,4 @@
-# admin-portal
+# admin-portal-js
 
 ## react 组件里取消事件冒泡：e.stopPropagation()可以阻止 react 事件的冒泡
 

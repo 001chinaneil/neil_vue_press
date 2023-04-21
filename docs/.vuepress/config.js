@@ -169,7 +169,11 @@ module.exports = {
         {
           title: "Tripalink",
           collapsable: true,
-          children: ["project-admin-portal"],
+          children: [
+            "project-admin-portal-js",
+            "project-admin-portal-css",
+            "project-admin-portal-other",
+          ],
         },
       ],
     },
