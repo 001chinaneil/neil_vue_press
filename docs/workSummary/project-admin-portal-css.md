@@ -17,3 +17,18 @@ word-break: 指代怎么在单词内断行
 break-word: 在文本可能溢出容器时，提前进行断行；项目中使用最频繁了。
 **/
 ```
+
+## 2. flex可以清除子元素浮动
+1. 20230424 场景：CRM PC followup list 对话式布局右侧，偶然发现使用float的子元素居然没有失去高度
+2. 实际原因：**flex也可以清除子元素浮动**
+3. 其他方法：
+```css
+/* 1. 利用伪元素，给父元素加上 */
+.classDemo::after{
+    clear: both;
+    content: '';
+    display: table;
+}
+/* 2. 给父元素加overflow: hidden; */
+/* 3. 使用grid布局，给父元素加上 */
+```
