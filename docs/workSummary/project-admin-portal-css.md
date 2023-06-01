@@ -32,3 +32,35 @@ break-word: 在文本可能溢出容器时，提前进行断行；项目中使�
 /* 2. 给父元素加overflow: hidden; */
 /* 3. 使用grid布局，给父元素加上 */
 ```
+
+## 3. flex实现子元素各间距固定
+1. 20230531 场景：CRM AI Leaseing项目 opportunity模块，希望子模块的宽度随父元素宽度各均分，子模块之间的宽度固定
+2. 实现方法：
+```css
+/* 父元素 */
+.fatherClass {
+    display: flex;
+    justify-content: space-between;
+}
+
+.childClass {
+    /* 3: 代表的是几个模块，32px：代表3个模块有2个间距，每个间距是16px; */
+    width: calc( (100%-32px) / 3 ); 
+}
+```
+3. 原理：
+[官链：](https://developer.mozilla.org/zh-CN/docs/Web/CSS/calc)
+calc() 可以执行加减乘除和嵌套计算，赞👍🏻
+
+## 4. vh代表什么含义，和vm，em，rem都有什么区别？
+[参链：张鑫旭](https://www.zhangxinxu.com/wordpress/2012/09/new-viewport-relative-units-vw-vh-vm-vmin/)
+1. vw、vh、vm（指的是vmin，宽度和长度其中较小的值），都是视区单位，指的是浏览器可视区域的大小，即window.innerWidth或者window.innerHeight，不包括任务栏标题栏工具栏
+2. 1vm 等于 1%，浏览器可视区域宽度是100vm，可视区域高度是100vh，%是相对于父级元素的，可能存在级联效果。
+3. 结论：vh和vw应用于非定位元素的高度相关属性上，height/min-height/max-height/line-height/padding-top/padding-bottom
+4. 绝佳应用场景：
+    1. Office Word效果，一屏一页。（感想：好的技术设计，可以让代码和效果很丝滑）
+
+5. em、rem：都是相对单位  
+    a. em相对父元素的文本对象，如果父元素没设置，就按浏览器默认文本为准，16px  
+    b. rem一直根据根元素对象为标准  
+[参链](https://vue3js.cn/interview/css/em_px_rem_vh_vw.html)
