@@ -64,3 +64,33 @@ calc() 可以执行加减乘除和嵌套计算，赞👍🏻
     a. em相对父元素的文本对象，如果父元素没设置，就按浏览器默认文本为准，16px  
     b. rem一直根据根元素对象为标准  
 [参链](https://vue3js.cn/interview/css/em_px_rem_vh_vw.html)
+
+## 5. scrollWidth、offsetWidth、clientWidth的区别
+1. 场景：[20230720] CRM Tour v2 自研Calendar需求，需要初始化滚动定位到默认选中的日期。
+2. 选择：使用**offsetWidth**，保证移动的距离是显示的实际距离
+3. 区别：
+- scrollWidth：是元素的实际内容宽度 + 滚动条的宽度（如果有） paddingRightWidth + innerDivWidth + paddingRightWidth
+- offsetWidth：是元素的实际宽度 + 边线宽度，borderRightWidth + paddingLeft + contentWidth + paddingRight + scrollBarWidth + borderRightWidth
+- clientWidth：是元素的可视区域宽度，不包括边线宽度，paddingLeftWidth + contentWidth + paddingRightWidth
+
+```js
+offsetWidth >= clientWidth
+
+scrollWidth >= clientWidth
+
+scrollWidth  = offsetWidth - borderRightWidth - borderLeftWidth - clientWidth
+```
+
+4. 延伸：box-sizing属性
+- 默认值content-box，设置元素的宽度为100px，但实际padding和border的宽度也会加到宽度上，导致实际宽度>=100px
+- border-box，此时设置宽度为100px，实际效果也是100px，padding和border的宽度是包含在这100px里面的
+
+## 6. 设置滚动条宽度
+1. 场景：[20230720] CRM Tour v2 自研Calendar需求，出现的横向滚动条比较粗，影响观感
+2. 处理：
+```js
+.className::-webkit-scrollbar {
+    width: 1px;
+}
+```
+3. [参链](https://blog.csdn.net/NineWaited/article/details/126450775)

@@ -240,3 +240,28 @@ touch ~/.ssh/config
 ```
 3. 注意事项
 * Host的命名会影响到命令，比如Host为`workgithub.com`，那clone时要为`git clone git@workgithub:xxxxxx`
+
+## 批量删除分支
+20230612上午 晴 新华科技大厦
+```js
+git branch | grep 'CRM' | xargs git branch -D
+```
+1. **|**是管道符，把各个git命令链接起来
+2. **grep**是搜索过滤命令，可以正则匹配
+3. **xargs**是参数传递命令，把上个命令的输出结果传递给下一个命令  
+[参链](https://www.fke6.com/html/5W08PW4SAD59.html)
+
+## 变基rebase操作
+20230721上午 中雨 新华科技大厦
+- [参链](https://www.cnblogs.com/xinmengwuheng/p/11301657.html)
+```js
+1. git rebase -i xxx(commitId，从此commitId以上进行变基合并，但不包括此commitId) // -i 代表进行交互式操作
+2. 常见命令：
+p , pick 提交
+s , squash 和上一个提交进行融合
+r , reword 使用提交，但修改提交说明
+f , 类似于s, 但丢弃提交说明日志
+3. 
+git push -f 提交本地代码到远端，只一个人开发的时候可用；
+git push --force-with-lease origin xxx(分支名) [推荐] 会进行检查，如果有其他人在此分支提交，会进行警告提示，推荐此用法，相对安全一些。
+```
