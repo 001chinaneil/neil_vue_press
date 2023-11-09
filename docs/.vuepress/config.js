@@ -13,8 +13,8 @@ module.exports = {
         link: "/workSummary/",
       },
       {
-        // text: "Interview",
-        text: "面试攻略",
+        text: "Interview",
+        // text: "面试攻略",
         link: "/Interview/",
       },
     ],
@@ -58,6 +58,8 @@ module.exports = {
             "engineering-actual-combat",
             "engineering-Full-stack",
             "engineering-lagou-end",
+            // ----------------------
+            "engineering-husky-eslint"
           ],
         },
         {
