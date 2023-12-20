@@ -94,3 +94,13 @@ scrollWidth  = offsetWidth - borderRightWidth - borderLeftWidth - clientWidth
 }
 ```
 3. [参链](https://blog.csdn.net/NineWaited/article/details/126450775)
+
+
+## 7. z-index不会与外部元素产生比较
+1. 场景：[20231208] CRM Tour预约流程优化需求，日历组件时间点btn组件里面的Tooltips组件会被同级btn组件遮挡。
+2. 处理：当btn按钮hover时加一个层级，hover: z-10
+3. 原理：
+* 因为z-index会在当前元素及其后代元素生成一个层叠上下文，但是不会与外部元素进行比较，(Tooltips组件挂载到了父组件上面)，这是产生下层btn遮挡的原因。
+所以想解决这个问题，那就利用hover这个交互，把Tooltips组件当前的btn按钮的层级提高，区别与同级别的btn组件，这样ToolTips组件就不会被下面的btn按钮遮挡了。
+* 心得：百思不得其解的疑惑和问题，追根溯源到最后，还是官方链接能解析清楚，理论和实践的相互补充。
+4. [官链](https://developer.mozilla.org/zh-CN/docs/Web/CSS/z-index)

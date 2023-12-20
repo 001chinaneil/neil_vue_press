@@ -1,4 +1,4 @@
-# 控制代码的一致性
+# husky自动代码格式化和自动代码检查
 
 ## 安装过程
 1. Git + Husky + Lint-staged + Prettier + Eslint

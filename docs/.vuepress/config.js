@@ -59,7 +59,10 @@ module.exports = {
             "engineering-Full-stack",
             "engineering-lagou-end",
             // ----------------------
-            "engineering-husky-eslint"
+            "engineering-husky-eslint",
+            "engineering-husky-commitlint",
+            "engineering-time-management-tool",// 工程中时间处理工具
+            "engineering-functions-tool",// 项目中函数类处理工具
           ],
         },
         {
