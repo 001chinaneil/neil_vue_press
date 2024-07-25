@@ -1,6 +1,6 @@
 module.exports = {
     title: '持续变强',
-    description: '学习笔记 & 工作总结 & 面试准备',
+    description: '学习笔记',
     base: '/neil_vue_press/',
     themeConfig: {
         nav: [
@@ -13,8 +13,8 @@ module.exports = {
             //     link: '/foo/'
             // },
             {
-                text: 'Interview',
-                // text: '面试准备',
+                // text: 'Interview',
+                text: '理论学习',
                 link: '/Interview/'
             },
         ],
@@ -101,6 +101,15 @@ module.exports = {
                     children: [
                         "server-size-knowledge"
                     ]
+                },
+                // 前沿技术探索攻略
+                {
+                    title: '技术探索攻略',
+                    collapsable: true,
+                    children: [
+                        "technology-rust",
+                        "technology-aigc"
+                    ]
                 }
             ],
             '/Interview/': [
@@ -173,15 +182,15 @@ module.exports = {
                         'algorithm-others',// 其他未分类集
                     ],
                 },
-                {
-                    title: '项目介绍（软实力）',
-                    collapsable: true,
-                    children: [
-                        'project-zyb',// 按面试节点划分
-                        'project-baidu',
-                        'project-tripalink'
-                    ]
-                },
+                // {
+                //     title: '项目介绍（软实力）',
+                //     collapsable: true,
+                //     children: [
+                //         'project-zyb',// 按面试节点划分
+                //         'project-baidu',
+                //         'project-tripalink'
+                //     ]
+                // },
             ]
         }
     }

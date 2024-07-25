@@ -6,7 +6,7 @@
   "author": "zhangguobiao",
   "license": "MIT",
   "scripts": {
-    "docs:dev": "vuepress dev docs",
+    "docs:dev": "set NODE_OPTIONS=--openssl-legacy-provider & vuepress dev docs",
     "docs:build": "vuepress build docs",
     "deploy": "GH=1 yarn docs:build && bash deploy.sh"
   },
@@ -14,6 +14,7 @@
     "vuepress": "^1.8.2"
   },
   "dependencies": {
-    "vuepress-theme-vue": "^1.1.1"
+    "vuepress-theme-vue": "^1.1.1",
+    "watchman": "^1.0.0"
   }
 }
