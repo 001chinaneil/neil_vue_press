@@ -442,5 +442,41 @@ console.log(jiujiu());
 
 ## Dom
 
+## 正则
+### 和正则相关的API函数
+总结：replace()、match()、search()的用法都是待匹配在前，匹配规则是入参；exec()、test()是匹配规则在前，待匹配是入参
+1. replace()
+```js
+// 把text里面能匹配上正则的，替换为xxx
+text.replace(regexp,'xxx')
+```
+
+2. match()
+```js
+// 取出匹配的字段，返回值是个数组，匹配不到就返回null
+const regexp = /\d+/g;
+const text = "javascript1 2a 3d";
+const i = text.match(regexp)
+console.log(i) // ['1','2','3']
+```
+
+3. search()
+```js
+// 返回匹配规则的起始索引
+const regexp = /\d+/;
+const text = "javascript1 2a 3d";
+const i = text.search(regexp);
+console.log(i); // 10
+```
+
+4. exec()
+[官链](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec)
+
+5. test()
+```js
+// 返回是否匹配的boolean值
+regexp.text(text)
+```
+
 参链：
 * 1. [灵活运用JS开发技巧](https://juejin.cn/post/6844903838449664013) 所有知识点都是纸老虎，确定目标，踏实实践总结，一定可以掌握的。

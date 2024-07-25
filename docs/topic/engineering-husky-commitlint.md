@@ -1,0 +1,1 @@
+# 利用commitlint控制commit message信息规范
