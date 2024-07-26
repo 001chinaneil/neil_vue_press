@@ -99,7 +99,8 @@ module.exports = {
                     title: '服务端知识集',
                     collapsable: true,
                     children: [
-                        "server-size-knowledge"
+                        "server-size-knowledge",
+                        "server-express"
                     ]
                 },
                 // 前沿技术探索攻略
