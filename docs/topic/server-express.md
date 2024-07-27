@@ -93,3 +93,60 @@ app.use("*",function(request, response, next){
 })
 ```
 
+8. params的基本用法：获取路由规则里面的值；
+```js
+app.get("/user/:name", function(req,res){
+	console.log(req.params.name, '获取路由规则的参数对象值！')
+})
+```
+
+9. send()是返回响应值
+```js
+可以是字符串、数组、对象或者数值
+
+// 数值会有个对应值
+res.send(200); // OK
+res.send(404); // Not Found
+res.send(500); // Internal Server Error
+```
+
+## 准备登录
+
+1. 模板引擎
+* express框架默认是ejs和jade模版
+
+2. 静态资源
+* 在项目目录下面新建public文件夹，存放css、js、images等静态资源
+```js
+app.use(express.staic(require('path').join(__dirname, 'publick')));
+
+//expres.staic 指定静态资源的查找目录
+```
+
+3. 渲染页面
+```js
+var express = require('express');
+var app = express();
+var path = require('path');
+ 
+app.set('views', __dirname);
+ 
+app.set( 'view engine', 'html' );
+app.engine( '.html', require( 'ejs' ).__express );
+ 
+app.get('/', function(req, res) {
+   res.render('index');
+   // render函数，对网页模板进行渲染。
+   // res.render(view, [locals], callback); 渲染函数
+});
+ 
+app.listen(80);
+```
+
+4. 重定向
+* 使用redirect实现重定向，**res.redirect([status], url);**，默认status是302。
+
+```js
+1. 前端FE实现静态资源
+2. 后端RD实现动态逻辑
+```
